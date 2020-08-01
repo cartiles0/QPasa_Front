@@ -39,7 +39,9 @@ export default {
     return {
       items: [
         { title: 'Create Account', logo: 'mdi-account', to: 'signup' },
+        { title: 'Log In', logo: 'mdi-account', to: 'login' },
         { title: 'Create Event', to: 'createEvent' },
+        { title: 'Search', logo: 'mdi-magnify' },
         { title: 'Tag', logo: 'mdi-tag' },
         { title: 'Categories', logo: 'mdi-pound' },
       ],

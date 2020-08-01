@@ -1,97 +1,65 @@
 <template>
   <v-row justify="center">
     <v-col>
-      <button>Back</button>
       <v-card-title>
-        <span class="headline">Create Account</span>
+        <span class="headline">Create Event</span>
       </v-card-title>
       <v-card-text>
         <v-container>
           <v-row>
             <v-col cols="12" sm="6" md="6">
               <v-text-field
-                v-model="user_name"
-                label="Name*"
+                v-model="title"
+                label="Title*"
                 required
               ></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="6">
               <v-text-field
-                v-model="user_lastName"
-                label="Last Name"
+                v-model="eventDate"
+                label="Event Date*"
+                required
               ></v-text-field>
             </v-col>
             <v-col cols="12">
-              <v-text-field
-                v-model="user_username"
-                label="Username*"
+              <v-textarea
+                v-model="description"
+                label="Event Description*"
                 persistent-hint
                 required
+              ></v-textarea>
+            </v-col>
+            <v-col cols="12" sm="6" md="6">
+              <v-text-field
+                v-model="capacity"
+                label="Capacity*"
+                required
               ></v-text-field>
             </v-col>
-            <v-col cols="12">
+            <v-col cols="12" sm="6" md="6">
               <v-text-field
-                v-model="user_email"
-                label="Email*"
+                v-model="price"
+                label="Price*"
                 required
               ></v-text-field>
             </v-col>
-            <v-col cols="12" sm="12" md="12">
-              <v-text-field
-                v-model="user_password"
-                :append-icon="password1 ? 'mdi-eye' : 'mdi-eye-off'"
-                :rules="[rules.required, rules.min]"
-                :type="password1 ? 'text' : 'password'"
-                label="Password*"
-                hint="At least 8 characters"
-                counter
-                required
-                @click:append="password1 = !password1"
-              ></v-text-field>
-              <!-- <v-text-field
-                v-model="user_password"
-                label="Password*"
-                hint="Needs to be at least 6 characters long"
-                type="password"
-                required
-              ></v-text-field> -->
-            </v-col>
-            <!-- <v-col cols="12" sm="6" md="6">
-              <v-text-field
-                :append-icon="password2 ? 'mdi-eye' : 'mdi-eye-off'"
-                :type="password2 ? 'text' : 'password'"
-                label="Confirm Password"
-                value="12345678"
-                hint="At least 8 characters"
-                required
-                @click:append="password2 = !password2"
-              ></v-text-field>
-            </v-col> -->
-            <v-col cols="12">
+            <v-col cols="12" m="6" md="6">
               <v-select
-                v-model="user_areaPreference"
+                v-model="category"
                 :items="[
-                  'Las Palmas de Gran Canaria',
-                  'Telde',
-                  'Agaete',
-                  'Agüimes',
-                  'Artenara',
-                  'Arucas',
-                  'Firgas',
-                  'Gáldar',
-                  'Ingenio',
-                  'La Aldea de San Nicolás',
-                  'Mogán',
-                  'Moya',
-                  'San Bartolomé de Tirajana',
-                  'Santa Brígida',
-                  'Santa Lucía de Tirajana',
-                  'Santa María de Guía',
-                  'Tejeda',
-                  'Teror',
-                  'Valleseco',
+                  'Concerts',
+                  'Conferences/Workshops',
+                  'Expo/Fairs',
+                  'Festivals',
+                  'For Kids',
+                  'Gastronomy',
+                  'Parties',
+                  'Retreats',
+                  'Shows',
+                  'Sports',
+                  'Theater/Film',
                 ]"
-                label="Area of Preference*"
+                label="Category*"
                 required
               ></v-select>
             </v-col>
@@ -112,32 +80,34 @@
 export default {
   data() {
     return {
-      user_name: '',
-      user_lastName: '',
-      user_username: '',
-      user_email: '',
-      user_password: '12345678',
-      user_areaPreference: '',
-      password1: false,
-      password2: false,
-      rules: {
-        required: (value) => !!value || 'Required.',
-        min: (v) => v.length >= 8 || 'Min 8 characters',
-        passwordMatch: () => "The password you entered doesn't match!",
-      },
+      title: '',
+      eventDate: '',
+      description: '',
+      capacity: '',
+      price: '',
+      category: '',
     }
   },
   methods: {
     async create() {
+      const getCreator = await this.$axios.$get('/auth/me', {
+        headers: { token: localStorage.getItem('token') },
+      })
+
       const data = {
-        user_name: this.user_name,
-        user_lastName: this.user_lastName,
-        user_username: this.user_username,
-        user_email: this.user_email,
-        user_password: this.user_password,
-        user_areaPreference: this.user_areaPreference,
+        title: this.title,
+        eventDate: this.eventDate,
+        description: this.description,
+        capacity: parseInt(this.capacity),
+        price: parseInt(this.price),
+        category: this.category,
+        creator: getCreator.id,
       }
-      const ip = await this.$axios.$post('/events/me', data)
+
+      const ip = await this.$axios.$post('/events/me', data, {
+        headers: { token: localStorage.getItem('token') },
+      })
+
       this.ip = ip
     },
   },

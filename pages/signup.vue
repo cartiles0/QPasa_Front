@@ -1,7 +1,6 @@
 <template>
   <v-row justify="center">
     <v-col>
-      <button>Back</button>
       <v-card-title>
         <span class="headline">Create Account</span>
       </v-card-title>
@@ -112,12 +111,12 @@
 export default {
   data() {
     return {
-      user_name: '',
-      user_lastName: '',
+      user_name: 'Carlos',
+      user_lastName: 'Artiles',
       user_username: '',
       user_email: '',
       user_password: '12345678',
-      user_areaPreference: '',
+      user_areaPreference: 'Arucas',
       password1: false,
       password2: false,
       rules: {
@@ -137,7 +136,12 @@ export default {
         user_password: this.user_password,
         user_areaPreference: this.user_areaPreference,
       }
+
       const ip = await this.$axios.$post('/auth/signup', data)
+
+      localStorage.setItem('token', ip.token)
+      localStorage.setItem('email', ip.email)
+
       this.ip = ip
     },
   },
