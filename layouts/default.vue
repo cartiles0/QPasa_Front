@@ -1,30 +1,29 @@
 <template>
-  <v-app dark>
-    <v-app-bar fixed app>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn icon>
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-    </v-app-bar>
+  <v-app>
+    <navBar :title="title" />
 
-    <v-content>
+    <v-main>
       <v-container>
         <nuxt />
       </v-container>
-    </v-content>
+    </v-main>
 
     <v-footer app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span>&copy; {{ title }} {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
+import navBar from '../components/navBar'
+
 export default {
+  components: {
+    navBar,
+  },
   data() {
     return {
-      title: 'Vuetify.js',
+      title: 'QPasa',
     }
   },
 }
