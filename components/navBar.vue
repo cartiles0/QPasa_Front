@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app>
+  <v-app-bar app elevate-on-scroll>
     <v-toolbar-title v-text="title" />
     <v-spacer />
     <div class="text-center">
@@ -66,17 +66,15 @@ export default {
       ],
     }
   },
-  computed() {
-    return {
-      logged() {
-        if (!localStorage.getItem('token')) {
-          this.userLogged = false
-        } else {
-          this.userLogged = true
-        }
-        return this.userLogged
-      },
-    }
+  method: {
+    logged() {
+      if (!localStorage.getItem('token')) {
+        return (this.userLogged = false)
+      } else {
+        this.userLogged = true
+      }
+      return this.userLogged
+    },
   },
 }
 </script>

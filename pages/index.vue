@@ -2,10 +2,26 @@
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
       <tagChips />
+      <br />
       <h2>Upcoming Events</h2>
-      <div id="upcomingEvents">
+      <v-card>
         <upcomingEvents />
-      </div>
+      </v-card>
+      <br />
+      <h3>#CERCADETI</h3>
+      <v-card>
+        <nearYou />
+      </v-card>
+      <br />
+      <h3>#CONCIERTOS</h3>
+      <v-card>
+        <concerts />
+      </v-card>
+      <br />
+      <h3>#GASTRONOMIA</h3>
+      <v-card>
+        <gastronomy />
+      </v-card>
     </v-flex>
   </v-layout>
 </template>
@@ -13,17 +29,17 @@
 <script>
 import tagChips from '../components/tagChips'
 import upcomingEvents from '../components/upcomingEvents'
+import nearYou from '../components/nearYou'
+import concerts from '../components/concerts'
+import gastronomy from '../components/gastronomy'
 
 export default {
   components: {
     tagChips,
     upcomingEvents,
+    nearYou,
+    concerts,
+    gastronomy,
   },
 }
 </script>
-
-<style>
-#upcomingEvents {
-  height: 50px;
-}
-</style>
