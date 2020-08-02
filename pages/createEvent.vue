@@ -10,11 +10,11 @@
             <v-col cols="12" sm="6" md="6">
               <v-text-field
                 v-model="title"
-                label="Title*"
+                label="Title"
                 required
               ></v-text-field>
             </v-col>
-            <v-col cols="12" lg="6">
+            <v-col cols="12" sm="6" md="6">
               <v-menu
                 ref="menu1"
                 v-model="menu1"
@@ -27,7 +27,7 @@
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
                     v-model="eventDate"
-                    label="Date"
+                    label="Event Date"
                     hint="Format MM/DD/YYYY"
                     persistent-hint
                     prepend-icon=""
@@ -44,24 +44,30 @@
               </v-menu>
             </v-col>
             <v-col cols="12">
+              <v-text-field
+                v-model="photo"
+                label="Event Poster Link"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12">
               <v-textarea
                 v-model="description"
-                label="Event Description*"
-                persistent-hint
+                label="Event Description"
                 required
               ></v-textarea>
             </v-col>
             <v-col cols="12" sm="6" md="6">
               <v-text-field
-                v-model="capacity"
-                label="Capacity*"
+                v-model.number="capacity"
+                label="Capacity"
                 required
               ></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="6">
               <v-text-field
                 v-model="price"
-                label="Price*"
+                label="Price"
                 required
               ></v-text-field>
             </v-col>
@@ -81,13 +87,13 @@
                   'Sports',
                   'Theater/Film',
                 ]"
-                label="Category*"
+                label="Category"
                 required
               ></v-select>
             </v-col>
           </v-row>
         </v-container>
-        <small>*indicates required field</small>
+        <small>Please fill out the the complete form!</small>
       </v-card-text>
       <v-card-actions>
         <v-btn color="blue darken-1" text to="/">Back</v-btn>
@@ -103,12 +109,13 @@ export default {
   data(vm) {
     return {
       title: '',
+      photo: '',
       description: '',
       capacity: '',
       price: '',
       category: '',
       date: new Date().toISOString().substr(0, 10),
-      eventDate: vm.formatDate(new Date().toISOString().substr(0, 10)),
+      eventDate: '',
       menu1: false,
       menu2: false,
     }
@@ -131,6 +138,7 @@ export default {
 
       const data = {
         title: this.title,
+        photo: this.photo,
         eventDate: this.eventDate,
         description: this.description,
         capacity: parseInt(this.capacity),
@@ -139,13 +147,9 @@ export default {
         creator: getCreator.id,
       }
 
-      console.log(data)
-
       const ip = await this.$axios.$post('/events/me', data, {
         headers: { token: localStorage.getItem('token') },
       })
-
-      console.log(ip)
 
       this.ip = ip
     },

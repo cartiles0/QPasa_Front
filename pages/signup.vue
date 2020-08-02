@@ -96,7 +96,9 @@
             </v-col>
           </v-row>
         </v-container>
-        <small>*indicates required field</small>
+        <v-btn text to="/login">
+          <small class="link">Already have an account?</small>
+        </v-btn>
       </v-card-text>
       <v-card-actions>
         <v-btn color="blue darken-1" text to="/">Back</v-btn>
@@ -147,3 +149,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.link {
+  color: blue;
+}
+</style>

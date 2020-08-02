@@ -8,7 +8,7 @@
       </v-container>
     </v-main>
 
-    <v-footer app>
+    <v-footer>
       <span>&copy; {{ title }} {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>

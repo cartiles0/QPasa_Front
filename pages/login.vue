@@ -24,7 +24,9 @@
             ></v-text-field>
           </v-col>
         </v-container>
-        <small>* Indicates required field</small>
+        <v-btn text to="/signup">
+          <small class="link">Create An Account Here</small>
+        </v-btn>
       </v-card-text>
       <v-col cols="12" sm="12" md="6" lg="6">
         <v-card-actions>
@@ -62,3 +64,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.link {
+  color: blue;
+}
+</style>
