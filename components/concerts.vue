@@ -1,16 +1,13 @@
 <template>
-  <div>
-    <v-carousel hide-delimiters>
-      <v-carousel-item
-        v-for="(event, i) in events"
-        :key="i"
-        :src="event.photo"
-        :to="`/events/${events[i].id}`"
-        height="100px"
-      ></v-carousel-item>
-    </v-carousel>
-    <button @click="concert">Get Carousel</button>
-  </div>
+  <v-carousel hide-delimiters>
+    <v-carousel-item
+      v-for="(event, i) in events"
+      :key="i"
+      :src="event.photo"
+      :to="`/events/${events[i].id}`"
+      height="100px"
+    ></v-carousel-item>
+  </v-carousel>
 </template>
 
 <script>
@@ -19,6 +16,9 @@ export default {
     return {
       events: [],
     }
+  },
+  mounted() {
+    this.concert()
   },
   methods: {
     async concert() {
