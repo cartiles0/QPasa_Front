@@ -4,11 +4,9 @@
 
     <v-card-actions class="pb-0">
       <v-btn class="pr-0" color="deep-purple" text>
-        Going
+        ATTEND
       </v-btn>
-      <v-btn class="ml-0 pl-0" icon>
-        <v-icon>mdi-thumb-up-outline</v-icon>
-      </v-btn>
+      <v-icon class="mb-1 mdi-18px">mdi-thumb-up-outline</v-icon>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>mdi-heart-outline</v-icon>
@@ -18,13 +16,19 @@
       </v-btn>
     </v-card-actions>
 
-    <v-card-title class="pb-2 pt-0">{{ event.title }}</v-card-title>
+    <v-card-title class="py-0">{{ event.title }}</v-card-title>
+    <v-card-text class="py-0 my-0"
+      >#{{ event.category }} | {{ event.creator }}</v-card-text
+    >
 
     <v-card-text>
-      <div>{{ event.category }}</div>
-
       <div class="mb-4 subtitle-1">
-        {{ event.price }}€ • Las Palmas de Gran Canaria
+        {{ event.price }}€ • {{ event.capacity }} Tickets • Las Palmas de Gran
+        Canaria
+      </div>
+      <v-spacer></v-spacer>
+      <div class="mb-4 subtitle-1">
+        {{ event.date }}
       </div>
 
       <div>{{ event.description }}</div>
@@ -33,12 +37,10 @@
     <v-divider class="mx-4"></v-divider>
 
     <v-card-actions class="justify-end">
-      <v-btn color="deep-purple" text>
-        Going
+      <v-btn class="pr-0" color="deep-purple" text>
+        ATTEND
       </v-btn>
-      <v-btn class="ml-0 pl-0" style="font-size: 10px;" icon>
-        <v-icon>mdi-thumb-up-outline</v-icon>
-      </v-btn>
+      <v-icon class="mb-1 mdi-18px">mdi-thumb-up-outline</v-icon>
     </v-card-actions>
   </div>
 </template>
@@ -63,12 +65,12 @@ export default {
       this.event = {
         title: dbEvent.title,
         description: dbEvent.description,
-        date: dbEvent.date,
+        date: dbEvent.eventDate,
         capacity: dbEvent.capacity,
         price: dbEvent.price,
         photo: dbEvent.photo,
         category: dbEvent.category,
-        creator: dbEvent.creator,
+        creator: dbEvent.creator.name,
         address: dbEvent.address,
         saved: dbEvent.saved,
         attendance: dbEvent.attendance,
