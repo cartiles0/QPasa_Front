@@ -72,15 +72,6 @@
               Categories
             </v-list-item-title>
           </v-list-item>
-          <v-list-item
-            active-class="deep-purple--text text--accent-4"
-            @click="logout()"
-          >
-            <v-list-item-title>
-              <v-icon>mdi-exit-to-app</v-icon>
-              Log Out
-            </v-list-item-title>
-          </v-list-item>
         </v-list>
         <!--  -->
         <v-list v-else>
@@ -161,9 +152,17 @@ export default {
       ],
     }
   },
+  mounted() {
+    if (localStorage.getItem('token')) {
+      this.userLogged = false
+    } else {
+      this.userLogged = true
+    }
+  },
   methods: {
     logout() {
       localStorage.clear()
+      location.reload()
     },
     logged() {
       if (!localStorage.getItem('token')) {

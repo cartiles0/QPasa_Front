@@ -67,6 +67,8 @@ export default {
       this.ip = ip
 
       this.reset()
+
+      window.location.href = '/'
     },
   },
 }
