@@ -63,17 +63,8 @@
               Search
             </v-list-item-title>
           </v-list-item>
-          <v-list-item
-            to="createEvent"
-            active-class="deep-purple--text text--accent-4"
-          >
-            <v-list-item-title>
-              <v-icon>mdi-flag</v-icon>
-              Categories
-            </v-list-item-title>
-          </v-list-item>
         </v-list>
-        <!--  -->
+
         <v-list v-else>
           <v-list-item
             to="createEvent"
@@ -100,15 +91,6 @@
             <v-list-item-title>
               <v-icon>mdi-magnify</v-icon>
               Search
-            </v-list-item-title>
-          </v-list-item>
-          <v-list-item
-            to="createEvent"
-            active-class="deep-purple--text text--accent-4"
-          >
-            <v-list-item-title>
-              <v-icon>mdi-flag</v-icon>
-              Categories
             </v-list-item-title>
           </v-list-item>
           <v-list-item
