@@ -55,7 +55,7 @@
             </v-list-item-title>
           </v-list-item>
           <v-list-item
-            to="createEvent"
+            to="events/createEvent"
             active-class="deep-purple--text text--accent-4"
           >
             <v-list-item-title>
@@ -67,7 +67,7 @@
 
         <v-list v-else>
           <v-list-item
-            to="createEvent"
+            to="events/createEvent"
             active-class="deep-purple--text text--accent-4"
           >
             <v-list-item-title>
@@ -76,7 +76,7 @@
             </v-list-item-title>
           </v-list-item>
           <v-list-item
-            to="createEvent"
+            to="events/createEvent"
             active-class="deep-purple--text text--accent-4"
           >
             <v-list-item-title>
@@ -85,7 +85,7 @@
             </v-list-item-title>
           </v-list-item>
           <v-list-item
-            to="createEvent"
+            to="events/createEvent"
             active-class="deep-purple--text text--accent-4"
           >
             <v-list-item-title>
@@ -126,8 +126,12 @@ export default {
         { title: 'Categories', logo: 'mdi-flag' },
       ],
       itemsLogged: [
-        { title: 'My Profile', logo: 'mdi-account', to: 'createEvent' },
-        { title: 'Create Event', logo: 'mdi-calendar-plus', to: 'createEvent' },
+        { title: 'My Profile', logo: 'mdi-account', to: 'events/createEvent' },
+        {
+          title: 'Create Event',
+          logo: 'mdi-calendar-plus',
+          to: 'events/createEvent',
+        },
         { title: 'Search', logo: 'mdi-magnify' },
         { title: 'Categories', logo: 'mdi-flag' },
         { title: 'Log Out', logo: 'mdi-exit-to-app' },
