@@ -7,11 +7,13 @@
       <v-card>
         <upcomingEvents />
       </v-card>
-      <br />
-      <h3>#CERCADETI</h3>
-      <v-card>
-        <nearYou />
-      </v-card>
+      <div v-if="userLogged === true">
+        <br />
+        <h3>#CERCADETI</h3>
+        <v-card>
+          <nearYou />
+        </v-card>
+      </div>
       <br />
       <h3>#CONCIERTOS</h3>
       <v-card>
@@ -40,6 +42,18 @@ export default {
     nearYou,
     concerts,
     gastronomy,
+  },
+  data() {
+    return {
+      userLogged: true,
+    }
+  },
+  mounted() {
+    if (localStorage.getItem('token')) {
+      this.userLogged = true
+    } else {
+      this.userLogged = false
+    }
   },
 }
 </script>

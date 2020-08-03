@@ -8,7 +8,7 @@
       </v-btn>
       <v-icon class="mb-1 mdi-18px">mdi-thumb-up-outline</v-icon>
       <v-spacer></v-spacer>
-      <v-btn icon>
+      <v-btn icon @click="userSave">
         <v-icon>mdi-heart-outline</v-icon>
       </v-btn>
       <v-btn icon>
@@ -58,6 +58,12 @@ export default {
     this.eventLoad()
   },
   methods: {
+    async userSave() {
+      const dvSave = await this.$axios.$put(`/me/${this.event.id}/save`, {
+        headers: { token: localStorage.getItem('token') },
+      })
+      this.dvSave = dvSave
+    },
     async eventLoad() {
       const dbEvent = await this.$axios.$get(
         `/events/${this.$route.params.eventId}`
@@ -77,7 +83,11 @@ export default {
         views: dbEvent.views,
         tags: dbEvent.tags,
         id: dbEvent._id,
+        // dateDay: dbEvent.eventDate.getDate(),
+        // dateMonth: dbEvent.eventDate.getMonth() + 1,
+        // dateYear: dbEvent.eventDate.getFullYear(),
       }
+      // console.log('HERE IS THE DATE' + dbEvent.eventDate.toISOString())
     },
   },
 }

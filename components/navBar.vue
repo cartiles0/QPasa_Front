@@ -35,7 +35,7 @@
             </v-list-item-title>
           </v-list-item>
         </v-list> -->
-        <v-list v-if="userLogged === true">
+        <v-list v-if="userLogged === false">
           <v-list-item
             to="signup"
             active-class="deep-purple--text text--accent-4"
@@ -136,9 +136,9 @@ export default {
   },
   mounted() {
     if (localStorage.getItem('token')) {
-      this.userLogged = false
-    } else {
       this.userLogged = true
+    } else {
+      this.userLogged = false
     }
   },
   methods: {
