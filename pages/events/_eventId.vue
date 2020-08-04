@@ -1,6 +1,6 @@
 <template>
-  <div class="mx-auto my-5">
-    <v-img height="auto" :src="event.photo"></v-img>
+  <v-card class="mx-auto my-5 justified-center elevation-0" max-width="800px">
+    <v-img :src="event.photo"></v-img>
 
     <v-card-actions class="pb-0">
       <v-btn class="pr-0" color="deep-purple" text>
@@ -42,15 +42,13 @@
       </v-btn>
       <v-icon class="mb-1 mdi-18px">mdi-thumb-up-outline</v-icon>
     </v-card-actions>
-  </div>
+  </v-card>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      loading: false,
-      selection: 1,
       event: {},
     }
   },

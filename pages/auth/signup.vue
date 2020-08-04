@@ -97,7 +97,7 @@
               </v-col>
             </v-row>
           </v-container>
-          <v-btn text to="/login">
+          <v-btn text to="/auth/login">
             <small class="link">Already have an account?</small>
           </v-btn>
         </v-card-text>

@@ -15,15 +15,14 @@
         </v-card>
       </div>
       <br />
-      <h3>#CONCIERTOS</h3>
-      <v-card>
-        <concerts />
-      </v-card>
-      <br />
-      <h3>#GASTRONOMIA</h3>
-      <v-card>
-        <gastronomy />
-      </v-card>
+
+      <div v-for="(category, idx) in categories" :key="idx">
+        <h3>#{{ category }}</h3>
+        <v-card>
+          <eventCarousel :data="category" />
+        </v-card>
+        <br />
+      </div>
     </v-flex>
   </v-layout>
 </template>
@@ -32,19 +31,18 @@
 import tagChips from '../components/tagChips'
 import upcomingEvents from '../components/upcomingEvents'
 import nearYou from '../components/nearYou'
-import concerts from '../components/concerts'
-import gastronomy from '../components/gastronomy'
+import eventCarousel from '../components/eventCarousel'
 
 export default {
   components: {
     tagChips,
     upcomingEvents,
     nearYou,
-    concerts,
-    gastronomy,
+    eventCarousel,
   },
   data() {
     return {
+      categories: ['Concerts', 'Gastronomy', 'Sports'],
       userLogged: true,
     }
   },

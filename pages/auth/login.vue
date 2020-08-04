@@ -25,7 +25,7 @@
               ></v-text-field>
             </v-col>
           </v-container>
-          <v-btn text to="/signup">
+          <v-btn text to="/auth/signup">
             <small class="link">Create An Account Here</small>
           </v-btn>
         </v-card-text>
