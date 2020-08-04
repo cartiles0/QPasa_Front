@@ -3,16 +3,14 @@
     <v-flex xs12 sm8 md6>
       <tagChips />
       <br />
-      <h2>Upcoming Events</h2>
-      <v-card>
+      <div>
+        <h2>Upcoming Events</h2>
         <upcomingEvents />
-      </v-card>
+      </div>
       <div v-if="userLogged === true">
         <br />
         <h3>#CERCADETI</h3>
-        <v-card>
-          <nearYou />
-        </v-card>
+        <nearYou />
       </div>
       <br />
 
