@@ -1,15 +1,11 @@
 <template>
   <v-app-bar color="primary" dark fixed app elevate-on-scroll>
-    <v-toolbar-title v-text="title" />
+    <v-toolbar-title>
+      <button :to="home" text>{{ title }}</button>
+    </v-toolbar-title>
     <v-spacer />
     <v-toolbar-items v-if="userLogged === false" class="hidden-sm-and-down">
-      <v-btn
-        v-for="(item, index) in items"
-        :key="index"
-        :to="item.to"
-        text
-        flat
-      >
+      <v-btn v-for="(item, index) in items" :key="index" :to="item.to" text>
         <v-icon>{{ item.logo }}</v-icon>
         {{ item.title }}
       </v-btn>
@@ -20,7 +16,6 @@
         :key="index"
         :to="item.to"
         text
-        flat
         @click="item.click ? item.click() : null"
       >
         <v-icon>{{ item.logo }}</v-icon>
@@ -77,6 +72,7 @@ export default {
   data() {
     return {
       userLogged: false,
+      home: '/',
       items: [
         { title: 'Create Account', logo: 'mdi-account', to: '/auth/signup' },
         { title: 'Log In', logo: 'mdi-account', to: '/auth/login' },

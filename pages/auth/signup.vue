@@ -8,20 +8,20 @@
         <v-card-text>
           <v-container>
             <v-row>
-              <v-col cols="12" sm="6" md="6">
+              <v-col cols="12" sm="6" md="6" lg="4">
                 <v-text-field
                   v-model="user_name"
                   label="Name*"
                   required
                 ></v-text-field>
               </v-col>
-              <v-col cols="12" sm="6" md="6">
+              <v-col cols="12" sm="6" md="6" lg="4">
                 <v-text-field
                   v-model="user_lastName"
                   label="Last Name"
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
+              <v-col cols="12" lg="8">
                 <v-text-field
                   v-model="user_username"
                   label="Username*"
@@ -29,14 +29,14 @@
                   required
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
+              <v-col cols="12" lg="8">
                 <v-text-field
                   v-model="user_email"
                   label="Email*"
                   required
                 ></v-text-field>
               </v-col>
-              <v-col cols="12" sm="12" md="12">
+              <v-col cols="12" sm="12" md="12" lg="8">
                 <v-text-field
                   v-model="user_password"
                   :append-icon="password1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -67,7 +67,7 @@
                 @click:append="password2 = !password2"
               ></v-text-field>
             </v-col> -->
-              <v-col cols="12">
+              <v-col cols="12" lg="8">
                 <v-select
                   v-model="user_areaPreference"
                   :items="[
@@ -115,12 +115,12 @@
 export default {
   data() {
     return {
-      user_name: 'Carlos',
-      user_lastName: 'Artiles',
+      user_name: '',
+      user_lastName: '',
       user_username: '',
       user_email: '',
-      user_password: '12345678',
-      user_areaPreference: 'Arucas',
+      user_password: '',
+      user_areaPreference: '',
       password1: false,
       password2: false,
       rules: {

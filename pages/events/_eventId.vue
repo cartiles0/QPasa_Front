@@ -3,7 +3,7 @@
     <v-img :src="event.photo"></v-img>
 
     <v-card-actions class="pb-0">
-      <v-btn class="pr-0" color="deep-purple" text>
+      <v-btn class="pr-0" color="deep-purple" text @click="userAttend">
         ATTEND
       </v-btn>
       <v-icon class="mb-1 mdi-18px">mdi-thumb-up-outline</v-icon>
@@ -37,7 +37,7 @@
     <v-divider class="mx-4"></v-divider>
 
     <v-card-actions class="justify-end">
-      <v-btn class="pr-0" color="deep-purple" text>
+      <v-btn class="pr-0" color="deep-purple" text @click="userAttend">
         ATTEND
       </v-btn>
       <v-icon class="mb-1 mdi-18px">mdi-thumb-up-outline</v-icon>
@@ -57,10 +57,24 @@ export default {
   },
   methods: {
     async userSave() {
-      const dvSave = await this.$axios.$put(`/me/${this.event.id}/save`, {
-        headers: { token: localStorage.getItem('token') },
-      })
-      this.dvSave = dvSave
+      const dbSave = await this.$axios.$put(
+        `/events/me/${this.event.id}/save`,
+        {},
+        {
+          headers: { token: localStorage.getItem('token') },
+        }
+      )
+      this.dbSave = dbSave
+    },
+    async userAttend() {
+      const dbAttend = await this.$axios.$put(
+        `/events/me/${this.event.id}/attendance`,
+        {},
+        {
+          headers: { token: localStorage.getItem('token') },
+        }
+      )
+      this.dbAttend = dbAttend
     },
     async eventLoad() {
       const dbEvent = await this.$axios.$get(
@@ -85,6 +99,7 @@ export default {
         // dateMonth: dbEvent.eventDate.getMonth() + 1,
         // dateYear: dbEvent.eventDate.getFullYear(),
       }
+      await this.$axios.$put(`/events/${dbEvent._id}/views`)
       // console.log('HERE IS THE DATE' + dbEvent.eventDate.toISOString())
     },
   },

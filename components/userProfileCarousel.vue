@@ -12,7 +12,7 @@
 <script>
 export default {
   props: {
-    yourevent: {
+    userevent: {
       type: Array,
       default: () => [],
     },
@@ -23,21 +23,17 @@ export default {
     }
   },
   mounted() {
-    this.loadYourEvents()
+    this.loadUserEvents()
   },
   methods: {
-    loadYourEvents() {
-      console.log('------->' + this.yourevent)
-      this.yourevent.forEach((eventID, idx) => {
+    loadUserEvents() {
+      this.userevent.forEach((eventID, idx) => {
         this.events.push({
           title: eventID.title,
           photo: eventID.photo,
           tags: eventID.tags,
           id: eventID._id,
         })
-        console.log(eventID)
-        console.log(this.events)
-        console.log(eventID.title)
       })
     },
   },

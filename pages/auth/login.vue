@@ -7,14 +7,14 @@
         </v-card-title>
         <v-card-text>
           <v-container>
-            <v-col cols="12" sm="12" md="6" lg="6">
+            <v-col cols="12" sm="12" md="6" lg="4">
               <v-text-field
                 v-model="user_email"
                 label="Email*"
                 required
               ></v-text-field>
             </v-col>
-            <v-col cols="12" sm="12" md="6" lg="6">
+            <v-col cols="12" sm="12" md="6" lg="4">
               <v-text-field
                 v-model="user_password"
                 :append-icon="password ? 'mdi-eye' : 'mdi-eye-off'"
@@ -29,7 +29,7 @@
             <small class="link">Create An Account Here</small>
           </v-btn>
         </v-card-text>
-        <v-col cols="12" sm="12" md="6" lg="6">
+        <v-col cols="12" sm="12" md="6" lg="4">
           <v-card-actions>
             <v-btn color="blue darken-1" text to="/">Back</v-btn>
             <v-spacer></v-spacer>

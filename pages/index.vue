@@ -1,7 +1,7 @@
 <template>
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
-      <tagChips />
+      <!-- <tagChips /> -->
       <br />
       <div>
         <h2>Upcoming Events</h2>
@@ -26,14 +26,14 @@
 </template>
 
 <script>
-import tagChips from '../components/tagChips'
+// import tagChips from '../components/tagChips'
 import upcomingEvents from '../components/upcomingEvents'
 import nearYou from '../components/nearYou'
 import eventCarousel from '../components/eventCarousel'
 
 export default {
   components: {
-    tagChips,
+    // tagChips,
     upcomingEvents,
     nearYou,
     eventCarousel,

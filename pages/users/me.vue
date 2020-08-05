@@ -24,62 +24,55 @@
     </v-card-text>
 
     <v-divider class="mx-4"></v-divider>
-    <v-list-item-title class="pb-2">
+    <v-list-item-title class="pb-2 pl-4">
       Your Events
     </v-list-item-title>
-    <yourEvents :yourevent="user.yourEvents" />
-    <v-list-item-title class="py-2 mt-6">
+    <eventCarousel :userevent="user.yourEvents" />
+    <v-list-item-title class="py-2 pl-4 mt-6">
       Attending Events
     </v-list-item-title>
-    <!-- <attendingEvents :attendingevent="user.attendingEvents" /> -->
-    <v-list-item-title class="py-2 mt-6">
+    <eventCarousel :userevent="user.attendingEvents" />
+    <v-list-item-title class="py-2 pl-4 mt-6">
       Saved Events
     </v-list-item-title>
-    <!-- <savedEvents :savedevent="user.savedEvents" /> -->
+    <eventCarousel :userevent="user.savedEvents" />
   </v-card>
 </template>
 
 <script>
-// import savedEvents from '@/components/savedEvents'
-import yourEvents from '@/components/yourEvents'
-// import attendingEvents from '@/components/attendingEvents'
+import axios from 'axios'
+import eventCarousel from '@/components/userProfileCarousel'
 
 export default {
   components: {
-    // savedEvents,
-    yourEvents,
-    // attendingEvents,
+    eventCarousel,
   },
-  data() {
+  async asyncData() {
+    const headers = { headers: { token: localStorage.getItem('token') } }
+    const dbUser = await axios.get(
+      'http://localhost:3000/api/users/me',
+      headers
+    )
     return {
-      user: {},
+      user: {
+        name: dbUser.data.name,
+        lastName: dbUser.data.lastName,
+        username: dbUser.data.username,
+        email: dbUser.data.email,
+        photo: dbUser.data.photo,
+        areaPreference: dbUser.data.areaPreference,
+        address: dbUser.data.address,
+        rating: dbUser.data.rating,
+        aboutMe: dbUser.data.aboutMe,
+        yourEvents: dbUser.data.myEvents,
+        savedEvents: dbUser.data.savedEvents,
+        attendingEvents: dbUser.data.attendingEvents,
+        id: dbUser.data._id,
+      },
     }
   },
-  mounted() {
-    this.userLoad()
-  },
-  methods: {
-    async userLoad() {
-      const dbUser = await this.$axios.$get('/users/me', {
-        headers: { token: localStorage.getItem('token') },
-      })
-      this.user = {
-        name: dbUser.name,
-        lastName: dbUser.lastName,
-        username: dbUser.username,
-        email: dbUser.email,
-        photo: dbUser.photo,
-        areaPreference: dbUser.areaPreference,
-        address: dbUser.address,
-        rating: dbUser.rating,
-        aboutMe: dbUser.aboutMe,
-        yourEvents: dbUser.myEvents,
-        savedEvents: dbUser.savedEvents,
-        attendingEvents: dbUser.attendingEvents,
-        id: dbUser._id,
-      }
-      console.log(this.user.yourEvents)
-    },
+  data() {
+    return {}
   },
 }
 </script>
