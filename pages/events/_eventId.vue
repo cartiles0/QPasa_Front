@@ -3,10 +3,18 @@
     <v-img :src="event.photo"></v-img>
 
     <v-card-actions class="pb-0">
-      <v-btn class="pr-0" color="deep-purple" text @click="userAttend">
+      <v-btn
+        v-if="attendText === false"
+        class="pr-0"
+        color="deep-purple"
+        text
+        @click="userAttend"
+      >
         ATTEND
       </v-btn>
-      <v-icon class="mb-1 mdi-18px">mdi-thumb-up-outline</v-icon>
+      <v-btn v-else class="pr-0" color="deep-purple" text @click="userAttend">
+        ATTENDING
+      </v-btn>
       <v-spacer></v-spacer>
       <v-btn v-if="savedIcon === false" icon @click="userSave">
         <v-icon>mdi-heart-outline</v-icon>
@@ -40,10 +48,18 @@
     <v-divider class="mx-4"></v-divider>
 
     <v-card-actions class="justify-end">
-      <v-btn class="pr-0" color="deep-purple" text @click="userAttend">
+      <v-btn
+        v-if="attendText === false"
+        class="pr-0"
+        color="deep-purple"
+        text
+        @click="userAttend"
+      >
         ATTEND
       </v-btn>
-      <v-icon class="mb-1 mdi-18px">mdi-thumb-up-outline</v-icon>
+      <v-btn v-else class="pr-0" color="deep-purple" text @click="userAttend">
+        ATTENDING
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -55,6 +71,7 @@ export default {
       event: {},
       savedIcon: false,
       userId: '',
+      attendText: false,
     }
   },
   mounted() {
@@ -109,10 +126,17 @@ export default {
         headers: { token: localStorage.getItem('token') },
       })
       this.userId = getCreator.id
+
       if (dbEvent.saved.includes(getCreator.id)) {
         this.savedIcon = true
       } else {
         this.savedIcon = false
+      }
+
+      if (dbEvent.attendance.includes(getCreator.id)) {
+        this.attendText = true
+      } else {
+        this.attendText = false
       }
 
       await this.$axios.$put(`/events/${dbEvent._id}/views`)
