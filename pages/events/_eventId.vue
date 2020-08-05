@@ -8,8 +8,11 @@
       </v-btn>
       <v-icon class="mb-1 mdi-18px">mdi-thumb-up-outline</v-icon>
       <v-spacer></v-spacer>
-      <v-btn icon @click="userSave">
+      <v-btn v-if="savedIcon === false" icon @click="userSave">
         <v-icon>mdi-heart-outline</v-icon>
+      </v-btn>
+      <v-btn v-else icon color="red" @click="userSave">
+        <v-icon>mdi-heart</v-icon>
       </v-btn>
       <v-btn icon>
         <v-icon>mdi-share-variant</v-icon>
@@ -50,6 +53,8 @@ export default {
   data() {
     return {
       event: {},
+      savedIcon: false,
+      userId: '',
     }
   },
   mounted() {
@@ -99,6 +104,17 @@ export default {
         // dateMonth: dbEvent.eventDate.getMonth() + 1,
         // dateYear: dbEvent.eventDate.getFullYear(),
       }
+
+      const getCreator = await this.$axios.$get('/auth/me', {
+        headers: { token: localStorage.getItem('token') },
+      })
+      this.userId = getCreator.id
+      if (dbEvent.saved.includes(getCreator.id)) {
+        this.savedIcon = true
+      } else {
+        this.savedIcon = false
+      }
+
       await this.$axios.$put(`/events/${dbEvent._id}/views`)
       // console.log('HERE IS THE DATE' + dbEvent.eventDate.toISOString())
     },
