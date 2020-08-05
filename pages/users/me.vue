@@ -31,24 +31,24 @@
     <v-list-item-title class="py-2 mt-6">
       Attending Events
     </v-list-item-title>
-    <attendingEvents :attendingevent="user.attendingEvents" />
+    <!-- <attendingEvents :attendingevent="user.attendingEvents" /> -->
     <v-list-item-title class="py-2 mt-6">
       Saved Events
     </v-list-item-title>
-    <savedEvents :savedevent="user.savedEvents" />
+    <!-- <savedEvents :savedevent="user.savedEvents" /> -->
   </v-card>
 </template>
 
 <script>
-import savedEvents from '@/components/savedEvents'
+// import savedEvents from '@/components/savedEvents'
 import yourEvents from '@/components/yourEvents'
-import attendingEvents from '@/components/attendingEvents'
+// import attendingEvents from '@/components/attendingEvents'
 
 export default {
   components: {
-    savedEvents,
+    // savedEvents,
     yourEvents,
-    attendingEvents,
+    // attendingEvents,
   },
   data() {
     return {
@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     async userLoad() {
-      const dbUser = await this.$axios.$get('users/me', {
+      const dbUser = await this.$axios.$get('/users/me', {
         headers: { token: localStorage.getItem('token') },
       })
       this.user = {
@@ -73,11 +73,12 @@ export default {
         address: dbUser.address,
         rating: dbUser.rating,
         aboutMe: dbUser.aboutMe,
-        yourEvents: dbUser.yourEvents,
+        yourEvents: dbUser.myEvents,
         savedEvents: dbUser.savedEvents,
         attendingEvents: dbUser.attendingEvents,
         id: dbUser._id,
       }
+      console.log(this.user.yourEvents)
     },
   },
 }

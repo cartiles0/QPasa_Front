@@ -13,13 +13,8 @@
 export default {
   props: {
     yourevent: {
-      type: null,
-      default: [
-        '5f26fd30ac234a467aa998b3',
-        '5f27000fac234a467aa998b5',
-        '5f2700b3ac234a467aa998b6',
-        '5f22faa51205c8d5eaf89969',
-      ],
+      type: Array,
+      default: () => [],
     },
   },
   data() {
@@ -28,21 +23,21 @@ export default {
     }
   },
   mounted() {
-    this.eventsArray()
+    this.loadYourEvents()
   },
   methods: {
-    eventsArray() {
-      this.yourevent.forEach((data) => {
-        this.loadYourEvents(data)
-      })
-    },
-    async loadYourEvents(e) {
-      const dbEvent = await this.$axios.$get(`/events/${e}`)
-      this.events.push({
-        title: dbEvent.title,
-        photo: dbEvent.photo,
-        tags: dbEvent.tags,
-        id: dbEvent._id,
+    loadYourEvents() {
+      console.log('------->' + this.yourevent)
+      this.yourevent.forEach((eventID, idx) => {
+        this.events.push({
+          title: eventID.title,
+          photo: eventID.photo,
+          tags: eventID.tags,
+          id: eventID._id,
+        })
+        console.log(eventID)
+        console.log(this.events)
+        console.log(eventID.title)
       })
     },
   },

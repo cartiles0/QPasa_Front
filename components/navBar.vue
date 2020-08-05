@@ -1,9 +1,34 @@
 <template>
-  <v-app-bar color="primary" dark app elevate-on-scroll>
+  <v-app-bar color="primary" dark fixed app elevate-on-scroll>
     <v-toolbar-title v-text="title" />
     <v-spacer />
-    <div class="text-center">
-      <v-menu offset-y>
+    <v-toolbar-items v-if="userLogged === false" class="hidden-sm-and-down">
+      <v-btn
+        v-for="(item, index) in items"
+        :key="index"
+        :to="item.to"
+        text
+        flat
+      >
+        <v-icon>{{ item.logo }}</v-icon>
+        {{ item.title }}
+      </v-btn>
+    </v-toolbar-items>
+    <v-toolbar-items v-else class="hidden-sm-and-down">
+      <v-btn
+        v-for="(item, index) in itemsLogged"
+        :key="index"
+        :to="item.to"
+        text
+        flat
+        @click="item.click ? item.click() : null"
+      >
+        <v-icon>{{ item.logo }}</v-icon>
+        {{ item.title }}
+      </v-btn>
+    </v-toolbar-items>
+    <div class="text-center hidden-md-and-up">
+      <v-menu>
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon v-bind="attrs" v-on="on">
             <v-icon>mdi-menu</v-icon>
