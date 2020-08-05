@@ -6,13 +6,13 @@
       <v-btn
         v-if="attendText === false"
         class="pr-0"
-        color="deep-purple"
+        color="primary"
         text
         @click="userAttend"
       >
         ATTEND
       </v-btn>
-      <v-btn v-else class="pr-0" color="deep-purple" text @click="userAttend">
+      <v-btn v-else class="pr-0" color="primary" text @click="userAttend">
         ATTENDING
       </v-btn>
       <v-spacer></v-spacer>
@@ -51,13 +51,13 @@
       <v-btn
         v-if="attendText === false"
         class="pr-0"
-        color="deep-purple"
+        color="primary"
         text
         @click="userAttend"
       >
         ATTEND
       </v-btn>
-      <v-btn v-else class="pr-0" color="deep-purple" text @click="userAttend">
+      <v-btn v-else class="pr-0" color="primary" text @click="userAttend">
         ATTENDING
       </v-btn>
     </v-card-actions>
@@ -86,7 +86,11 @@ export default {
           headers: { token: localStorage.getItem('token') },
         }
       )
-      this.dbSave = dbSave
+      if (dbSave.saved.includes(this.userId)) {
+        this.savedIcon = true
+      } else {
+        this.savedIcon = false
+      }
     },
     async userAttend() {
       const dbAttend = await this.$axios.$put(
@@ -96,7 +100,11 @@ export default {
           headers: { token: localStorage.getItem('token') },
         }
       )
-      this.dbAttend = dbAttend
+      if (dbAttend.attendance.includes(this.userId)) {
+        this.attendText = true
+      } else {
+        this.attendText = false
+      }
     },
     async eventLoad() {
       const dbEvent = await this.$axios.$get(
