@@ -24,7 +24,7 @@
     </v-card-text>
 
     <v-divider class="mx-4"></v-divider>
-    <v-list-item-title class="pb-2 pl-4">
+    <v-list-item-title class="py-2 pl-4 mt-6">
       Your Events
     </v-list-item-title>
     <eventCarousel :userevent="user.yourEvents" />
