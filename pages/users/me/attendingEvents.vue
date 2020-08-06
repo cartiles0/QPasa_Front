@@ -46,8 +46,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   data() {
     return {
@@ -76,10 +74,7 @@ export default {
     },
     async loadCategory() {
       const headers = { headers: { token: localStorage.getItem('token') } }
-      const dbUser = await axios.get(
-        `${process.env.VUE_APP_API_URL}/users/me`,
-        headers
-      )
+      const dbUser = await this.$axios.$get(`/users/me`, headers)
 
       const getCreator = await this.$axios.$get('/auth/me', {
         headers: { token: localStorage.getItem('token') },
@@ -87,7 +82,7 @@ export default {
 
       this.userId = getCreator.id
 
-      const attendingEvents = dbUser.data.attendingEvents
+      const attendingEvents = dbUser.attendingEvents
 
       attendingEvents.forEach((event, idx) => {
         this.events.push({

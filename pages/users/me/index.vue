@@ -40,19 +40,15 @@
 </template>
 
 <script>
-import axios from 'axios'
 import eventCarousel from '@/components/userProfileCarousel'
 
 export default {
   components: {
     eventCarousel,
   },
-  async asyncData() {
+  async asyncData({ $axios, params }) {
     const headers = { headers: { token: localStorage.getItem('token') } }
-    const dbUser = await axios.get(
-      `${process.env.VUE_APP_API_URL}/users/me`,
-      headers
-    )
+    const dbUser = await $axios.get(`/users/me`, headers)
     return {
       user: {
         name: dbUser.data.name,
