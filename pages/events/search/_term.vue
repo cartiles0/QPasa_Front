@@ -1,0 +1,117 @@
+<template>
+  <v-container fluid>
+    <div class="pb-2 title">Search for: "{{ searchItem }}"</div>
+    <v-row dense>
+      <v-col v-for="(event, idx) in events" :key="idx" :cols="4">
+        <v-card class="mr-5 mb-5">
+          <v-img
+            :src="event.photo"
+            class="white--text align-end"
+            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+            height="auto"
+            :to="`/events/${event.id}`"
+          >
+            <!-- <v-card-title v-text="event.title"></v-card-title> -->
+          </v-img>
+
+          <v-card-actions>
+            <v-btn
+              class="pr-0"
+              color="primary"
+              text
+              :to="`/events/${event.id}`"
+              v-text="event.title"
+            >
+            </v-btn>
+
+            <v-spacer></v-spacer>
+
+            <v-btn
+              v-if="events[idx].savedIcon === false"
+              icon
+              @click="userSave(idx)"
+            >
+              <v-icon>mdi-heart-outline</v-icon>
+            </v-btn>
+            <v-btn v-else icon color="red" @click="userSave(idx)">
+              <v-icon>mdi-heart</v-icon>
+            </v-btn>
+
+            <v-btn icon>
+              <v-icon>mdi-share-variant</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      events: [],
+      userId: '',
+      searchItem: this.$route.params.term,
+    }
+  },
+  mounted() {
+    this.loadCategory()
+  },
+  methods: {
+    async userSave(idx) {
+      const dbSave = await this.$axios.$put(
+        `/events/me/${this.events[idx].id}/save`,
+        {},
+        {
+          headers: { token: localStorage.getItem('token') },
+        }
+      )
+      if (dbSave.saved.includes(this.userId)) {
+        this.events[idx].savedIcon = true
+      } else {
+        this.events[idx].savedIcon = false
+      }
+    },
+    async loadCategory() {
+      const dbEvent = await this.$axios.$get(
+        `/events/search/${this.$route.params.term}`
+      )
+
+      const getCreator = await this.$axios.$get('/auth/me', {
+        headers: { token: localStorage.getItem('token') },
+      })
+      this.userId = getCreator.id
+
+      dbEvent.forEach((event, idx) => {
+        this.events.push({
+          title: event.title,
+          date: event.eventDate,
+          capacity: event.capacity,
+          price: event.price,
+          photo: event.photo,
+          category: event.category,
+          address: event.address,
+          saved: event.saved,
+          attendance: event.attendance,
+          tags: event.tags,
+          id: event._id,
+          savedIcon: false,
+        })
+        if (dbEvent[idx].saved.includes(getCreator.id)) {
+          this.events[idx].savedIcon = true
+        } else {
+          this.events[idx].savedIcon = false
+        }
+      })
+    },
+  },
+}
+</script>
+
+<style>
+.v-image__image--cover {
+  background-size: contain !important;
+}
+</style>

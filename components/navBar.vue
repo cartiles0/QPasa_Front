@@ -5,16 +5,34 @@
         <button :to="home" text>{{ title }}</button>
       </v-toolbar-title>
       <v-spacer />
-      <v-btn color="accent" large @click.stop="showLogInForm = true"
+      <!-- <v-btn color="accent" large @click.stop="showLogInForm = true"
         >TEST</v-btn
-      >
+      > -->
       <v-toolbar-items v-if="userLogged === false" class="hidden-sm-and-down">
         <v-btn v-for="(item, index) in items" :key="index" :to="item.to" text>
+          <v-text-field
+            v-model="searchInput"
+            class="py-1"
+            label="Search"
+            :append-icon="'mdi-magnify'"
+            filled
+            outlined
+            @click:append="search"
+          ></v-text-field>
           <v-icon>{{ item.logo }}</v-icon>
           {{ item.title }}
         </v-btn>
       </v-toolbar-items>
       <v-toolbar-items v-else class="hidden-sm-and-down">
+        <v-text-field
+          v-model="searchInput"
+          class="py-1"
+          label="Search"
+          :append-icon="'mdi-magnify'"
+          filled
+          outlined
+          @click:append="search"
+        ></v-text-field>
         <v-btn
           v-for="(item, index) in itemsLogged"
           :key="index"
@@ -34,6 +52,15 @@
             </v-btn>
           </template>
           <v-list v-if="userLogged === false">
+            <v-text-field
+              v-model="searchInput"
+              class="px-2 mb-0 pb-0"
+              label="Search"
+              :append-icon="'mdi-magnify'"
+              filled
+              outlined
+              @click:append="search"
+            ></v-text-field>
             <v-list-item
               v-for="(item, index) in items"
               :key="index"
@@ -47,6 +74,15 @@
             </v-list-item>
           </v-list>
           <v-list v-else>
+            <v-text-field
+              v-model="searchInput"
+              class="px-2 mb-0 pb-0"
+              label="Search"
+              :append-icon="'mdi-magnify'"
+              filled
+              outlined
+              @click:append="search"
+            ></v-text-field>
             <v-list-item
               v-for="(item, index) in itemsLogged"
               :key="index"
@@ -63,9 +99,9 @@
         </v-menu>
       </div>
     </v-app-bar>
-    <v-main>
+    <!-- <v-main>
       <login :visible="showLogInForm" @close="showLogInForm = false" />
-    </v-main>
+    </v-main> -->
   </div>
 </template>
 
@@ -84,13 +120,14 @@ export default {
   },
   data() {
     return {
+      searchInput: '',
       showLogInForm: false,
       userLogged: false,
       home: '/',
       items: [
         { title: 'Create Account', logo: 'mdi-account', to: '/auth/signup' },
         { title: 'Log In', logo: 'mdi-account', to: '/auth/login' },
-        { title: 'Search', logo: 'mdi-magnify' },
+        // { title: 'Search', logo: 'mdi-magnify' },
       ],
       itemsLogged: [
         { title: 'My Profile', logo: 'mdi-account', to: '/users/me' },
@@ -99,7 +136,7 @@ export default {
           logo: 'mdi-calendar-plus',
           to: 'events/createEvent',
         },
-        { title: 'Search', logo: 'mdi-magnify' },
+        // { title: 'Search', logo: 'mdi-magnify' },
         { title: 'Log Out', logo: 'mdi-exit-to-app', click: this.logout },
       ],
     }
@@ -112,6 +149,9 @@ export default {
     }
   },
   methods: {
+    search() {
+      window.location.href = `/events/search/${this.searchInput}`
+    },
     logout() {
       localStorage.clear()
       window.location.href = '/'
