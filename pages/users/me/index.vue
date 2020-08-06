@@ -50,7 +50,7 @@ export default {
   async asyncData() {
     const headers = { headers: { token: localStorage.getItem('token') } }
     const dbUser = await axios.get(
-      'http://localhost:3000/api/users/me',
+      `${process.env.VUE_APP_API_URL}/users/me`,
       headers
     )
     return {
