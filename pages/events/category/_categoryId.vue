@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <div class="pb-2 title">Search for: "{{ searchItem }}"</div>
+    <div class="pb-2 title">Category - {{ searchItem }}</div>
     <v-row dense>
       <v-col v-for="(event, idx) in events" :key="idx" :cols="4">
         <v-card class="mr-5 mb-5">
@@ -51,7 +51,7 @@ export default {
     return {
       events: [],
       userId: '',
-      searchItem: this.$route.params.term,
+      searchItem: this.$route.params.categoryId,
     }
   },
   mounted() {
@@ -73,8 +73,9 @@ export default {
       }
     },
     async loadCategory() {
+      console.log(this.$route.params.categoryId)
       const dbEvent = await this.$axios.$get(
-        `/events/search/${this.$route.params.term}`
+        `/events/category/${this.$route.params.categoryId}`
       )
 
       const getCreator = await this.$axios.$get('/auth/me', {
