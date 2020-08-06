@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <div class="pb-2 title">Category - {{ searchItem }}</div>
+    <div class="pb-2 title">My Saved Events</div>
     <v-row dense>
       <v-col v-for="(event, idx) in events" :key="idx" :cols="4">
         <v-card class="mr-5 mb-5">
@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data() {
     return {
@@ -71,18 +73,24 @@ export default {
       } else {
         this.events[idx].savedIcon = false
       }
+      window.location.reload()
     },
     async loadCategory() {
-      const dbEvent = await this.$axios.$get(
-        `/events/category/${this.$route.params.categoryId}`
+      const headers = { headers: { token: localStorage.getItem('token') } }
+      const dbUser = await axios.get(
+        'http://localhost:3000/api/users/me',
+        headers
       )
 
       const getCreator = await this.$axios.$get('/auth/me', {
         headers: { token: localStorage.getItem('token') },
       })
+
       this.userId = getCreator.id
 
-      dbEvent.forEach((event, idx) => {
+      const savedEvents = dbUser.data.savedEvents
+
+      savedEvents.forEach((event, idx) => {
         this.events.push({
           title: event.title,
           date: event.eventDate,
@@ -97,7 +105,7 @@ export default {
           id: event._id,
           savedIcon: false,
         })
-        if (dbEvent[idx].saved.includes(getCreator.id)) {
+        if (savedEvents[idx].saved.includes(getCreator.id)) {
           this.events[idx].savedIcon = true
         } else {
           this.events[idx].savedIcon = false
