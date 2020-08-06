@@ -8,7 +8,9 @@
         <v-list-item-title class="py-0">
           {{ user.username }}
         </v-list-item-title>
-        <v-list-item-title class="py-0">{{ user.lastName }}</v-list-item-title>
+        <v-list-item-title class="py-0"
+          >{{ user.name }} {{ user.lastName }}</v-list-item-title
+        >
         <v-list-item-subtitle class="py-0 my-0">
           Rating: {{ user.rating }} | {{ user.email }} |
           {{ user.areaPreference }}
@@ -29,11 +31,22 @@
     </v-list-item-title>
     <eventCarousel :userevent="user.yourEvents" />
     <v-list-item-title class="py-2 pl-4 mt-6">
-      Attending Events
+      Attending Events -
+      <v-btn
+        :to="'/users/me/attendingEvents'"
+        class="pl-0"
+        text
+        color="primary"
+      >
+        See All
+      </v-btn>
     </v-list-item-title>
     <eventCarousel :userevent="user.attendingEvents" />
     <v-list-item-title class="py-2 pl-4 mt-6">
-      Saved Events
+      Saved Events -
+      <v-btn :to="'/users/me/savedEvents'" class="pl-0" text color="primary">
+        See All
+      </v-btn>
     </v-list-item-title>
     <eventCarousel :userevent="user.savedEvents" />
   </v-card>
