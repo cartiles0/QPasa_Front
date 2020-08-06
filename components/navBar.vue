@@ -9,16 +9,16 @@
         >TEST</v-btn
       > -->
       <v-toolbar-items v-if="userLogged === false" class="hidden-sm-and-down">
+        <v-text-field
+          v-model="searchInput"
+          class="py-1 pb-1"
+          label="Search"
+          :append-icon="'mdi-magnify'"
+          filled
+          outlined
+          @click:append="search"
+        ></v-text-field>
         <v-btn v-for="(item, index) in items" :key="index" :to="item.to" text>
-          <v-text-field
-            v-model="searchInput"
-            class="py-1 pr-1"
-            label="Search"
-            :append-icon="'mdi-magnify'"
-            filled
-            outlined
-            @click:append="search"
-          ></v-text-field>
           <v-icon>{{ item.logo }}</v-icon>
           {{ item.title }}
         </v-btn>
@@ -26,7 +26,7 @@
       <v-toolbar-items v-else class="hidden-sm-and-down">
         <v-text-field
           v-model="searchInput"
-          class="py-1 pr-1"
+          class="py-1 pb-1"
           label="Search"
           :append-icon="'mdi-magnify'"
           filled
