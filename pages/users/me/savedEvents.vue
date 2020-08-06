@@ -75,13 +75,13 @@ export default {
     },
     async loadCategory() {
       const headers = { headers: { token: localStorage.getItem('token') } }
-      const dbUser = await this.$axios.$get(`/users/me`, headers)
+      const dbUser = await this.$axios.$get(`/users/me/savedEvents`, headers)
 
       const getCreator = await this.$axios.$get('/auth/me', {
         headers: { token: localStorage.getItem('token') },
       })
-
-      this.userId = getCreator.id
+      console.log(getCreator.id, dbUser._id)
+      this.userId = dbUser._id
 
       const savedEvents = dbUser.savedEvents
 

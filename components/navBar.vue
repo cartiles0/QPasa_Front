@@ -12,7 +12,7 @@
         <v-btn v-for="(item, index) in items" :key="index" :to="item.to" text>
           <v-text-field
             v-model="searchInput"
-            class="py-1"
+            class="py-1 pr-1"
             label="Search"
             :append-icon="'mdi-magnify'"
             filled
@@ -26,7 +26,7 @@
       <v-toolbar-items v-else class="hidden-sm-and-down">
         <v-text-field
           v-model="searchInput"
-          class="py-1"
+          class="py-1 pr-1"
           label="Search"
           :append-icon="'mdi-magnify'"
           filled
