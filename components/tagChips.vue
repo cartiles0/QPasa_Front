@@ -7,7 +7,7 @@
       outlined
     >
       <v-icon left>mdi-pound</v-icon>
-      Gastronomía
+      Gastronomy
     </v-chip>
 
     <v-chip
@@ -17,7 +17,7 @@
       outlined
     >
       <v-icon left>mdi-pound</v-icon>
-      Conciertos
+      Concerts
     </v-chip>
 
     <v-chip
@@ -37,7 +37,7 @@
       outlined
     >
       <v-icon left>mdi-pound</v-icon>
-      Expo/Ferias
+      Expo/Fairs
     </v-chip>
   </div>
 </template>

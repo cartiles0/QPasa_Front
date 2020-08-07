@@ -10,7 +10,7 @@
       > -->
       <v-text-field
         v-model="searchInput"
-        class="mt-5 hidden-sm-and-down"
+        class="mt-7 hidden-sm-and-down"
         label="Search"
         :append-icon="'mdi-magnify'"
         filled
