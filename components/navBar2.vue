@@ -42,7 +42,7 @@
                 <v-icon>mdi-account</v-icon> {{ user.username }}
               </v-list-item-title>
             </v-list-item>
-            <v-list-item icon :to="'events/createEvent'">
+            <v-list-item icon :to="'/events/createEvent'">
               <v-list-item-title>
                 <v-icon>mdi-calendar-plus</v-icon> Create Event
               </v-list-item-title>
@@ -112,7 +112,7 @@
                 <v-icon>mdi-account</v-icon> {{ user.username }}
               </v-list-item-title>
             </v-list-item>
-            <v-list-item icon :to="'events/createEvent'">
+            <v-list-item icon :to="'/events/createEvent'">
               <v-list-item-title>
                 <v-icon>mdi-calendar-plus</v-icon> Create Event
               </v-list-item-title>
