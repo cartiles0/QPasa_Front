@@ -145,12 +145,12 @@
 
 <script>
 import login from '@/components/login3'
-import signup from '@/components/signup'
+// import signup from '@/components/signup'
 
 export default {
   component: {
     login,
-    signup,
+    // signup,
   },
   props: {
     title: {
