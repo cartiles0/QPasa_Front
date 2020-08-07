@@ -39,7 +39,7 @@
       </div>
       <v-spacer></v-spacer>
       <div class="mb-4 subtitle-1">
-        {{ event.date }}
+        {{ event.eventMonth }} {{ event.eventDay }}, {{ event.eventYear }}
       </div>
 
       <div>{{ event.description }}</div>
@@ -72,6 +72,20 @@ export default {
       savedIcon: false,
       userId: '',
       attendText: false,
+      months: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'Octubre',
+        'November',
+        'December',
+      ],
     }
   },
   mounted() {
@@ -113,7 +127,6 @@ export default {
       this.event = {
         title: dbEvent.title,
         description: dbEvent.description,
-        date: dbEvent.eventDate,
         capacity: dbEvent.capacity,
         price: dbEvent.price,
         photo: dbEvent.photo,
@@ -125,9 +138,9 @@ export default {
         views: dbEvent.views,
         tags: dbEvent.tags,
         id: dbEvent._id,
-        // dateDay: dbEvent.eventDate.getDate(),
-        // dateMonth: dbEvent.eventDate.getMonth() + 1,
-        // dateYear: dbEvent.eventDate.getFullYear(),
+        eventDay: dbEvent.eventDate.slice(8, 10),
+        eventMonth: this.months[dbEvent.eventDate.slice(5, 7) - 1],
+        eventYear: dbEvent.eventDate.slice(0, 4),
       }
 
       const getCreator = await this.$axios.$get('/auth/me', {
@@ -148,7 +161,6 @@ export default {
       }
 
       await this.$axios.$put(`/events/${dbEvent._id}/views`)
-      // console.log('HERE IS THE DATE' + dbEvent.eventDate.toISOString())
     },
   },
 }

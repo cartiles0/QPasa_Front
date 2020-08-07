@@ -23,10 +23,21 @@
 
       <v-spacer />
 
+      <!-- <v-dialog v-model="dialog" persistent max-width="600px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn color="primary" dark v-bind="attrs" v-on="on">
+            Open Dialog
+          </v-btn>
+        </template>
+        <signup />
+      </v-dialog> -->
+
       <div class="hidden-sm-and-down">
         <v-toolbar-items v-if="userLogged === false">
-          <v-btn :to="'/auth/login'" text>
-            <v-icon>mdi-account</v-icon> Sign In
+          <v-icon>mdi-account</v-icon>
+          <v-btn :to="'/auth/login'" class="px-0 mt-1" text> Log In </v-btn>/
+          <v-btn :to="'/auth/signup'" class="px-0 mt-1" text>
+            Create Account
           </v-btn>
         </v-toolbar-items>
 
@@ -134,10 +145,12 @@
 
 <script>
 import login from '@/components/login3'
+import signup from '@/components/signup'
 
 export default {
   component: {
     login,
+    signup,
   },
   props: {
     title: {

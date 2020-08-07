@@ -1,85 +1,5 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" persistent max-width="600px">
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn color="primary" dark v-bind="attrs" v-on="on">
-          Open Dialog
-        </v-btn>
-      </template>
-      <v-card>
-        <v-card-title>
-          <span class="headline">User Profile</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field label="Legal first name*" required></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field
-                  label="Legal middle name"
-                  hint="example of helper text only on focus"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field
-                  label="Legal last name*"
-                  hint="example of persistent helper text"
-                  persistent-hint
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field label="Email*" required></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  label="Password*"
-                  type="password"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Age*"
-                  required
-                ></v-select>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-autocomplete
-                  :items="[
-                    'Skiing',
-                    'Ice hockey',
-                    'Soccer',
-                    'Basketball',
-                    'Hockey',
-                    'Reading',
-                    'Writing',
-                    'Coding',
-                    'Basejump',
-                  ]"
-                  label="Interests"
-                  multiple
-                ></v-autocomplete>
-              </v-col>
-            </v-row>
-          </v-container>
-          <small>*indicates required field</small>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false"
-            >Close</v-btn
-          >
-          <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-row>
-
-  <!-- <v-row justify="center">
     <v-col>
       <v-form ref="form">
         <v-card-title>
@@ -90,7 +10,7 @@
             <v-row>
               <v-col cols="12" sm="6" md="6" lg="4">
                 <v-text-field
-                  v-model="name"
+                  v-model="user_name"
                   label="Name*"
                   autofocus=""
                   required
@@ -98,13 +18,13 @@
               </v-col>
               <v-col cols="12" sm="6" md="6" lg="4">
                 <v-text-field
-                  v-model="lastName"
+                  v-model="user_lastName"
                   label="Last Name"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" lg="8">
                 <v-text-field
-                  v-model="username"
+                  v-model="user_username"
                   label="Username*"
                   persistent-hint
                   required
@@ -112,14 +32,14 @@
               </v-col>
               <v-col cols="12" lg="8">
                 <v-text-field
-                  v-model="email"
+                  v-model="user_email"
                   label="Email*"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="12" lg="8">
                 <v-text-field
-                  v-model="password"
+                  v-model="user_password"
                   :append-icon="password1 ? 'mdi-eye' : 'mdi-eye-off'"
                   :rules="[rules.required, rules.min]"
                   :type="password1 ? 'text' : 'password'"
@@ -132,7 +52,7 @@
               </v-col>
               <v-col cols="12" lg="8">
                 <v-select
-                  v-model="areaPreference"
+                  v-model="user_areaPreference"
                   :items="[
                     'Las Palmas de Gran Canaria',
                     'Telde',
@@ -173,19 +93,21 @@
         </v-col>
       </v-form>
     </v-col>
-  </v-row> -->
+  </v-row>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      name: '',
-      lastName: '',
-      username: '',
-      email: '',
-      password: '',
-      areaPreference: '',
+      user_name: '',
+      user_lastName: '',
+      user_username: '',
+      user_email: '',
+      user_password: '',
+      user_areaPreference: '',
+      password1: false,
+      password2: false,
       rules: {
         required: (value) => !!value || 'Required.',
         min: (v) => v.length >= 8 || 'Min 8 characters',
@@ -199,12 +121,12 @@ export default {
     },
     async signup() {
       const data = {
-        user_name: this.name,
-        user_lastName: this.lastName,
-        user_username: this.username,
-        user_email: this.email,
-        user_password: this.password,
-        user_areaPreference: this.areaPreference,
+        user_name: this.user_name,
+        user_lastName: this.user_lastName,
+        user_username: this.user_username,
+        user_email: this.user_email,
+        user_password: this.user_password,
+        user_areaPreference: this.user_areaPreference,
       }
 
       const ip = await this.$axios.$post('/auth/signup', data)
