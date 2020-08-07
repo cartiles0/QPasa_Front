@@ -2,7 +2,15 @@
   <v-container fluid>
     <div class="pb-2 title">Search for: "{{ searchItem }}"</div>
     <v-row dense>
-      <v-col v-for="(event, idx) in events" :key="idx" :cols="4">
+      <v-col
+        v-for="(event, idx) in events"
+        :key="idx"
+        :cols="12"
+        :sm="6"
+        :md="4"
+        :lg="3"
+        :xl="3"
+      >
         <v-card class="mr-5 mb-5">
           <v-img
             :src="event.photo"
