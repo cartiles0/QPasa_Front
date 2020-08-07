@@ -3,25 +3,32 @@
     <v-flex xs12 sm8 md6>
       <tagChips />
       <br />
-      <div>
-        <h2>Upcoming Events</h2>
-        <upcomingEvents />
-      </div>
-      <div v-if="userLogged === true">
+      <div class="hidden-md-and-up">
+        <div>
+          <h2>Upcoming Events</h2>
+          <upcomingEvents />
+        </div>
+        <div v-if="userLogged === true">
+          <br />
+          <h3>#CERCADETI</h3>
+          <nearYou />
+        </div>
         <br />
-        <h3>#CERCADETI</h3>
-        <nearYou />
-      </div>
-      <br />
-
-      <div v-for="(category, idx) in categories" :key="idx">
-        <h3>#{{ category }}</h3>
-        <v-card>
-          <eventCarousel :data="category" />
-        </v-card>
-        <br />
+        <div v-for="(category, idx) in categories" :key="idx">
+          <h3>#{{ category }}</h3>
+          <v-card>
+            <eventCarousel :data="category" />
+          </v-card>
+          <br />
+        </div>
       </div>
     </v-flex>
+    <div class="hidden-sm-and-down">
+      <div v-for="(category, idx) in categories" :key="idx">
+        <h3>#{{ category }}</h3>
+        <eventCards :data="category" />
+      </div>
+    </div>
   </v-layout>
 </template>
 
@@ -30,6 +37,7 @@ import tagChips from '../components/tagChips'
 import upcomingEvents from '../components/upcomingEvents'
 import nearYou from '../components/nearYou'
 import eventCarousel from '../components/eventCarousel'
+import eventCards from '../components/eventCards'
 
 export default {
   components: {
@@ -37,6 +45,7 @@ export default {
     upcomingEvents,
     nearYou,
     eventCarousel,
+    eventCards,
   },
   data() {
     return {

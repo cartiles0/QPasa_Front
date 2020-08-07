@@ -1,84 +1,137 @@
 <template>
-  <v-card class="mx-auto my-5 justify-center elevation-0" max-width="800px">
-    <v-list-item>
-      <v-avatar>
-        <img :src="user.photo" :alt="user.name" />
-      </v-avatar>
-      <v-list-item-content class="ml-4">
-        <v-list-item-title class="py-0">
-          {{ user.username }}
-        </v-list-item-title>
-        <v-list-item-title class="py-0">{{ user.lastName }}</v-list-item-title>
-        <v-list-item-subtitle class="py-0 my-0">
-          Rating: {{ user.rating }} | {{ user.email }} |
-          {{ user.areaPreference }}
-        </v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
+  <v-container fluid>
+    <v-row dense>
+      <v-col
+        v-for="(event, idx) in events"
+        :key="idx"
+        :cols="12"
+        :sm="6"
+        :md="4"
+        :lg="3"
+        :xl="3"
+      >
+        <v-card class="mr-5 mb-5">
+          <v-img :src="event.photo"></v-img>
 
-    <v-card-text>
-      <v-list-item-title class="py-0 title">
-        About Me
-      </v-list-item-title>
-      <div>{{ user.aboutMe }}</div>
-    </v-card-text>
+          <v-card-actions>
+            <v-btn
+              color="primary"
+              text
+              :to="`/events/${event.id}`"
+              v-text="event.title"
+            >
+            </v-btn>
 
-    <v-divider class="mx-4"></v-divider>
-    <v-list-item-title class="py-2 pl-4 mt-6">
-      Your Events
-    </v-list-item-title>
-    <eventCarousel :userevent="user.yourEvents" />
-    <v-list-item-title class="py-2 pl-4 mt-6">
-      Attending Events
-    </v-list-item-title>
-    <eventCarousel :userevent="user.attendingEvents" />
-    <v-list-item-title class="py-2 pl-4 mt-6">
-      Saved Events
-    </v-list-item-title>
-    <eventCarousel :userevent="user.savedEvents" />
-  </v-card>
+            <!-- <v-spacer></v-spacer>
+
+            <v-btn v-if="event.savedIcon === false" icon @click="userSave(idx)">
+              <v-icon>mdi-heart-outline</v-icon>
+            </v-btn>
+            <v-btn v-else icon color="red" @click="userSave(idx)">
+              <v-icon>mdi-heart</v-icon>
+            </v-btn> -->
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import axios from 'axios'
-import eventCarousel from '@/components/userProfileCarousel'
-
 export default {
-  components: {
-    eventCarousel,
-  },
-  async asyncData() {
-    const headers = { headers: { token: localStorage.getItem('token') } }
-    const dbUser = await axios.get(
-      `${process.env.VUE_APP_API_URL}/users/me`,
-      headers
-    )
-    return {
-      user: {
-        name: dbUser.data.name,
-        lastName: dbUser.data.lastName,
-        username: dbUser.data.username,
-        email: dbUser.data.email,
-        photo: dbUser.data.photo,
-        areaPreference: dbUser.data.areaPreference,
-        address: dbUser.data.address,
-        rating: dbUser.data.rating,
-        aboutMe: dbUser.data.aboutMe,
-        yourEvents: dbUser.data.myEvents,
-        savedEvents: dbUser.data.savedEvents,
-        attendingEvents: dbUser.data.attendingEvents,
-        id: dbUser.data._id,
-      },
-    }
+  props: {
+    data: {
+      type: String,
+      default: '',
+    },
   },
   data() {
-    return {}
+    return {
+      events: [],
+      savedIcon: false,
+      userId: '',
+      attendText: false,
+      months: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ],
+    }
+  },
+  mounted() {
+    this.eventLoad()
+  },
+  methods: {
+    async userSave() {
+      const dbSave = await this.$axios.$put(
+        `/events/me/${this.event.id}/save`,
+        {},
+        {
+          headers: { token: localStorage.getItem('token') },
+        }
+      )
+      if (dbSave.saved.includes(this.userId)) {
+        this.savedIcon = true
+      } else {
+        this.savedIcon = false
+      }
+    },
+    async userAttend() {
+      const dbAttend = await this.$axios.$put(
+        `/events/me/${this.event.id}/attendance`,
+        {},
+        {
+          headers: { token: localStorage.getItem('token') },
+        }
+      )
+      if (dbAttend.attendance.includes(this.userId)) {
+        this.attendText = true
+      } else {
+        this.attendText = false
+      }
+    },
+    async eventLoad() {
+      const dbEvent = await this.$axios.$get(`/events/category/${this.data}`)
+
+      dbEvent.forEach((event, idx) => {
+        this.events.push({
+          title: event.title,
+          description: event.description,
+          capacity: event.capacity,
+          price: event.price,
+          photo: event.photo,
+          category: event.category,
+          address: event.address,
+          saved: event.saved,
+          attendance: event.attendance,
+          views: event.views,
+          tags: event.tags,
+          id: event._id,
+        })
+      })
+
+      const getCreator = await this.$axios.$get('/auth/me', {
+        headers: { token: localStorage.getItem('token') },
+      })
+      this.userId = getCreator.id
+
+      if (dbEvent.saved.includes(getCreator.id)) {
+        this.savedIcon = true
+      } else {
+        this.savedIcon = false
+      }
+
+      await this.$axios.$put(`/events/${dbEvent._id}/views`)
+    },
   },
 }
 </script>
-
-<style>
-.title {
-  color: black;
-}
-</style>
