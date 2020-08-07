@@ -79,11 +79,7 @@ export default {
         headers
       )
 
-      const getCreator = await this.$axios.$get('/auth/me', {
-        headers: { token: localStorage.getItem('token') },
-      })
-
-      this.userId = getCreator.id
+      this.userId = dbUser._id
 
       const attendingEvents = dbUser.attendingEvents
 
@@ -102,7 +98,7 @@ export default {
           id: event._id,
           savedIcon: false,
         })
-        if (attendingEvents[idx].saved.includes(getCreator.id)) {
+        if (attendingEvents[idx].saved.includes(dbUser._id)) {
           this.events[idx].savedIcon = true
         } else {
           this.events[idx].savedIcon = false

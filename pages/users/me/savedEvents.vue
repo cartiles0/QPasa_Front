@@ -77,10 +77,6 @@ export default {
       const headers = { headers: { token: localStorage.getItem('token') } }
       const dbUser = await this.$axios.$get(`/users/me/savedEvents`, headers)
 
-      const getCreator = await this.$axios.$get('/auth/me', {
-        headers: { token: localStorage.getItem('token') },
-      })
-      console.log(getCreator.id, dbUser._id)
       this.userId = dbUser._id
 
       const savedEvents = dbUser.savedEvents
@@ -100,7 +96,7 @@ export default {
           id: event._id,
           savedIcon: false,
         })
-        if (savedEvents[idx].saved.includes(getCreator.id)) {
+        if (savedEvents[idx].saved.includes(dbUser._id)) {
           this.events[idx].savedIcon = true
         } else {
           this.events[idx].savedIcon = false
