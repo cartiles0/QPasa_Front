@@ -83,7 +83,7 @@ export default {
         'July',
         'August',
         'September',
-        'Octubre',
+        'October',
         'November',
         'December',
       ],

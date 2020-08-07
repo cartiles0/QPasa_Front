@@ -79,7 +79,6 @@ export default {
       } else {
         this.events[idx].savedIcon = false
       }
-      window.location.reload()
     },
     async loadCategory() {
       const headers = { headers: { token: localStorage.getItem('token') } }
