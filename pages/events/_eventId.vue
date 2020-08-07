@@ -39,7 +39,8 @@
       </div>
       <v-spacer></v-spacer>
       <div class="mb-4 subtitle-1">
-        {{ event.eventMonth }} {{ event.eventDay }}, {{ event.eventYear }}
+        {{ event.eventMonth }} {{ event.eventDay }}, {{ event.eventYear }} -
+        {{ event.daysLeft }} Days Left!
       </div>
 
       <div>{{ event.description }}</div>
@@ -141,7 +142,17 @@ export default {
         eventDay: dbEvent.eventDate.slice(8, 10),
         eventMonth: this.months[dbEvent.eventDate.slice(5, 7) - 1],
         eventYear: dbEvent.eventDate.slice(0, 4),
+        daysLeft: 0,
       }
+
+      const today = new Date()
+      const eventDay = new Date(
+        `${dbEvent.eventDate.slice(0, 4)}-${dbEvent.eventDate.slice(
+          5,
+          7
+        )}-${dbEvent.eventDate.slice(8, 10)}`
+      )
+      this.event.daysLeft = Math.ceil((eventDay - today) / (1000 * 3600 * 24))
 
       const getCreator = await this.$axios.$get('/auth/me', {
         headers: { token: localStorage.getItem('token') },
