@@ -27,9 +27,12 @@
 
     <v-divider class="mx-4"></v-divider>
     <v-list-item-title class="py-2 pl-4 mt-6">
-      Your Events
+      My Events -
+      <v-btn :to="'/users/me/myEvents'" class="pl-0" text color="primary">
+        See All
+      </v-btn>
     </v-list-item-title>
-    <eventCarousel :userevent="user.yourEvents" />
+    <eventCarousel :userevent="user.myEvents" />
     <v-list-item-title class="py-2 pl-4 mt-6">
       Attending Events -
       <v-btn
@@ -73,7 +76,7 @@ export default {
         address: dbUser.data.address,
         rating: dbUser.data.rating,
         aboutMe: dbUser.data.aboutMe,
-        yourEvents: dbUser.data.myEvents,
+        myEvents: dbUser.data.myEvents,
         savedEvents: dbUser.data.savedEvents,
         attendingEvents: dbUser.data.attendingEvents,
         id: dbUser.data._id,
