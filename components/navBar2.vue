@@ -10,7 +10,7 @@
       > -->
       <v-text-field
         v-model="searchInput"
-        class="mt-4 py-2 hidden-sm-and-down"
+        class="mt-5 hidden-sm-and-down"
         label="Search"
         :append-icon="'mdi-magnify'"
         filled
@@ -23,36 +23,38 @@
 
       <v-spacer />
 
-      <v-toolbar-items v-if="userLogged === false" class="hidden-sm-and-down">
-        <v-btn :to="'/auth/login'" text>
-          <v-icon>mdi-account</v-icon> Sign In
-        </v-btn>
-      </v-toolbar-items>
+      <div class="hidden-sm-and-down">
+        <v-toolbar-items v-if="userLogged === false">
+          <v-btn :to="'/auth/login'" text>
+            <v-icon>mdi-account</v-icon> Sign In
+          </v-btn>
+        </v-toolbar-items>
 
-      <v-menu v-else offset-y>
-        <template v-slot:activator="{ on, attrs }">
-          <v-avatar v-bind="attrs" height="40px" width="40px" v-on="on">
-            <img :src="user.photo" :alt="user.name" />
-          </v-avatar>
-        </template>
-        <v-list>
-          <v-list-item icon :to="'/users/me'">
-            <v-list-item-title>
-              <v-icon>mdi-account</v-icon> {{ user.username }}
-            </v-list-item-title>
-          </v-list-item>
-          <v-list-item icon :to="'events/createEvent'">
-            <v-list-item-title>
-              <v-icon>mdi-calendar-plus</v-icon> Create Event
-            </v-list-item-title>
-          </v-list-item>
-          <v-list-item icon @click="logout()">
-            <v-list-item-title>
-              <v-icon>mdi-exit-to-app</v-icon> Log Out
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+        <v-menu v-else offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-avatar v-bind="attrs" height="40px" width="40px" v-on="on">
+              <img :src="user.photo" :alt="user.name" />
+            </v-avatar>
+          </template>
+          <v-list>
+            <v-list-item icon :to="'/users/me'">
+              <v-list-item-title>
+                <v-icon>mdi-account</v-icon> {{ user.username }}
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon :to="'events/createEvent'">
+              <v-list-item-title>
+                <v-icon>mdi-calendar-plus</v-icon> Create Event
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon @click="logout()">
+              <v-list-item-title>
+                <v-icon>mdi-exit-to-app</v-icon> Log Out
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
 
       <div class="text-center hidden-md-and-up">
         <v-menu offset-y>
