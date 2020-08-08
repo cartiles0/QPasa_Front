@@ -99,7 +99,7 @@
             <v-divider class="px-2"></v-divider>
             <v-list-item icon :to="'/auth/login'">
               <v-list-item-title>
-                <v-icon>mdi-account</v-icon> Sign In
+                <v-icon>mdi-account</v-icon> Log In / Create Account
               </v-list-item-title>
             </v-list-item>
           </v-list>

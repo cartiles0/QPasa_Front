@@ -11,6 +11,7 @@
               <v-text-field
                 v-model="user_email"
                 label="Email*"
+                clearable=""
                 required
               ></v-text-field>
             </v-col>
@@ -20,6 +21,7 @@
                 :append-icon="password ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="password ? 'text' : 'password'"
                 label="Password*"
+                clearable=""
                 required
                 @click:append="password = !password"
               ></v-text-field>
@@ -63,6 +65,8 @@ export default {
             localStorage.setItem('email', response.email)
             localStorage.setItem('token', response.token)
             window.location.href = '/'
+          } else {
+            window.alert(response.error)
           }
         })
         .catch((err) => console.err(err))

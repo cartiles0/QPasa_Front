@@ -55,7 +55,9 @@
                 <v-textarea
                   v-model="description"
                   label="Event Description"
-                  required
+                  auto-grow
+                  rows="2"
+                  clearable
                 ></v-textarea>
               </v-col>
               <v-col cols="12" sm="6" md="6">
@@ -77,8 +79,8 @@
                   v-model="category"
                   :items="[
                     'Concerts',
-                    'Conferences/Workshops',
-                    'Expo/Fairs',
+                    'Conferences-Workshops',
+                    'Expo-Fairs',
                     'Festivals',
                     'For Kids',
                     'Gastronomy',
@@ -86,7 +88,7 @@
                     'Retreats',
                     'Shows',
                     'Sports',
-                    'Theater/Film',
+                    'Theater-Film',
                   ]"
                   label="Category"
                   required
@@ -153,13 +155,20 @@ export default {
         creator: getCreator.id,
       }
 
-      const ip = await this.$axios.$post('/events/me', data, {
-        headers: { token: localStorage.getItem('token') },
-      })
+      this.$axios
+        .$post('/events/me', data, {
+          headers: { token: localStorage.getItem('token') },
+        })
+        .then((response) => {
+          if (!response.errors) {
+            this.$router.push(`/events/${response._id}`)
+          } else {
+            window.alert('Please fill out the form correctly!')
+          }
+        })
+        .catch((err) => console.err(err))
 
-      this.ip = ip
-
-      this.reset()
+      // this.reset()
     },
     formatDate(date) {
       if (!date) return null
