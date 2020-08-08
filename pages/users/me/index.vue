@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto my-5 justify-center elevation-0" max-width="800px">
+  <v-card class="mx-auto my-5 justify-center elevation-0" max-width="1500px">
     <v-list-item>
       <v-avatar>
         <img :src="user.photo" :alt="user.name" />
@@ -27,7 +27,7 @@
 
     <v-divider class="mx-4"></v-divider>
 
-    <div class="hidden-md-and-up">
+    <div class="hidden-sm-and-up">
       <v-list-item-title class="py-2 pl-4 mt-6">
         My Events -
         <v-btn :to="'/users/me/myEvents'" class="pl-0" text color="primary">
@@ -56,7 +56,7 @@
       <eventCarousel :userevent="user.savedEvents" />
     </div>
 
-    <div class="hidden-sm-and-down">
+    <div class="hidden-xs-and-down">
       <v-list-item-title class="py-2 pl-4 mt-6">
         My Events -
         <v-btn :to="'/users/me/myEvents'" class="pl-0" text color="primary">

@@ -7,8 +7,8 @@
         :cols="12"
         :sm="6"
         :md="4"
-        :lg="4"
-        :xl="4"
+        :lg="3"
+        :xl="3"
       >
         <v-card class="mr-5 mb-5">
           <v-img :src="event.photo"></v-img>
@@ -22,14 +22,14 @@
             >
             </v-btn>
 
-            <v-spacer></v-spacer>
+            <!-- <v-spacer></v-spacer>
 
             <v-btn v-if="event.savedIcon === false" icon @click="userSave(idx)">
               <v-icon>mdi-heart-outline</v-icon>
             </v-btn>
             <v-btn v-else icon color="red" @click="userSave(idx)">
               <v-icon>mdi-heart</v-icon>
-            </v-btn>
+            </v-btn> -->
           </v-card-actions>
         </v-card>
       </v-col>
