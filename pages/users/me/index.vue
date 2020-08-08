@@ -26,41 +26,75 @@
     </v-card-text>
 
     <v-divider class="mx-4"></v-divider>
-    <v-list-item-title class="py-2 pl-4 mt-6">
-      My Events -
-      <v-btn :to="'/users/me/myEvents'" class="pl-0" text color="primary">
-        See All
-      </v-btn>
-    </v-list-item-title>
-    <eventCarousel :userevent="user.myEvents" />
-    <v-list-item-title class="py-2 pl-4 mt-6">
-      Attending Events -
-      <v-btn
-        :to="'/users/me/attendingEvents'"
-        class="pl-0"
-        text
-        color="primary"
-      >
-        See All
-      </v-btn>
-    </v-list-item-title>
-    <eventCarousel :userevent="user.attendingEvents" />
-    <v-list-item-title class="py-2 pl-4 mt-6">
-      Saved Events -
-      <v-btn :to="'/users/me/savedEvents'" class="pl-0" text color="primary">
-        See All
-      </v-btn>
-    </v-list-item-title>
-    <eventCarousel :userevent="user.savedEvents" />
+
+    <div class="hidden-md-and-up">
+      <v-list-item-title class="py-2 pl-4 mt-6">
+        My Events -
+        <v-btn :to="'/users/me/myEvents'" class="pl-0" text color="primary">
+          See All
+        </v-btn>
+      </v-list-item-title>
+      <eventCarousel :userevent="user.myEvents" />
+      <v-list-item-title class="py-2 pl-4 mt-6">
+        Attending Events -
+        <v-btn
+          :to="'/users/me/attendingEvents'"
+          class="pl-0"
+          text
+          color="primary"
+        >
+          See All
+        </v-btn>
+      </v-list-item-title>
+      <eventCarousel :userevent="user.attendingEvents" />
+      <v-list-item-title class="py-2 pl-4 mt-6">
+        Saved Events -
+        <v-btn :to="'/users/me/savedEvents'" class="pl-0" text color="primary">
+          See All
+        </v-btn>
+      </v-list-item-title>
+      <eventCarousel :userevent="user.savedEvents" />
+    </div>
+
+    <div class="hidden-sm-and-down">
+      <v-list-item-title class="py-2 pl-4 mt-6">
+        My Events -
+        <v-btn :to="'/users/me/myEvents'" class="pl-0" text color="primary">
+          See All
+        </v-btn>
+      </v-list-item-title>
+      <eventCards :userevent="user.myEvents" />
+      <v-list-item-title class="py-2 pl-4 mt-6">
+        Attending Events -
+        <v-btn
+          :to="'/users/me/attendingEvents'"
+          class="pl-0"
+          text
+          color="primary"
+        >
+          See All
+        </v-btn>
+      </v-list-item-title>
+      <eventCards :userevent="user.attendingEvents" />
+      <v-list-item-title class="py-2 pl-4 mt-6">
+        Saved Events -
+        <v-btn :to="'/users/me/savedEvents'" class="pl-0" text color="primary">
+          See All
+        </v-btn>
+      </v-list-item-title>
+      <eventCards :userevent="user.savedEvents" />
+    </div>
   </v-card>
 </template>
 
 <script>
 import eventCarousel from '@/components/userProfileCarousel'
+import eventCards from '@/components/userProfileCards'
 
 export default {
   components: {
     eventCarousel,
+    eventCards,
   },
   async asyncData({ $axios, params }) {
     const headers = { headers: { token: localStorage.getItem('token') } }
