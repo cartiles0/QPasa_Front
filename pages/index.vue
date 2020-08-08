@@ -22,13 +22,13 @@
           <br />
         </div>
       </div>
-    </v-flex>
-    <div class="hidden-xs-and-down">
-      <div v-for="(category, idx) in categories" :key="idx">
-        <h3>#{{ category }}</h3>
-        <eventCards :data="category" />
+      <div class="hidden-xs-and-down">
+        <div v-for="(category, idx) in categories" :key="idx">
+          <h3>#{{ category }}</h3>
+          <eventCards :data="category" />
+        </div>
       </div>
-    </div>
+    </v-flex>
   </v-layout>
 </template>
 
