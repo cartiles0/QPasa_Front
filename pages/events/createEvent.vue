@@ -166,9 +166,7 @@ export default {
             window.alert('Please fill out the form correctly!')
           }
         })
-        .catch((err) => console.err(err))
-
-      // this.reset()
+        .catch((err) => console.error(err))
     },
     formatDate(date) {
       if (!date) return null

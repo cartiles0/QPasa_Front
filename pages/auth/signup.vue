@@ -119,7 +119,7 @@ export default {
     reset() {
       this.$refs.form.reset()
     },
-    async signup() {
+    signup() {
       const data = {
         user_name: this.user_name,
         user_lastName: this.user_lastName,
@@ -129,16 +129,18 @@ export default {
         user_areaPreference: this.user_areaPreference,
       }
 
-      const ip = await this.$axios.$post('/auth/signup', data)
-
-      localStorage.setItem('token', ip.token)
-      localStorage.setItem('email', ip.email)
-
-      this.ip = ip
-
-      this.reset()
-
-      window.location.href = '/'
+      this.$axios
+        .$post('/auth/signup', data)
+        .then((response) => {
+          if (!response.error) {
+            localStorage.setItem('email', response.email)
+            localStorage.setItem('token', response.token)
+            window.location.href = '/'
+          } else {
+            window.alert('Please fill out the form correctly!')
+          }
+        })
+        .catch((err) => console.error(err))
     },
   },
 }
