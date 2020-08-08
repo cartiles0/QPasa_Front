@@ -68,7 +68,18 @@ export default {
     }
   },
   mounted() {
-    this.eventLoad()
+    if (localStorage.getItem('token')) {
+      this.$axios
+        .$get('/auth/me', {
+          headers: { token: localStorage.getItem('token') },
+        })
+        .then((response) => {
+          this.eventLoadId(response.id)
+        })
+        .catch((err) => console.error(err))
+    } else {
+      this.eventLoadNoId()
+    }
   },
   methods: {
     async userSave(idx) {
@@ -85,12 +96,28 @@ export default {
         this.events[idx].savedIcon = false
       }
     },
-    async eventLoad() {
-      const getCreator = await this.$axios.$get('/auth/me', {
-        headers: { token: localStorage.getItem('token') },
-      })
+    async eventLoadNoId() {
+      const dbEvent = await this.$axios.$get(`/events/category/${this.data}`)
 
-      this.userId = getCreator.id
+      dbEvent.forEach((event, idx) => {
+        this.events.push({
+          title: event.title,
+          description: event.description,
+          capacity: event.capacity,
+          price: event.price,
+          photo: event.photo,
+          category: event.category,
+          address: event.address,
+          saved: event.saved,
+          attendance: event.attendance,
+          tags: event.tags,
+          id: event._id,
+          savedIcon: false,
+        })
+      })
+    },
+    async eventLoadId(id) {
+      this.userId = id
 
       const dbEvent = await this.$axios.$get(`/events/category/${this.data}`)
 
@@ -109,7 +136,7 @@ export default {
           id: event._id,
           savedIcon: false,
         })
-        if (dbEvent[idx].saved.includes(getCreator.id)) {
+        if (dbEvent[idx].saved.includes(id)) {
           this.events[idx].savedIcon = true
         } else {
           this.events[idx].savedIcon = false
