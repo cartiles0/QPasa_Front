@@ -22,14 +22,14 @@
             >
             </v-btn>
 
-            <!-- <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
 
             <v-btn v-if="event.savedIcon === false" icon @click="userSave(idx)">
               <v-icon>mdi-heart-outline</v-icon>
             </v-btn>
             <v-btn v-else icon color="red" @click="userSave(idx)">
               <v-icon>mdi-heart</v-icon>
-            </v-btn> -->
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -71,35 +71,27 @@ export default {
     this.eventLoad()
   },
   methods: {
-    async userSave() {
+    async userSave(idx) {
       const dbSave = await this.$axios.$put(
-        `/events/me/${this.event.id}/save`,
+        `/events/me/${this.events[idx].id}/save`,
         {},
         {
           headers: { token: localStorage.getItem('token') },
         }
       )
       if (dbSave.saved.includes(this.userId)) {
-        this.savedIcon = true
+        this.events[idx].savedIcon = true
       } else {
-        this.savedIcon = false
-      }
-    },
-    async userAttend() {
-      const dbAttend = await this.$axios.$put(
-        `/events/me/${this.event.id}/attendance`,
-        {},
-        {
-          headers: { token: localStorage.getItem('token') },
-        }
-      )
-      if (dbAttend.attendance.includes(this.userId)) {
-        this.attendText = true
-      } else {
-        this.attendText = false
+        this.events[idx].savedIcon = false
       }
     },
     async eventLoad() {
+      const getCreator = await this.$axios.$get('/auth/me', {
+        headers: { token: localStorage.getItem('token') },
+      })
+
+      this.userId = getCreator.id
+
       const dbEvent = await this.$axios.$get(`/events/category/${this.data}`)
 
       dbEvent.forEach((event, idx) => {
@@ -116,19 +108,14 @@ export default {
           views: event.views,
           tags: event.tags,
           id: event._id,
+          savedIcon: false,
         })
+        if (dbEvent[idx].saved.includes(getCreator.id)) {
+          this.events[idx].savedIcon = true
+        } else {
+          this.events[idx].savedIcon = false
+        }
       })
-
-      const getCreator = await this.$axios.$get('/auth/me', {
-        headers: { token: localStorage.getItem('token') },
-      })
-      this.userId = getCreator.id
-
-      if (dbEvent.saved.includes(getCreator.id)) {
-        this.savedIcon = true
-      } else {
-        this.savedIcon = false
-      }
 
       await this.$axios.$put(`/events/${dbEvent._id}/views`)
     },
