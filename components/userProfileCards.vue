@@ -7,8 +7,8 @@
         :cols="12"
         :sm="6"
         :md="4"
-        :lg="3"
-        :xl="3"
+        :lg="4"
+        :xl="4"
       >
         <v-card class="mr-5 mb-5">
           <v-img :src="event.photo"></v-img>
