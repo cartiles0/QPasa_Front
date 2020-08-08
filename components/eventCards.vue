@@ -105,7 +105,6 @@ export default {
           address: event.address,
           saved: event.saved,
           attendance: event.attendance,
-          views: event.views,
           tags: event.tags,
           id: event._id,
           savedIcon: false,
@@ -116,8 +115,6 @@ export default {
           this.events[idx].savedIcon = false
         }
       })
-
-      await this.$axios.$put(`/events/${dbEvent._id}/views`)
     },
   },
 }

@@ -51,24 +51,21 @@ export default {
     }
   },
   methods: {
-    reset() {
-      this.$refs.form.reset()
-    },
-    async login() {
+    login() {
       const data = {
         user_email: this.user_email,
         user_password: this.user_password,
       }
-      const ip = await this.$axios.$post('/auth/login', data)
-
-      localStorage.setItem('token', ip.token)
-      localStorage.setItem('email', ip.email)
-
-      this.ip = ip
-
-      this.reset()
-
-      window.location.href = '/'
+      this.$axios
+        .$post('/auth/login', data)
+        .then((response) => {
+          if (!response.error) {
+            localStorage.setItem('email', response.email)
+            localStorage.setItem('token', response.token)
+            window.location.href = '/'
+          }
+        })
+        .catch((err) => console.err(err))
     },
   },
 }

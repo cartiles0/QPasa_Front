@@ -8,49 +8,81 @@
       <!-- <v-btn color="accent" large @click.stop="showLogInForm = true"
         >TEST</v-btn
       > -->
-      <v-toolbar-items v-if="userLogged === false" class="hidden-sm-and-down">
-        <v-text-field
-          v-model="searchInput"
-          class="py-1 pb-1"
-          label="Search"
-          :append-icon="'mdi-magnify'"
-          filled
-          outlined
-          @click:append="search"
-        ></v-text-field>
-        <v-btn v-for="(item, index) in items" :key="index" :to="item.to" text>
-          <v-icon>{{ item.logo }}</v-icon>
-          {{ item.title }}
-        </v-btn>
-      </v-toolbar-items>
-      <v-toolbar-items v-else class="hidden-sm-and-down">
-        <v-text-field
-          v-model="searchInput"
-          class="py-1 pb-1"
-          label="Search"
-          :append-icon="'mdi-magnify'"
-          filled
-          outlined
-          @click:append="search"
-        ></v-text-field>
-        <v-btn
-          v-for="(item, index) in itemsLogged"
-          :key="index"
-          :to="item.to"
-          text
-          @click="item.click ? item.click() : null"
-        >
-          <v-icon>{{ item.logo }}</v-icon>
-          {{ item.title }}
-        </v-btn>
-      </v-toolbar-items>
-      <div class="text-center hidden-md-and-up">
-        <v-menu>
+      <v-text-field
+        v-model="searchInput"
+        class="mt-7 hidden-sm-and-down"
+        label="Search"
+        :append-icon="'mdi-magnify'"
+        filled
+        dense
+        clearable
+        rounded
+        outlined
+        @click:append="search"
+      ></v-text-field>
+
+      <v-spacer />
+
+      <!-- <v-dialog v-model="dialog" persistent max-width="600px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn color="primary" dark v-bind="attrs" v-on="on">
+            Open Dialog
+          </v-btn>
+        </template>
+        <signup />
+      </v-dialog> -->
+
+      <div class="hidden-sm-and-down">
+        <v-toolbar-items v-if="userLogged === false">
+          <v-icon>mdi-account</v-icon>
+          <v-btn :to="'/auth/login'" class="px-0 mt-1" text> Log In </v-btn>/
+          <v-btn :to="'/auth/signup'" class="px-0 mt-1" text>
+            Create Account
+          </v-btn>
+        </v-toolbar-items>
+
+        <v-menu v-else offset-y>
           <template v-slot:activator="{ on, attrs }">
+            <v-avatar v-bind="attrs" height="40px" width="40px" v-on="on">
+              <img :src="user.photo" :alt="user.name" />
+            </v-avatar>
+          </template>
+          <v-list>
+            <v-list-item icon :to="'/users/me'">
+              <v-list-item-title>
+                <v-icon>mdi-account</v-icon> {{ user.username }}
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon :to="'/events/createEvent'">
+              <v-list-item-title>
+                <v-icon>mdi-calendar-plus</v-icon> Create Event
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon @click="logout()">
+              <v-list-item-title>
+                <v-icon>mdi-exit-to-app</v-icon> Log Out
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
+
+      <div class="text-center hidden-md-and-up">
+        <v-menu offset-y>
+          <template
+            v-if="userLogged === false"
+            v-slot:activator="{ on, attrs }"
+          >
             <v-btn icon v-bind="attrs" v-on="on">
               <v-icon>mdi-menu</v-icon>
             </v-btn>
           </template>
+          <template v-else v-slot:activator="{ on, attrs }">
+            <v-avatar v-bind="attrs" height="35px" width="35px" v-on="on">
+              <img :src="user.photo" :alt="user.name" />
+            </v-avatar>
+          </template>
+
           <v-list v-if="userLogged === false">
             <v-text-field
               v-model="searchInput"
@@ -58,21 +90,20 @@
               label="Search"
               :append-icon="'mdi-magnify'"
               filled
+              dense
+              rounded
+              clearable
               outlined
               @click:append="search"
             ></v-text-field>
-            <v-list-item
-              v-for="(item, index) in items"
-              :key="index"
-              icon
-              :to="item.to"
-            >
+            <v-divider class="px-2"></v-divider>
+            <v-list-item icon :to="'/auth/login'">
               <v-list-item-title>
-                <v-icon>{{ item.logo }}</v-icon>
-                {{ item.title }}
+                <v-icon>mdi-account</v-icon> Sign In
               </v-list-item-title>
             </v-list-item>
           </v-list>
+
           <v-list v-else>
             <v-text-field
               v-model="searchInput"
@@ -81,18 +112,25 @@
               :append-icon="'mdi-magnify'"
               filled
               outlined
+              dense
+              clearable
+              rounded
               @click:append="search"
             ></v-text-field>
-            <v-list-item
-              v-for="(item, index) in itemsLogged"
-              :key="index"
-              icon
-              :to="item.to"
-              @click="item.click ? item.click() : null"
-            >
+            <v-divider class="px-2"></v-divider>
+            <v-list-item icon :to="'/users/me'">
               <v-list-item-title>
-                <v-icon>{{ item.logo }}</v-icon>
-                {{ item.title }}
+                <v-icon>mdi-account</v-icon> {{ user.username }}
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon :to="'/events/createEvent'">
+              <v-list-item-title>
+                <v-icon>mdi-calendar-plus</v-icon> Create Event
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon @click="logout()">
+              <v-list-item-title>
+                <v-icon>mdi-exit-to-app</v-icon> Log Out
               </v-list-item-title>
             </v-list-item>
           </v-list>
@@ -107,10 +145,12 @@
 
 <script>
 import login from '@/components/login3'
+// import signup from '@/components/signup'
 
 export default {
   component: {
     login,
+    // signup,
   },
   props: {
     title: {
@@ -120,30 +160,17 @@ export default {
   },
   data() {
     return {
+      user: {},
       searchInput: '',
       showLogInForm: false,
       userLogged: false,
       home: '/',
-      items: [
-        { title: 'Create Account', logo: 'mdi-account', to: '/auth/signup' },
-        { title: 'Log In', logo: 'mdi-account', to: '/auth/login' },
-        // { title: 'Search', logo: 'mdi-magnify' },
-      ],
-      itemsLogged: [
-        { title: 'My Profile', logo: 'mdi-account', to: '/users/me' },
-        {
-          title: 'Create Event',
-          logo: 'mdi-calendar-plus',
-          to: 'events/createEvent',
-        },
-        // { title: 'Search', logo: 'mdi-magnify' },
-        { title: 'Log Out', logo: 'mdi-exit-to-app', click: this.logout },
-      ],
     }
   },
   mounted() {
     if (localStorage.getItem('token')) {
       this.userLogged = true
+      this.getUser()
     } else {
       this.userLogged = false
     }
@@ -164,6 +191,25 @@ export default {
       }
       return this.userLogged
     },
+    async getUser() {
+      const dbUser = await this.$axios.$get('/users/me', {
+        headers: { token: localStorage.getItem('token') },
+      })
+
+      this.user = {
+        username: dbUser.username,
+        name: dbUser.name[0],
+        photo: dbUser.photo,
+      }
+    },
   },
 }
 </script>
+
+<style>
+.v-input__control {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  height: 55px;
+}
+</style>

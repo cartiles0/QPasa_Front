@@ -33,7 +33,7 @@
     <v-chip
       class="ma-2"
       color="indigo darken-3"
-      :to="`/events/category/Expo%2FFairs`"
+      :to="`/events/category/Expo-Fairs`"
       outlined
     >
       <v-icon left>mdi-pound</v-icon>
