@@ -58,6 +58,21 @@
                 <v-icon>mdi-calendar-plus</v-icon> Create Event
               </v-list-item-title>
             </v-list-item>
+            <v-list-item icon :to="'/users/myEvents'">
+              <v-list-item-title>
+                <v-icon>mdi-sign-direction</v-icon> My Events
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon :to="'/users/attendingEvents'">
+              <v-list-item-title>
+                <v-icon>mdi-arrow-right-drop-circle</v-icon> Attending Events
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon :to="'/users/savedEvents'">
+              <v-list-item-title>
+                <v-icon>mdi-heart-box-outline</v-icon> Saved Events
+              </v-list-item-title>
+            </v-list-item>
             <v-list-item icon @click="logout()">
               <v-list-item-title>
                 <v-icon>mdi-exit-to-app</v-icon> Log Out
@@ -126,6 +141,21 @@
             <v-list-item icon :to="'/events/createEvent'">
               <v-list-item-title>
                 <v-icon>mdi-calendar-plus</v-icon> Create Event
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon :to="'/users/myEvents'">
+              <v-list-item-title>
+                <v-icon>mdi-sign-direction</v-icon> My Events
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon :to="'/users/attendingEvents'">
+              <v-list-item-title>
+                <v-icon>mdi-arrow-right-drop-circle</v-icon> Attending Events
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon :to="'/users/savedEvents'">
+              <v-list-item-title>
+                <v-icon>mdi-heart-box-outline</v-icon> Saved Events
               </v-list-item-title>
             </v-list-item>
             <v-list-item icon @click="logout()">
