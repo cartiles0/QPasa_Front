@@ -2,7 +2,7 @@
   <div>
     <v-app-bar color="primary" dark fixed app elevate-on-scroll>
       <v-toolbar-title>
-        <button :to="home" text>{{ title }}</button>
+        <button text @click="goHome()">{{ title }}</button>
       </v-toolbar-title>
       <v-spacer />
       <!-- <v-btn color="accent" large @click.stop="showLogInForm = true"
@@ -164,7 +164,6 @@ export default {
       searchInput: '',
       showLogInForm: false,
       userLogged: false,
-      home: '/',
     }
   },
   mounted() {
@@ -176,6 +175,9 @@ export default {
     }
   },
   methods: {
+    goHome() {
+      window.location.href = '/'
+    },
     search() {
       window.location.href = `/events/search/${this.searchInput}`
     },

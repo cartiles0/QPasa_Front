@@ -20,16 +20,10 @@
           >
           </v-img>
 
-          <v-card-actions>
-            <v-btn
-              class="pr-0"
-              color="primary"
-              text
-              :to="`/events/${event.id}`"
-              v-text="event.title"
-            >
-            </v-btn>
-
+          <v-card-actions class="py-0 align-baseline">
+            <v-card-subtitle class="py-0 pl-2 align-baseline">
+              {{ event.daysLeft }} - Days Left...
+            </v-card-subtitle>
             <v-spacer></v-spacer>
 
             <v-btn
@@ -47,6 +41,17 @@
               <v-icon>mdi-share-variant</v-icon>
             </v-btn>
           </v-card-actions>
+
+          <v-card-title class="pt-0 pb-2">
+            <v-btn
+              class="px-0 align-start"
+              color="primary"
+              text
+              :to="`/events/${event.id}`"
+              v-text="event.title"
+            >
+            </v-btn>
+          </v-card-title>
         </v-card>
       </v-col>
     </v-row>
@@ -103,6 +108,17 @@ export default {
           id: event._id,
           savedIcon: false,
         })
+        const today = new Date()
+        const eventDay = new Date(
+          `${event.eventDate.slice(0, 4)}-${event.eventDate.slice(
+            5,
+            7
+          )}-${event.eventDate.slice(8, 10)}`
+        )
+        this.events[idx].daysLeft = Math.ceil(
+          (eventDay - today) / (1000 * 3600 * 24)
+        )
+
         if (myEvents[idx].saved.includes(dbUser._id)) {
           this.events[idx].savedIcon = true
         } else {
