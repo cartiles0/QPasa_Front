@@ -64,6 +64,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/firebase',
   ],
   /*
    ** Axios module configuration
@@ -98,4 +99,26 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {},
+  /*
+   ** FireBase!!!
+   */
+  firebase: {
+    config: {
+      apiKey: 'AIzaSyDwB5XScf4-iY1AGpFubbdHBsw075hadTw',
+      authDomain: 'qpasagc.firebaseapp.com',
+      databaseURL: 'https://qpasagc.firebaseio.com',
+      projectId: 'qpasagc',
+      storageBucket: 'qpasagc.appspot.com',
+      messagingSenderId: '151322553934',
+      appId: '1:151322553934:web:b453a8c1d1c979c6db5d1f',
+      measurementId: 'G-BPG2F4Y7SJ',
+    },
+    services: {
+      auth: true, // Just as example. Can be any other service.
+      storage: true,
+      realtimeDb: true,
+      performance: true,
+      analytics: true,
+    },
+  },
 }
