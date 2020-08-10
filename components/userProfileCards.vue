@@ -11,7 +11,7 @@
         :xl="3"
       >
         <v-card class="mr-5 mb-5">
-          <v-img :src="event.photo"></v-img>
+          <v-img :src="event.photo" @click="goToEvent(idx)"></v-img>
 
           <v-card-actions>
             <v-btn
@@ -68,6 +68,9 @@ export default {
     this.loadUserEvents()
   },
   methods: {
+    goToEvent(idx) {
+      this.$router.push(`/events/${this.events[idx].id}`)
+    },
     loadUserEvents() {
       this.userevent.forEach((event, idx) => {
         this.events.push({
