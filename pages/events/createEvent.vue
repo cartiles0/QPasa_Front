@@ -161,7 +161,7 @@ export default {
         })
         .then((response) => {
           if (!response.errors) {
-            this.$router.push(`/events/${response._id}`)
+            this.$router.push(`/events/me/${response._id}`)
           } else {
             window.alert('Please fill out the form correctly!')
           }

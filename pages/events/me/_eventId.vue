@@ -284,7 +284,9 @@ export default {
             this.dialogDeleteEvent = false
             this.$router.push(`/users/me`)
           } else {
-            window.alert('Please fill out the form correctly!')
+            window.alert(
+              'The event could not be deleted at this moment, sorry!'
+            )
           }
         })
         .catch((err) => console.error(err))
