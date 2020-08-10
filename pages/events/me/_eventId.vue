@@ -1,133 +1,179 @@
 <template>
   <div>
-    <div class="editEventForm">
-      <v-row justify="end">
-        <v-dialog v-model="dialog" persistent max-width="600px">
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon small color="#666666">mdi-pencil</v-icon>
-            <v-btn
-              class="pl-0 pr-9"
-              color="#666666"
-              small
-              dark
-              v-bind="attrs"
-              text
-              v-on="on"
-            >
-              Edit Event
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="headline">Create Event</span>
-            </v-card-title>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field
-                      v-model="editEvent.title"
-                      label="Title"
-                      required
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-menu
-                      ref="menu1"
-                      v-model="menu1"
-                      :close-on-content-click="false"
-                      transition="scale-transition"
-                      offset-y
-                      max-width="290px"
-                      min-width="290px"
-                    >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-text-field
-                          v-model="editEvent.eventDate"
-                          label="Event Date"
-                          hint="Format MM/DD/YYYY"
-                          persistent-hint
-                          prepend-icon=""
-                          v-bind="attrs"
-                          @blur="date = parseDate(eventDate)"
-                          v-on="on"
-                        ></v-text-field>
-                      </template>
-                      <v-date-picker
-                        v-model="date"
-                        no-title
-                        @input="menu1 = false"
-                      ></v-date-picker>
-                    </v-menu>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="editEvent.photo"
-                      label="Event Poster Link"
-                      required
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-textarea
-                      v-model="editEvent.description"
-                      label="Event Description"
-                      auto-grow
-                      rows="2"
-                      clearable
-                    ></v-textarea>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field
-                      v-model.number="editEvent.capacity"
-                      label="Capacity"
-                      required
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field
-                      v-model="editEvent.price"
-                      label="Price"
-                      required
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" m="6" md="6">
-                    <v-select
-                      v-model="editEvent.category"
-                      :items="[
-                        'Concerts',
-                        'Conferences-Workshops',
-                        'Expo-Fairs',
-                        'Festivals',
-                        'For Kids',
-                        'Gastronomy',
-                        'Parties',
-                        'Retreats',
-                        'Shows',
-                        'Sports',
-                        'Theater-Film',
-                      ]"
-                      label="Category"
-                      required
-                    ></v-select>
-                  </v-col>
-                </v-row>
-              </v-container>
-              <small>Please fill out the complete form!</small>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dialog = false"
-                >Close</v-btn
-              >
-              <v-btn color="blue darken-1" text @click="updateEvent"
-                >Update</v-btn
-              >
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-row>
-    </div>
     <v-card class="mx-auto my-5 justified-center elevation-0" max-width="600px">
+      <v-row justify="end">
+        <div class="editEventForm">
+          <v-row justify="end">
+            <v-dialog v-model="dialogEditEvent" persistent max-width="600px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon small color="#666666">mdi-pencil</v-icon>
+                <v-btn
+                  class="pl-0 pb-0"
+                  color="#666666"
+                  small
+                  dark
+                  v-bind="attrs"
+                  text
+                  v-on="on"
+                >
+                  Edit Event
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="headline">Create Event</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12" sm="6" md="6">
+                        <v-text-field
+                          v-model="editEvent.title"
+                          label="Title"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="6">
+                        <v-menu
+                          ref="menu1"
+                          v-model="menu1"
+                          :close-on-content-click="false"
+                          transition="scale-transition"
+                          offset-y
+                          max-width="290px"
+                          min-width="290px"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="editEvent.eventDate"
+                              label="Event Date"
+                              hint="Format MM/DD/YYYY"
+                              persistent-hint
+                              prepend-icon=""
+                              v-bind="attrs"
+                              @blur="date = parseDate(eventDate)"
+                              v-on="on"
+                            ></v-text-field>
+                          </template>
+                          <v-date-picker
+                            v-model="date"
+                            no-title
+                            @input="menu1 = false"
+                          ></v-date-picker>
+                        </v-menu>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          v-model="editEvent.photo"
+                          label="Event Poster Link"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-textarea
+                          v-model="editEvent.description"
+                          label="Event Description"
+                          auto-grow
+                          rows="2"
+                          clearable
+                        ></v-textarea>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="6">
+                        <v-text-field
+                          v-model.number="editEvent.capacity"
+                          label="Capacity"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="6">
+                        <v-text-field
+                          v-model="editEvent.price"
+                          label="Price"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" m="6" md="6">
+                        <v-select
+                          v-model="editEvent.category"
+                          :items="[
+                            'Concerts',
+                            'Conferences-Workshops',
+                            'Expo-Fairs',
+                            'Festivals',
+                            'For Kids',
+                            'Gastronomy',
+                            'Parties',
+                            'Retreats',
+                            'Shows',
+                            'Sports',
+                            'Theater-Film',
+                          ]"
+                          label="Category"
+                          required
+                        ></v-select>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                  <small>Please fill out the complete form!</small>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="dialogEditEvent = false"
+                    >Close</v-btn
+                  >
+                  <v-btn color="blue darken-1" text @click="updateEvent"
+                    >Update</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
+        </div>
+        <div class="deleteEvent">
+          <v-row justify="end">
+            <v-dialog v-model="dialogDeleteEvent" persistent max-width="390">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  class="px-8"
+                  color="red"
+                  dark
+                  text
+                  small
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon>mdi-delete-forever</v-icon>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title class="headline"
+                  >Are you sure you want to delete this event?</v-card-title
+                >
+                <v-card-text
+                  >Once the event is deleted you won't be able to access it any
+                  more.</v-card-text
+                >
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="dialogDeleteEvent = false"
+                    >Cancel</v-btn
+                  >
+                  <v-btn color="red darken-1" text @click="deleteEvent"
+                    >Delete</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
+        </div>
+      </v-row>
       <v-img :src="event.photo"></v-img>
 
       <v-card-actions class="pb-0">
@@ -198,7 +244,8 @@
 export default {
   data() {
     return {
-      dialog: false,
+      dialogEditEvent: false,
+      dialogDeleteEvent: false,
       date: new Date().toISOString().substr(0, 10),
       menu1: false,
       menu2: false,
@@ -227,6 +274,21 @@ export default {
     this.eventLoad()
   },
   methods: {
+    deleteEvent() {
+      this.$axios
+        .$delete(`/events/me/${this.$route.params.eventId}`, {
+          headers: { token: localStorage.getItem('token') },
+        })
+        .then((response) => {
+          if (!response.errors) {
+            this.dialogDeleteEvent = false
+            this.$router.push(`/users/me`)
+          } else {
+            window.alert('Please fill out the form correctly!')
+          }
+        })
+        .catch((err) => console.error(err))
+    },
     updateEvent() {
       if (
         !this.editEvent.title === '' ||
