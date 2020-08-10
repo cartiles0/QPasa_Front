@@ -13,24 +13,34 @@
         <v-card class="mr-5 mb-5">
           <v-img :src="event.photo" @click="goToEvent(idx)"></v-img>
 
-          <v-card-actions>
-            <v-btn
-              color="primary"
-              text
-              :to="`/events/${event.id}`"
-              v-text="event.title"
-            >
-            </v-btn>
-
+          <v-card-actions class="py-0 align-baseline">
+            <v-card-subtitle class="py-0 pl-2 align-baseline">
+              {{ event.eventMonth }} {{ event.eventDay }}, {{ event.eventYear }}
+            </v-card-subtitle>
             <v-spacer></v-spacer>
 
-            <v-btn v-if="event.savedIcon === false" icon @click="userSave(idx)">
+            <v-btn
+              v-if="events[idx].savedIcon === false"
+              icon
+              @click="userSave(idx)"
+            >
               <v-icon>mdi-heart-outline</v-icon>
             </v-btn>
             <v-btn v-else icon color="red" @click="userSave(idx)">
               <v-icon>mdi-heart</v-icon>
             </v-btn>
           </v-card-actions>
+
+          <v-card-title class="pt-0 pb-2">
+            <v-btn
+              class="px-0 align-start"
+              color="primary"
+              text
+              :to="`/events/${event.id}`"
+              v-text="event.title"
+            >
+            </v-btn>
+          </v-card-title>
         </v-card>
       </v-col>
     </v-row>
@@ -109,6 +119,9 @@ export default {
           attendance: event.attendance,
           tags: event.tags,
           id: event._id,
+          eventDay: event.eventDate.slice(8, 10),
+          eventMonth: this.months[event.eventDate.slice(5, 7) - 1],
+          eventYear: event.eventDate.slice(0, 4),
           savedIcon: false,
         })
         const today = new Date()
@@ -146,6 +159,9 @@ export default {
           attendance: event.attendance,
           tags: event.tags,
           id: event._id,
+          eventDay: event.eventDate.slice(8, 10),
+          eventMonth: this.months[event.eventDate.slice(5, 7) - 1],
+          eventYear: event.eventDate.slice(0, 4),
           savedIcon: false,
         })
         if (dbEvent[idx].saved.includes(id)) {

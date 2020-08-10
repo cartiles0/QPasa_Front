@@ -16,20 +16,14 @@
             :src="event.photo"
             class="white--text align-end"
             height="auto"
-            :to="`/events/${event.id}`"
+            @click="goToEvent(idx)"
           >
           </v-img>
 
-          <v-card-actions>
-            <v-btn
-              class="pr-0"
-              color="primary"
-              text
-              @click="goToEvent(idx)"
-              v-text="event.title"
-            >
-            </v-btn>
-
+          <v-card-actions class="py-0 align-baseline">
+            <v-card-subtitle class="py-0 pl-2 align-baseline">
+              {{ event.eventMonth }} {{ event.eventDay }}, {{ event.eventYear }}
+            </v-card-subtitle>
             <v-spacer></v-spacer>
 
             <v-btn
@@ -42,11 +36,18 @@
             <v-btn v-else icon color="red" @click="userSave(idx)">
               <v-icon>mdi-heart</v-icon>
             </v-btn>
-
-            <v-btn icon>
-              <v-icon>mdi-share-variant</v-icon>
-            </v-btn>
           </v-card-actions>
+
+          <v-card-title class="pt-0 pb-2">
+            <v-btn
+              class="px-0 align-start"
+              color="primary"
+              text
+              :to="`/events/${event.id}`"
+              v-text="event.title"
+            >
+            </v-btn>
+          </v-card-title>
         </v-card>
       </v-col>
     </v-row>
@@ -60,6 +61,20 @@ export default {
       events: [],
       userId: '',
       searchItem: this.$route.params.categoryId,
+      months: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ],
     }
   },
   mounted() {
@@ -107,6 +122,9 @@ export default {
           attendance: event.attendance,
           tags: event.tags,
           id: event._id,
+          eventDay: event.eventDate.slice(8, 10),
+          eventMonth: this.months[event.eventDate.slice(5, 7) - 1],
+          eventYear: event.eventDate.slice(0, 4),
           savedIcon: false,
         })
         if (attendingEvents[idx].saved.includes(dbUser._id)) {

@@ -22,7 +22,7 @@
 
           <v-card-actions class="py-0 align-baseline">
             <v-card-subtitle class="py-0 pl-2 align-baseline">
-              {{ event.daysLeft }} - Days Left...
+              {{ event.eventMonth }} {{ event.eventDay }}, {{ event.eventYear }}
             </v-card-subtitle>
             <v-spacer></v-spacer>
 
@@ -38,10 +38,6 @@
             </v-btn>
             <v-btn v-else icon color="red" @click="userSave(idx)">
               <v-icon>mdi-heart</v-icon>
-            </v-btn>
-
-            <v-btn icon>
-              <v-icon>mdi-share-variant</v-icon>
             </v-btn>
           </v-card-actions>
 
@@ -68,6 +64,20 @@ export default {
       events: [],
       userId: '',
       searchItem: this.$route.params.categoryId,
+      months: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ],
     }
   },
   mounted() {
@@ -115,6 +125,9 @@ export default {
           attendance: event.attendance,
           tags: event.tags,
           id: event._id,
+          eventDay: event.eventDate.slice(8, 10),
+          eventMonth: this.months[event.eventDate.slice(5, 7) - 1],
+          eventYear: event.eventDate.slice(0, 4),
           savedIcon: false,
         })
         const today = new Date()

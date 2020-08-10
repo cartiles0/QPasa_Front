@@ -13,24 +13,23 @@
         <v-card class="mr-5 mb-5">
           <v-img :src="event.photo" @click="goToEvent(idx)"></v-img>
 
-          <v-card-actions>
+          <v-card-actions class="pb-0">
+            <v-card-subtitle class="py-0 pl-2 align-baseline">
+              {{ event.eventMonth }} {{ event.eventDay }}, {{ event.eventYear }}
+            </v-card-subtitle>
+            <v-spacer></v-spacer>
+          </v-card-actions>
+
+          <v-card-title class="pt-0 pb-2">
             <v-btn
+              class="px-0 align-start"
               color="primary"
               text
-              :to="`/events/${event.id}`"
+              @click="editEvent(idx)"
               v-text="event.title"
             >
             </v-btn>
-
-            <!-- <v-spacer></v-spacer>
-
-            <v-btn v-if="event.savedIcon === false" icon @click="userSave(idx)">
-              <v-icon>mdi-heart-outline</v-icon>
-            </v-btn>
-            <v-btn v-else icon color="red" @click="userSave(idx)">
-              <v-icon>mdi-heart</v-icon>
-            </v-btn> -->
-          </v-card-actions>
+          </v-card-title>
         </v-card>
       </v-col>
     </v-row>
