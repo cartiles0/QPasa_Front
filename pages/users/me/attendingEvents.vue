@@ -25,7 +25,7 @@
               class="pr-0"
               color="primary"
               text
-              :to="`/events/${event.id}`"
+              @click="goToEvent(idx)"
               v-text="event.title"
             >
             </v-btn>
@@ -66,6 +66,9 @@ export default {
     this.loadCategory()
   },
   methods: {
+    goToEvent(idx) {
+      this.$router.push(`/events/${this.events[idx].id}`)
+    },
     async userSave(idx) {
       const dbSave = await this.$axios.$put(
         `/events/me/${this.events[idx].id}/save`,

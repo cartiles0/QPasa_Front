@@ -16,7 +16,7 @@
             :src="event.photo"
             class="white--text align-end"
             height="auto"
-            :to="`/events/${event.id}`"
+            @click="editEvent(idx)"
           >
           </v-img>
 
@@ -50,7 +50,7 @@
               class="px-0 align-start"
               color="primary"
               text
-              :to="`/events/${event.id}`"
+              @click="editEvent(idx)"
               v-text="event.title"
             >
             </v-btn>
@@ -74,6 +74,9 @@ export default {
     this.loadCategory()
   },
   methods: {
+    goToEvent(idx) {
+      this.$router.push(`/events/${this.events[idx].id}`)
+    },
     editEvent(idx) {
       this.$router.push(`/events/me/${this.events[idx].id}`)
     },

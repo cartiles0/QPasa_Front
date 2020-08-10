@@ -16,7 +16,7 @@
             :src="event.photo"
             class="white--text align-end"
             height="auto"
-            :to="`/events/${event.id}`"
+            @click="goToEvent(idx)"
           >
           </v-img>
 
@@ -66,6 +66,9 @@ export default {
     this.loadCategory()
   },
   methods: {
+    goToEvent(idx) {
+      this.$router.push(`/events/${this.events[idx].id}`)
+    },
     async userSave(idx) {
       const dbSave = await this.$axios.$put(
         `/events/me/${this.events[idx].id}/save`,
