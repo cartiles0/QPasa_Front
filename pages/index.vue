@@ -15,9 +15,17 @@
         </div>
         <br />
         <div v-for="(category, idx) in categories" :key="idx">
-          <h3>#{{ category }}</h3>
+          <v-chip
+            class="ma-2"
+            :color="category.color"
+            :to="`/events/category/${category.type}`"
+            outlined
+          >
+            <v-icon left small class="mr-0">mdi-pound</v-icon>
+            {{ category.type }}
+          </v-chip>
           <v-card>
-            <eventCarousel :data="category" />
+            <eventCarousel :data="category.type" />
           </v-card>
           <br />
         </div>
@@ -28,8 +36,16 @@
           <upcomingEventsCard />
         </div>
         <div v-for="(category, idx) in categories" :key="idx">
-          <h3>#{{ category }}</h3>
-          <eventCards :data="category" />
+          <v-chip
+            class="ma-2"
+            :color="category.color"
+            :to="`/events/category/${category.type}`"
+            outlined
+          >
+            <v-icon left small class="mr-0">mdi-pound</v-icon>
+            {{ category.type }}
+          </v-chip>
+          <eventCards :data="category.type" />
         </div>
       </div>
     </v-flex>
@@ -55,7 +71,11 @@ export default {
   },
   data() {
     return {
-      categories: ['Concerts', 'Gastronomy', 'Sports'],
+      categories: [
+        { type: 'Concerts', color: 'primary' },
+        { type: 'Gastronomy', color: 'success' },
+        { type: 'Sports', color: 'deep-purple accent-4' },
+      ],
       userLogged: true,
     }
   },

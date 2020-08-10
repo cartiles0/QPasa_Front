@@ -6,7 +6,7 @@
       :to="`/events/category/Gastronomy`"
       outlined
     >
-      <v-icon left>mdi-pound</v-icon>
+      <v-icon left small class="mr-0">mdi-pound</v-icon>
       Gastronomy
     </v-chip>
 
@@ -16,7 +16,7 @@
       :to="`/events/category/Concerts`"
       outlined
     >
-      <v-icon left>mdi-pound</v-icon>
+      <v-icon left small class="mr-0">mdi-pound</v-icon>
       Concerts
     </v-chip>
 
@@ -26,7 +26,7 @@
       :to="`/events/category/Sports`"
       outlined
     >
-      <v-icon left>mdi-pound</v-icon>
+      <v-icon left small class="mr-0">mdi-pound</v-icon>
       Sports
     </v-chip>
 
@@ -36,7 +36,7 @@
       :to="`/events/category/Expo-Fairs`"
       outlined
     >
-      <v-icon left>mdi-pound</v-icon>
+      <v-icon left small class="mr-0">mdi-pound</v-icon>
       Expo/Fairs
     </v-chip>
   </div>
