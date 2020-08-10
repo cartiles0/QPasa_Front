@@ -112,7 +112,7 @@
                   </v-col>
                 </v-row>
               </v-container>
-              <small>Please fill out the the complete form!</small>
+              <small>Please fill out the complete form!</small>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
