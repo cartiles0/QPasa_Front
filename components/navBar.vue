@@ -47,7 +47,7 @@
                 <v-icon>mdi-calendar-plus</v-icon> Create Event
               </v-list-item-title>
             </v-list-item>
-            <v-list-item icon :to="'/users/myEvents'">
+            <v-list-item icon :to="'/users/me/myEvents'">
               <v-list-item-title>
                 <v-icon>mdi-sign-direction</v-icon> My Events
               </v-list-item-title>
@@ -132,7 +132,7 @@
                 <v-icon>mdi-calendar-plus</v-icon> Create Event
               </v-list-item-title>
             </v-list-item>
-            <v-list-item icon :to="'/users/myEvents'">
+            <v-list-item icon :to="'/users/me/myEvents'">
               <v-list-item-title>
                 <v-icon>mdi-sign-direction</v-icon> My Events
               </v-list-item-title>

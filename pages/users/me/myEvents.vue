@@ -26,6 +26,9 @@
             </v-card-subtitle>
             <v-spacer></v-spacer>
 
+            <v-btn icon text @click="editEvent(idx)">
+              Edit
+            </v-btn>
             <v-btn
               v-if="events[idx].savedIcon === false"
               icon
@@ -71,6 +74,9 @@ export default {
     this.loadCategory()
   },
   methods: {
+    editEvent(idx) {
+      this.$router.push(`/events/me/${this.events[idx].id}`)
+    },
     async userSave(idx) {
       const dbSave = await this.$axios.$put(
         `/events/me/${this.events[idx].id}/save`,
@@ -124,6 +130,9 @@ export default {
         } else {
           this.events[idx].savedIcon = false
         }
+      })
+      this.events.sort(function (a, b) {
+        return a.daysLeft - b.daysLeft
       })
     },
   },
