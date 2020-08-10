@@ -5,9 +5,7 @@
         <button text @click="goHome()">{{ title }}</button>
       </v-toolbar-title>
       <v-spacer />
-      <!-- <v-btn color="accent" large @click.stop="showLogInForm = true"
-        >TEST</v-btn
-      > -->
+
       <v-text-field
         v-model="searchInput"
         class="mt-7 hidden-sm-and-down"
@@ -22,15 +20,6 @@
       ></v-text-field>
 
       <v-spacer />
-
-      <!-- <v-dialog v-model="dialog" persistent max-width="600px">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" dark v-bind="attrs" v-on="on">
-            Open Dialog
-          </v-btn>
-        </template>
-        <signup />
-      </v-dialog> -->
 
       <div class="hidden-sm-and-down">
         <v-toolbar-items v-if="userLogged === false">
@@ -167,21 +156,11 @@
         </v-menu>
       </div>
     </v-app-bar>
-    <!-- <v-main>
-      <login :visible="showLogInForm" @close="showLogInForm = false" />
-    </v-main> -->
   </div>
 </template>
 
 <script>
-import login from '@/components/login3'
-// import signup from '@/components/signup'
-
 export default {
-  component: {
-    login,
-    // signup,
-  },
   props: {
     title: {
       type: String,

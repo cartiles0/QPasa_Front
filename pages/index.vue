@@ -8,11 +8,11 @@
           <h2>Upcoming Events</h2>
           <upcomingEventsCarousel />
         </div>
-        <div v-if="userLogged === true">
+        <!-- <div v-if="userLogged === true">
           <br />
           <h3>#CERCADETI</h3>
           <nearYou />
-        </div>
+        </div> -->
         <br />
         <div v-for="(category, idx) in categories" :key="idx">
           <v-chip
@@ -56,7 +56,7 @@
 import tagChips from '../components/tagChips'
 import upcomingEventsCarousel from '../components/upcomingEventsCarousel'
 import upcomingEventsCard from '../components/upcomingEventsCard'
-import nearYou from '../components/nearYou'
+// import nearYou from '../components/nearYou'
 import eventCarousel from '../components/eventCarousel'
 import eventCards from '../components/eventCards'
 
@@ -65,7 +65,7 @@ export default {
     tagChips,
     upcomingEventsCarousel,
     upcomingEventsCard,
-    nearYou,
+    // nearYou,
     eventCarousel,
     eventCards,
   },
