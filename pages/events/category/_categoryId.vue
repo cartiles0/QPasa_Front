@@ -3,7 +3,7 @@
     <div class="pb-2 title">Category - {{ searchItem }}</div>
     <v-row dense>
       <v-col v-for="(event, idx) in events" :key="idx" :cols="4">
-        <v-card class="mr-5 mb-5 rounded-xl">
+        <v-card class="mr-5 mb-5 rounded-xl" min-width="400px">
           <v-img
             :src="event.photo"
             class="white--text align-end"
