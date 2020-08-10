@@ -295,8 +295,8 @@ export default {
         .then((response) => {
           if (!response.errors) {
             this.dialogDeleteEvent = false
-            localStorage.clear()
             window.location.href = '/'
+            localStorage.clear()
           } else {
             window.alert('The user could not be deleted at this moment, sorry!')
           }
