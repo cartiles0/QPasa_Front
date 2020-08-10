@@ -35,7 +35,22 @@ export default {
           tags: event.tags,
           id: event._id,
         })
+        const today = new Date()
+        const eventDay = new Date(
+          `${event.eventDate.slice(0, 4)}-${event.eventDate.slice(
+            5,
+            7
+          )}-${event.eventDate.slice(8, 10)}`
+        )
+        this.events[idx].daysLeft = Math.ceil(
+          (eventDay - today) / (1000 * 3600 * 24)
+        )
       })
+      this.events.sort(function (a, b) {
+        return a.daysLeft - b.daysLeft
+      })
+
+      this.events = this.events.slice(0, 8)
     },
   },
 }

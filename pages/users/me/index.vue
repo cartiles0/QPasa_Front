@@ -7,7 +7,7 @@
             <template v-slot:activator="{ on, attrs }">
               <v-icon small color="#666666">mdi-account-edit</v-icon>
               <v-btn
-                class="pl-0"
+                class="pl-0 pr-9"
                 color="#666666"
                 small
                 dark
@@ -162,7 +162,7 @@
         <eventCarousel :userevent="user.savedEvents" />
       </div>
 
-      <div class="hidden-xs-and-down">
+      <div class="hidden-xs-only">
         <v-list-item-title class="py-2 pl-4 mt-6">
           My Events -
           <v-btn :to="'/users/me/myEvents'" class="pl-0" text color="primary">

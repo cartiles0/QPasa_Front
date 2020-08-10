@@ -22,7 +22,7 @@
           <br />
         </div>
       </div>
-      <div class="hidden-xs-and-down">
+      <div class="hidden-xs-only">
         <div v-for="(category, idx) in categories" :key="idx">
           <h3>#{{ category }}</h3>
           <eventCards :data="category" />
