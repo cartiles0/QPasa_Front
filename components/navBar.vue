@@ -8,7 +8,7 @@
 
       <v-text-field
         v-model="searchInput"
-        class="mt-7 hidden-sm-and-down"
+        class="mt-7 hidden-xs-only"
         label="Search"
         :append-icon="'mdi-magnify'"
         filled
@@ -21,7 +21,7 @@
 
       <v-spacer />
 
-      <div class="hidden-sm-and-down">
+      <div class="hidden-xs-only">
         <v-toolbar-items v-if="userLogged === false">
           <v-icon>mdi-account</v-icon>
           <v-btn :to="'/auth/login'" class="px-0 mt-1" text> Log In </v-btn>/
@@ -71,7 +71,7 @@
         </v-menu>
       </div>
 
-      <div class="text-center hidden-md-and-up">
+      <div class="text-center hidden-sm-and-up">
         <v-menu offset-y>
           <template
             v-if="userLogged === false"

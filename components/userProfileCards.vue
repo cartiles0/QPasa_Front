@@ -10,7 +10,7 @@
         :lg="3"
         :xl="3"
       >
-        <v-card class="mr-5 mb-5">
+        <v-card class="mr-5 mb-5 rounded-xl">
           <v-img :src="event.photo" @click="goToEvent(idx)"></v-img>
 
           <v-card-actions class="pb-0">

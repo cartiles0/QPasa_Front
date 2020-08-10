@@ -6,7 +6,9 @@
       <div class="hidden-sm-and-up">
         <div>
           <h2>Upcoming Events</h2>
-          <upcomingEventsCarousel />
+          <v-card class="rounded-xl">
+            <upcomingEventsCarousel />
+          </v-card>
         </div>
         <!-- <div v-if="userLogged === true">
           <br />
@@ -24,7 +26,7 @@
             <v-icon left small class="mr-0">mdi-pound</v-icon>
             {{ category.type }}
           </v-chip>
-          <v-card>
+          <v-card class="rounded-xl">
             <eventCarousel :data="category.type" />
           </v-card>
           <br />

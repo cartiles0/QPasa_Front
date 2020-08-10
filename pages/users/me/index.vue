@@ -179,7 +179,9 @@
             See All
           </v-btn>
         </v-list-item-title>
-        <eventCarousel :userevent="user.myEvents" />
+        <v-card class="rounded-xl">
+          <eventCarousel :userevent="user.myEvents" />
+        </v-card>
         <v-list-item-title class="py-2 pl-4 mt-6">
           Attending Events -
           <v-btn
@@ -191,7 +193,9 @@
             See All
           </v-btn>
         </v-list-item-title>
-        <eventCarousel :userevent="user.attendingEvents" />
+        <v-card class="rounded-xl">
+          <eventCarousel :userevent="user.attendingEvents" />
+        </v-card>
         <v-list-item-title class="py-2 pl-4 mt-6">
           Saved Events -
           <v-btn
@@ -203,7 +207,9 @@
             See All
           </v-btn>
         </v-list-item-title>
-        <eventCarousel :userevent="user.savedEvents" />
+        <v-card class="rounded-xl">
+          <eventCarousel :userevent="user.savedEvents" />
+        </v-card>
       </div>
 
       <div class="hidden-xs-only">
