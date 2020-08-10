@@ -6,7 +6,7 @@
       <div class="hidden-sm-and-up">
         <div>
           <h2>Upcoming Events</h2>
-          <upcomingEvents />
+          <upcomingEventsCarousel />
         </div>
         <div v-if="userLogged === true">
           <br />
@@ -23,6 +23,10 @@
         </div>
       </div>
       <div class="hidden-xs-only">
+        <div>
+          <h2>Upcoming Events</h2>
+          <upcomingEventsCard />
+        </div>
         <div v-for="(category, idx) in categories" :key="idx">
           <h3>#{{ category }}</h3>
           <eventCards :data="category" />
@@ -34,7 +38,8 @@
 
 <script>
 import tagChips from '../components/tagChips'
-import upcomingEvents from '../components/upcomingEvents'
+import upcomingEventsCarousel from '../components/upcomingEventsCarousel'
+import upcomingEventsCard from '../components/upcomingEventsCard'
 import nearYou from '../components/nearYou'
 import eventCarousel from '../components/eventCarousel'
 import eventCards from '../components/eventCards'
@@ -42,7 +47,8 @@ import eventCards from '../components/eventCards'
 export default {
   components: {
     tagChips,
-    upcomingEvents,
+    upcomingEventsCarousel,
+    upcomingEventsCard,
     nearYou,
     eventCarousel,
     eventCards,
