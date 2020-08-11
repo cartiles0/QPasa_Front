@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto my-5 justified-center elevation-0" max-width="800px">
+  <v-card class="mx-auto my-5 justified-center elevation-0" max-width="600px">
     <v-img :src="event.photo"></v-img>
 
     <v-card-actions class="pb-0">

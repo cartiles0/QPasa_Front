@@ -15,7 +15,7 @@
           <v-img
             :src="event.photo"
             class="white--text align-end"
-            height="auto"
+            height="200px"
             @click="editEvent(idx)"
           >
           </v-img>
@@ -155,8 +155,12 @@ export default {
 }
 </script>
 
-<style>
-.v-image__image--cover {
-  background-size: contain !important;
+<style lang="scss">
+// .v-card > .v-card__progress + :not(.v-btn):not(.v-chip),
+// .v-card > :first-child:not(.v-btn):not(.v-chip) {
+//   max-height: 180px;
+// }
+.v-image.v-responsive.theme--light > div.v-image__image.v-image__image--cover {
+  background-size: cover !important;
 }
 </style>
