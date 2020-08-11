@@ -9,13 +9,17 @@
           <v-container>
             <v-row>
               <v-col cols="12" sm="6" md="6">
+                <v-card-title class="pl-0 pb-0">
+                  Upload Event Poster
+                </v-card-title>
+                <uploadImage v-model="photo" @imageURL="setImageURL" />
+              </v-col>
+              <v-col cols="12" sm="6" md="6">
                 <v-text-field
                   v-model="title"
                   label="Title"
                   required
                 ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="6">
                 <v-menu
                   ref="menu1"
                   v-model="menu1"
@@ -43,13 +47,25 @@
                     @input="menu1 = false"
                   ></v-date-picker>
                 </v-menu>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  v-model="photo"
-                  label="Event Poster Link"
+                <v-select
+                  v-model="category"
+                  class="pt-7"
+                  :items="[
+                    'Concerts',
+                    'Conferences-Workshops',
+                    'Expo-Fairs',
+                    'Festivals',
+                    'For Kids',
+                    'Gastronomy',
+                    'Parties',
+                    'Retreats',
+                    'Shows',
+                    'Sports',
+                    'Theater-Film',
+                  ]"
+                  label="Category"
                   required
-                ></v-text-field>
+                ></v-select>
               </v-col>
               <v-col cols="12">
                 <v-textarea
@@ -74,26 +90,6 @@
                   required
                 ></v-text-field>
               </v-col>
-              <v-col cols="12" m="6" md="6">
-                <v-select
-                  v-model="category"
-                  :items="[
-                    'Concerts',
-                    'Conferences-Workshops',
-                    'Expo-Fairs',
-                    'Festivals',
-                    'For Kids',
-                    'Gastronomy',
-                    'Parties',
-                    'Retreats',
-                    'Shows',
-                    'Sports',
-                    'Theater-Film',
-                  ]"
-                  label="Category"
-                  required
-                ></v-select>
-              </v-col>
             </v-row>
           </v-container>
           <small>Please fill out the the complete form!</small>
@@ -110,9 +106,15 @@
 </template>
 
 <script>
+import uploadImage from '@/components/uploadImage'
+
 export default {
+  components: {
+    uploadImage,
+  },
   data(vm) {
     return {
+      imageURL: '',
       title: '',
       photo: '',
       description: '',
@@ -139,6 +141,9 @@ export default {
     reset() {
       this.$refs.form.reset()
     },
+    setImageURL(imageURL) {
+      this.imageURL = imageURL
+    },
     async create() {
       const getCreator = await this.$axios.$get('/auth/me', {
         headers: { token: localStorage.getItem('token') },
@@ -146,7 +151,7 @@ export default {
 
       const data = {
         title: this.title,
-        photo: this.photo,
+        photo: this.imageURL,
         eventDate: this.eventDate,
         description: this.description,
         capacity: parseInt(this.capacity),

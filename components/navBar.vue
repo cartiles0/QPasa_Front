@@ -64,7 +64,7 @@
             </v-list-item>
             <v-list-item icon @click="logout()">
               <v-list-item-title>
-                <v-icon>mdi-exit-to-app</v-icon> Log Out
+                <v-icon>mdi-arrow-left-circle-outline</v-icon> Log Out
               </v-list-item-title>
             </v-list-item>
           </v-list>
@@ -149,7 +149,7 @@
             </v-list-item>
             <v-list-item icon @click="logout()">
               <v-list-item-title>
-                <v-icon>mdi-exit-to-app</v-icon> Log Out
+                <v-icon>mdi-arrow-left-circle-outline</v-icon> Log Out
               </v-list-item-title>
             </v-list-item>
           </v-list>
