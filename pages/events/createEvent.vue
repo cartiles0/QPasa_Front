@@ -8,13 +8,13 @@
         <v-card-text>
           <v-container>
             <v-row>
-              <v-col cols="12" sm="6" md="6">
+              <v-col cols="12" sm="5" md="4">
                 <v-card-title class="pl-0 pb-0">
                   Upload Event Poster
                 </v-card-title>
                 <uploadImage v-model="photo" @imageURL="setImageURL" />
               </v-col>
-              <v-col cols="12" sm="6" md="6">
+              <v-col cols="12" sm="7" md="8">
                 <v-text-field
                   v-model="title"
                   label="Title"
