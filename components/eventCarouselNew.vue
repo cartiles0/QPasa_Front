@@ -10,7 +10,7 @@
       :xl="3"
     >
       <v-card class="rounded-xl">
-        <v-carousel hide-delimiters height="auto">
+        <v-carousel hide-delimiters height="370px">
           <v-carousel-item
             :src="event.photo"
             :to="`/events/${events[i].id}`"
@@ -123,7 +123,7 @@ export default {
 </script>
 
 <style>
-.v-image__image--cover {
-  background-size: contain !important;
+.v-window-item > div > div.v-image__image.v-image__image--cover {
+  background-size: cover !important;
 }
 </style>

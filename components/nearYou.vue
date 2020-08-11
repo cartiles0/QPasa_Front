@@ -1,5 +1,5 @@
 <template>
-  <v-carousel hide-delimiters height="auto">
+  <v-carousel hide-delimiters height="370px">
     <v-carousel-item
       v-for="(item, i) in items"
       :key="i"
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style>
-.v-image__image--cover {
-  background-size: contain !important;
+.v-window-item > div > div.v-image__image.v-image__image--cover {
+  background-size: cover !important;
 }
 </style>
