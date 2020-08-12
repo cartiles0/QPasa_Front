@@ -1,8 +1,14 @@
 <template>
   <div>
-    <v-app-bar color="primary" dark fixed app elevate-on-scroll>
+    <v-app-bar color="white" fixed app elevate-on-scroll>
       <v-toolbar-title>
-        <button text @click="goHome()">{{ title }}</button>
+        <v-img
+          src="https://firebasestorage.googleapis.com/v0/b/qpasagc.appspot.com/o/Logo-1_Mesa%20de%20trabajo%201.png?alt=media&token=4e64091b-474f-4c2b-b883-8fbba232fece"
+          height="75px"
+          width="75px"
+          @click="goHome()"
+        ></v-img>
+        <!-- <button text @click="goHome()">{{ title }}</button> -->
       </v-toolbar-title>
       <v-spacer />
 
