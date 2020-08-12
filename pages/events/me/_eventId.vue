@@ -235,6 +235,7 @@
         <v-btn v-else class="pr-0" color="primary" text @click="userAttend">
           ATTENDING
         </v-btn>
+        {{ event.tags }}
       </v-card-actions>
     </v-card>
   </div>
@@ -309,6 +310,7 @@ export default {
           photo: this.editEvent.photo,
           category: this.editEvent.category,
           eventDate: this.editEvent.eventDate,
+          tags: this.editEvent.tags,
         }
 
         this.$axios

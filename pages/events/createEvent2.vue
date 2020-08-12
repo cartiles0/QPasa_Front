@@ -1,3 +1,4 @@
+<!--
 <template>
   <v-row justify="center">
     <v-col>
@@ -91,30 +92,33 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-combobox
-                  v-model="tags"
-                  chips
-                  clearable
-                  label="Your favorite hobbies"
-                  multiple
-                  solo
-                >
-                  <template
-                    v-slot:selection="{ attrs, item, select, selected }"
-                  >
-                    <v-chip
-                      v-bind="attrs"
-                      :input-value="selected"
-                      close
-                      @click="select"
-                      @click:close="remove(item)"
+                <v-layout wrap>
+                  <v-flex xs12>
+                    <v-combobox
+                      v-model="select"
+                      multiple
+                      label="Tags"
+                      append-icon
+                      chips
+                      deletable-chips
+                      class="tag-input"
+                      :search-input.sync="search"
+                      @keyup.tab="updateTags"
+                      @paste="updateTags"
                     >
-                      &nbsp;
-                      <v-icon left x-small>mdi-pound</v-icon>
-                      <strong>{{ item }}</strong>
-                    </v-chip>
-                  </template>
-                </v-combobox>
+                    </v-combobox>
+                  </v-flex>
+
+                  <v-chip
+                    v-for="tag in select"
+                    v-bind="attrs"
+                    close
+                    color="success"
+                    text-color="white"
+                  >
+                    &nbsp; <v-icon left>label</v-icon>{{ tag }}
+                  </v-chip>
+                </v-layout>
               </v-col>
             </v-row>
           </v-container>
@@ -140,6 +144,10 @@ export default {
   },
   data(vm) {
     return {
+      select: ['add-tags-with', 'enter', 'tab', 'paste'],
+      chips: [],
+      search: '',
+      chipItems: ['Streaming', 'Eating'],
       imageURL: '',
       title: '',
       photo: '',
@@ -149,7 +157,6 @@ export default {
       category: '',
       date: new Date().toISOString().substr(0, 10),
       eventDate: '',
-      tags: [],
       menu1: false,
       menu2: false,
     }
@@ -165,9 +172,13 @@ export default {
     },
   },
   methods: {
-    remove(item) {
-      this.tags.splice(this.tags.indexOf(item), 1)
-      this.tags = [...this.tags]
+    updateTags() {
+      this.$nextTick(() => {
+        this.select.push(...this.search.split(','))
+        this.$nextTick(() => {
+          this.search = ''
+        })
+      })
     },
     reset() {
       this.$refs.form.reset()
@@ -197,7 +208,7 @@ export default {
         })
         .then((response) => {
           if (!response.errors) {
-            this.createEvent(response._id)
+            this.$router.push(`/events/me/${response._id}`)
           } else {
             window.alert('Please fill out the form correctly!')
           }
@@ -216,24 +227,7 @@ export default {
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
-    async createEvent(eventID) {
-      await this.tags.forEach((tag) => {
-        this.$axios
-          .$post(
-            '/tags/createTag',
-            {
-              name: tag,
-              eventId: JSON.stringify(eventID),
-            },
-            {
-              headers: { token: localStorage.getItem('token') },
-            }
-          )
-          .then((response) => console.log(response))
-          .catch((err) => console.error(err))
-      })
-      this.$router.push(`/events/me/${eventID}`)
-    },
   },
 }
 </script>
+-->

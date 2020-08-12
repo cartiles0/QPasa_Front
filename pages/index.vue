@@ -6,9 +6,7 @@
       <div class="hidden-sm-and-up">
         <div>
           <h2>Upcoming Events</h2>
-          <v-card class="rounded-xl">
-            <upcomingEventsCarousel />
-          </v-card>
+          <upcomingEventsCardPhone />
         </div>
         <!-- <div v-if="userLogged === true">
           <br />
@@ -56,7 +54,7 @@
 
 <script>
 import tagChips from '../components/tagChips'
-import upcomingEventsCarousel from '../components/upcomingEventsCarousel'
+import upcomingEventsCardPhone from '../components/upcomingEventsCardPhone'
 import upcomingEventsCard from '../components/upcomingEventsCard'
 // import nearYou from '../components/nearYou'
 import eventCarousel from '../components/eventCarousel'
@@ -65,7 +63,7 @@ import eventCards from '../components/eventCards'
 export default {
   components: {
     tagChips,
-    upcomingEventsCarousel,
+    upcomingEventsCardPhone,
     upcomingEventsCard,
     // nearYou,
     eventCarousel,
