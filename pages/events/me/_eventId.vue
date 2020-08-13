@@ -425,7 +425,6 @@ export default {
         eventYear: dbEvent.eventDate.slice(0, 4),
         daysLeft: 0,
       }
-      console.log(dbEvent)
       this.editEvent = {
         title: dbEvent.title,
         description: dbEvent.description,
