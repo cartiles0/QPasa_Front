@@ -26,6 +26,56 @@
       ></v-text-field>
 
       <v-spacer />
+
+      <div class="hidden-xs-only">
+        <v-toolbar-items v-if="userLogged === false">
+          <v-icon>mdi-account</v-icon>
+          <v-btn :to="'/auth/login'" class="px-0 mt-1" text> Log In </v-btn>/
+          <v-btn :to="'/auth/signup'" class="px-0 mt-1" text>
+            Create Account
+          </v-btn>
+        </v-toolbar-items>
+
+        <v-menu v-else offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-avatar v-bind="attrs" height="40px" width="40px" v-on="on">
+              <img :src="user.photo" :alt="user.name" />
+            </v-avatar>
+          </template>
+          <v-list>
+            <v-list-item icon :to="'/users/me'">
+              <v-list-item-title>
+                <v-icon>mdi-account</v-icon> {{ user.username }}
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon :to="'/events/createEvent'">
+              <v-list-item-title>
+                <v-icon>mdi-calendar-plus</v-icon> Create Event
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon :to="'/users/me/myEvents'">
+              <v-list-item-title>
+                <v-icon>mdi-sign-direction</v-icon> My Events
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon :to="'/users/me/attendingEvents'">
+              <v-list-item-title>
+                <v-icon>mdi-arrow-right-drop-circle</v-icon> Attending Events
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon :to="'/users/me/savedEvents'">
+              <v-list-item-title>
+                <v-icon>mdi-heart-box-outline</v-icon> Saved Events
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item icon @click="logout()">
+              <v-list-item-title>
+                <v-icon>mdi-arrow-left-circle-outline</v-icon> Log Out
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
     </v-app-bar>
   </div>
 </template>
@@ -40,16 +90,49 @@ export default {
   },
   data() {
     return {
+      user: {},
       searchInput: '',
+      showLogInForm: false,
+      userLogged: false,
+    }
+  },
+  mounted() {
+    if (localStorage.getItem('token')) {
+      this.userLogged = true
+      this.getUser()
+    } else {
+      this.userLogged = false
     }
   },
   methods: {
+    goHome() {
+      window.location.href = '/'
+    },
     search() {
       window.location.href = `/events/search/${this.searchInput}`
     },
     logout() {
       localStorage.clear()
       window.location.href = '/'
+    },
+    logged() {
+      if (!localStorage.getItem('token')) {
+        return (this.userLogged = false)
+      } else {
+        this.userLogged = true
+      }
+      return this.userLogged
+    },
+    async getUser() {
+      const dbUser = await this.$axios.$get('/users/me', {
+        headers: { token: localStorage.getItem('token') },
+      })
+
+      this.user = {
+        username: dbUser.username,
+        name: dbUser.name[0],
+        photo: dbUser.photo,
+      }
     },
   },
 }
