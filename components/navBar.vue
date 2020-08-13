@@ -8,7 +8,6 @@
           width="75px"
           @click="goHome()"
         ></v-img>
-        <!-- <button text @click="goHome()">{{ title }}</button> -->
       </v-toolbar-title>
       <v-spacer />
 

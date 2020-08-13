@@ -8,23 +8,15 @@
       </v-container>
     </v-main>
 
-    <v-bottom-navigation :value="activeBtn" color="purple lighten-1" app fixed>
-      <v-btn>
-        <span>Recents</span>
-        <v-icon>mdi-history</v-icon>
-      </v-btn>
-
-      <v-btn>
-        <span>Favorites</span>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn>
-        <span>Nearby</span>
-        <v-icon>mdi-map-marker</v-icon>
-      </v-btn>
+    <v-bottom-navigation
+      :value="activeBtn"
+      class="hidden-sm-and-up"
+      color="indigo"
+      fixed
+    >
+      <bottomNav />
     </v-bottom-navigation>
-    <v-footer>
+    <v-footer app fixed>
       <span>&copy; {{ title }} {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
@@ -32,12 +24,12 @@
 
 <script>
 import navBar from '../components/navBar'
-// import toolBar from '../components/toolBar'
+import bottomNav from '../components/bottomNavigation'
 
 export default {
   components: {
     navBar,
-    // toolBar,
+    bottomNav,
   },
   data() {
     return {
