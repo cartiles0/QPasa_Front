@@ -202,22 +202,57 @@
       </v-card-actions>
 
       <v-card-title class="py-0">{{ event.title }}</v-card-title>
-      <v-card-text class="py-0 my-0"
+      <v-card-text class="py-0 my-0 subtitle-2"
         >#{{ event.category }} | {{ event.creator }}</v-card-text
       >
 
       <v-card-text>
-        <div class="mb-4 subtitle-1">
-          {{ event.price }}€ • {{ event.capacity }} Tickets • Las Palmas de Gran
-          Canaria
-        </div>
-        <v-spacer></v-spacer>
-        <div class="mb-4 subtitle-1">
+        <div class="subtitle-1 text--primary">
           {{ event.eventMonth }} {{ event.eventDay }}, {{ event.eventYear }} -
           {{ event.daysLeft }} Days Left!
         </div>
+        <v-spacer></v-spacer>
+        <div class="mb-4 body-1 text--primary">
+          {{ event.price }}€ • {{ event.capacity }} Tickets • Las Palmas de Gran
+          Canaria
+        </div>
 
-        <div>{{ event.description }}</div>
+        <v-row class="px-2">
+          <div v-for="(tag, idx) in event.tags" :key="idx" class="pl-1">
+            <v-chip :color="color[idx]" outlined small>
+              <v-icon left x-small class="mr-0">mdi-pound</v-icon>
+              {{ tag.name }}
+            </v-chip>
+          </div>
+        </v-row>
+
+        <v-card-title class="px-0 py-1 text--primary">Description</v-card-title>
+        <div class="pb-3">{{ event.description }}</div>
+
+        <div class="hidden-xs-only">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14074.639034899825!2d-15.44195505!3d28.126397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x44d0e97cbbd0b9f8!2sCentro%20Comercial%20Las%20Arenas!5e0!3m2!1sen!2ses!4v1597263773665!5m2!1sen!2ses"
+            width="600x"
+            height="600px"
+            frameborder="0"
+            style="border: 0;"
+            allowfullscreen=""
+            aria-hidden="false"
+            tabindex="0"
+          ></iframe>
+        </div>
+        <div class="hidden-sm-and-up">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14074.639034899825!2d-15.44195505!3d28.126397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x44d0e97cbbd0b9f8!2sCentro%20Comercial%20Las%20Arenas!5e0!3m2!1sen!2ses!4v1597263773665!5m2!1sen!2ses"
+            width="320px"
+            height="400px"
+            frameborder="0"
+            style="border: 0;"
+            allowfullscreen=""
+            aria-hidden="false"
+            tabindex="0"
+          ></iframe>
+        </div>
       </v-card-text>
 
       <v-divider class="mx-4"></v-divider>
@@ -244,6 +279,16 @@
 export default {
   data() {
     return {
+      color: [
+        'success',
+        'primary',
+        'deep-purple accent-4',
+        'indigo darken-3',
+        'secondary',
+        'red',
+        'orange',
+        'teal',
+      ],
       dialogEditEvent: false,
       dialogDeleteEvent: false,
       date: new Date().toISOString().substr(0, 10),
