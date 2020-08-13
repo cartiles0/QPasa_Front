@@ -1,152 +1,156 @@
 <template>
   <div>
     <v-card class="mx-auto my-5 justify-center elevation-0" max-width="1300px">
-      <v-row justify="end">
-        <div class="editUserForm">
-          <v-row justify="end">
-            <v-dialog v-model="dialogEditUser" persistent max-width="600px">
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon small color="#666666">mdi-account-edit</v-icon>
-                <v-btn
-                  class="px-0"
-                  color="#666666"
-                  small
-                  dark
-                  v-bind="attrs"
-                  text
-                  v-on="on"
-                >
-                  Edit Profile
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="headline">Edit Profile</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col cols="12" sm="6">
-                        <v-text-field
-                          v-model="editProfile.name"
-                          type="name"
-                          label="Name"
-                          required
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field
-                          v-model="editProfile.lastName"
-                          type="Last Name"
-                          label="Last Name"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          v-model="editProfile.email"
-                          type="email"
-                          label="Email"
-                          required
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-select
-                          v-model="editProfile.areaPreference"
-                          :items="[
-                            'Las Palmas de Gran Canaria',
-                            'Telde',
-                            'Agaete',
-                            'Agüimes',
-                            'Artenara',
-                            'Arucas',
-                            'Firgas',
-                            'Gáldar',
-                            'Ingenio',
-                            'La Aldea de San Nicolás',
-                            'Mogán',
-                            'Moya',
-                            'San Bartolomé de Tirajana',
-                            'Santa Brígida',
-                            'Santa Lucía de Tirajana',
-                            'Santa María de Guía',
-                            'Tejeda',
-                            'Teror',
-                            'Valleseco',
-                          ]"
-                          label="Area of Preference"
-                        ></v-select>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-textarea
-                          v-model="editProfile.aboutMe"
-                          label="About Me"
-                          auto-grow
-                          rows="2"
-                          clearable
-                        ></v-textarea>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+      <v-container class="px-12">
+        <v-row>
+          <div class="editUserForm">
+            <v-row justify="end">
+              <v-dialog v-model="dialogEditUser" persistent max-width="600px">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon small color="#666666">mdi-account-edit</v-icon>
                   <v-btn
-                    color="blue darken-1"
+                    class="px-0"
+                    color="#666666"
+                    small
+                    dark
+                    v-bind="attrs"
                     text
-                    @click="dialogEditUser = false"
-                    >Close</v-btn
+                    v-on="on"
                   >
-                  <v-btn color="blue darken-1" text @click="updateProfile"
-                    >Update</v-btn
-                  >
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row>
-        </div>
-        <div class="deleteUser">
-          <v-row justify="end">
-            <v-dialog v-model="dialogDeleteUser" persistent max-width="390">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  class="px-9"
-                  color="red"
-                  dark
-                  text
-                  small
-                  icon
-                  v-bind="attrs"
-                  v-on="on"
-                >
-                  <v-icon>mdi-delete-forever</v-icon>
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title class="headline"
-                  >Are you sure you want to delete your profile?</v-card-title
-                >
-                <v-card-text
-                  >Once your profile is deleted you won't be able to access any
-                  of the information any more, and all events you have created
-                  will also be deleted forever!.</v-card-text
-                >
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+                    Edit Profile
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="headline">Edit Profile</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col cols="12" sm="6">
+                          <v-text-field
+                            v-model="editProfile.name"
+                            type="name"
+                            label="Name"
+                            required
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6">
+                          <v-text-field
+                            v-model="editProfile.lastName"
+                            type="Last Name"
+                            label="Last Name"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-text-field
+                            v-model="editProfile.email"
+                            type="email"
+                            label="Email"
+                            required
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-select
+                            v-model="editProfile.areaPreference"
+                            :items="[
+                              'Las Palmas de Gran Canaria',
+                              'Telde',
+                              'Agaete',
+                              'Agüimes',
+                              'Artenara',
+                              'Arucas',
+                              'Firgas',
+                              'Gáldar',
+                              'Ingenio',
+                              'La Aldea de San Nicolás',
+                              'Mogán',
+                              'Moya',
+                              'San Bartolomé de Tirajana',
+                              'Santa Brígida',
+                              'Santa Lucía de Tirajana',
+                              'Santa María de Guía',
+                              'Tejeda',
+                              'Teror',
+                              'Valleseco',
+                            ]"
+                            label="Area of Preference"
+                          ></v-select>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-textarea
+                            v-model="editProfile.aboutMe"
+                            label="About Me"
+                            auto-grow
+                            rows="2"
+                            clearable
+                          ></v-textarea>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="dialogEditUser = false"
+                      >Close</v-btn
+                    >
+                    <v-btn color="blue darken-1" text @click="updateProfile"
+                      >Update</v-btn
+                    >
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+          </div>
+          <div class="deleteUser">
+            <v-row justify="end">
+              <v-dialog v-model="dialogDeleteUser" persistent max-width="390">
+                <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                    color="blue darken-1"
+                    class="px-9"
+                    color="red"
+                    dark
                     text
-                    @click="dialogDeleteUser = false"
-                    >Cancel</v-btn
+                    small
+                    icon
+                    v-bind="attrs"
+                    v-on="on"
                   >
-                  <v-btn color="red darken-1" text @click="deleteUser"
-                    >Delete Profile</v-btn
+                    <v-icon>mdi-delete-forever</v-icon>
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-card-title class="headline"
+                    >Are you sure you want to delete your profile?</v-card-title
                   >
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row>
-        </div>
-      </v-row>
+                  <v-card-text
+                    >Once your profile is deleted you won't be able to access
+                    any of the information any more, and all events you have
+                    created will also be deleted forever!.</v-card-text
+                  >
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="dialogDeleteUser = false"
+                      >Cancel</v-btn
+                    >
+                    <v-btn color="red darken-1" text @click="deleteUser"
+                      >Delete Profile</v-btn
+                    >
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+          </div>
+          <v-spacer></v-spacer>
+          <v-btn color="indigo" text @click="logout">Log Out</v-btn>
+        </v-row>
+      </v-container>
 
       <v-list-item>
         <v-avatar>
@@ -292,6 +296,10 @@ export default {
     }
   },
   methods: {
+    logout() {
+      localStorage.clear()
+      window.location.href = '/'
+    },
     deleteUser() {
       this.$axios
         .$delete(`/users/me`, {

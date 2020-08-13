@@ -28,10 +28,15 @@
         <v-icon>mdi-heart</v-icon>
       </v-btn>
 
-      <v-btn class="px-1" @click="goToMyTickets">
+      <v-btn class="px-1" @click="createEvent">
+        <span>CREATE</span>
+        <v-icon>mdi-calendar-plus</v-icon>
+      </v-btn>
+
+      <!-- <v-btn class="px-1" @click="goToMyTickets">
         <span>MY TICKETS</span>
         <v-icon>mdi-ticket</v-icon>
-      </v-btn>
+      </v-btn> -->
 
       <v-btn class="px-1" @click="goProfile">
         <span>PROFILE</span>
@@ -73,6 +78,9 @@ export default {
     },
     goToSaved() {
       this.$router.push(`/users/me/savedEvents`)
+    },
+    createEvent() {
+      this.$router.push(`/events/createEvent`)
     },
     goToMyTickets() {
       this.$router.push(`/users/me/attendingEvents`)
