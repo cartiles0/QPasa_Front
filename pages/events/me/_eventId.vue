@@ -235,7 +235,6 @@
         <v-btn v-else class="pr-0" color="primary" text @click="userAttend">
           ATTENDING
         </v-btn>
-        {{ event.tags }}
       </v-card-actions>
     </v-card>
   </div>
@@ -381,6 +380,7 @@ export default {
         eventYear: dbEvent.eventDate.slice(0, 4),
         daysLeft: 0,
       }
+      console.log(dbEvent)
       this.editEvent = {
         title: dbEvent.title,
         description: dbEvent.description,

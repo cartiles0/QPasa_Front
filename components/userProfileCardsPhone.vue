@@ -1,6 +1,6 @@
 <template>
   <v-sheet class="mx-auto" elevation="0" max-width="2000">
-    <v-slide-group v-model="model" class="pt-2" show-arrows center-active>
+    <v-slide-group v-model="model" class="pt-2" center-active>
       <v-slide-item
         v-for="(event, idx) in events"
         :key="idx"

@@ -44,6 +44,31 @@
       </div>
 
       <div>{{ event.description }}</div>
+
+      <v-html class="hidden-xs-only">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14074.639034899825!2d-15.44195505!3d28.126397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x44d0e97cbbd0b9f8!2sCentro%20Comercial%20Las%20Arenas!5e0!3m2!1sen!2ses!4v1597263773665!5m2!1sen!2ses"
+          width="600x"
+          height="600px"
+          frameborder="0"
+          style="border: 0;"
+          allowfullscreen=""
+          aria-hidden="false"
+          tabindex="0"
+        ></iframe>
+      </v-html>
+      <v-html class="hidden-sm-and-up">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14074.639034899825!2d-15.44195505!3d28.126397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x44d0e97cbbd0b9f8!2sCentro%20Comercial%20Las%20Arenas!5e0!3m2!1sen!2ses!4v1597263773665!5m2!1sen!2ses"
+          width="350px"
+          height="400px"
+          frameborder="0"
+          style="border: 0;"
+          allowfullscreen=""
+          aria-hidden="false"
+          tabindex="0"
+        ></iframe>
+      </v-html>
     </v-card-text>
 
     <v-divider class="mx-4"></v-divider>

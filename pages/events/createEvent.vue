@@ -197,7 +197,7 @@ export default {
         })
         .then((response) => {
           if (!response.errors) {
-            this.createEvent(response._id)
+            this.createTags(response._id)
           } else {
             window.alert('Please fill out the form correctly!')
           }
@@ -216,23 +216,26 @@ export default {
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
-    async createEvent(eventID) {
-      await this.tags.forEach((tag) => {
+    createTags(eventID) {
+      this.tags.forEach((tag, idx) => {
         this.$axios
           .$post(
             '/tags/createTag',
             {
               name: tag,
-              eventId: JSON.stringify(eventID),
+              eventId: eventID,
             },
             {
               headers: { token: localStorage.getItem('token') },
             }
           )
-          .then((response) => console.log(response))
+          .then(() => {
+            if (idx === this.tags.length - 1) {
+              this.$router.push(`/events/me/${eventID}`)
+            }
+          })
           .catch((err) => console.error(err))
       })
-      this.$router.push(`/events/me/${eventID}`)
     },
   },
 }

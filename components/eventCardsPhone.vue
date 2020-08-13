@@ -1,6 +1,6 @@
 <template>
   <v-sheet class="mx-auto" elevation="0" max-width="2000">
-    <v-slide-group v-model="model" class="pt-2" show-arrows center-active>
+    <v-slide-group v-model="model" class="pt-2" center-active>
       <v-slide-item
         v-for="(event, idx) in events"
         :key="idx"
@@ -16,8 +16,7 @@
 
           <v-card-actions class="py-0 align-baseline">
             <v-card-subtitle class="py-0 pl-2 align-baseline">
-              {{ event.eventMonth }} {{ event.eventDay }},
-              {{ event.eventYear }}
+              {{ event.eventMonth }} {{ event.eventDay }}, {{ event.eventYear }}
             </v-card-subtitle>
             <v-spacer></v-spacer>
 
@@ -69,6 +68,12 @@
 
 <script>
 export default {
+  props: {
+    data: {
+      type: String,
+      default: '',
+    },
+  },
   data() {
     return {
       model: null,
@@ -125,7 +130,7 @@ export default {
       }
     },
     async eventLoadNoId() {
-      const dbEvent = await this.$axios.$get(`/events/`)
+      const dbEvent = await this.$axios.$get(`/events/category/${this.data}`)
 
       dbEvent.forEach((event, idx) => {
         this.events.push({
@@ -145,27 +150,12 @@ export default {
           eventYear: event.eventDate.slice(0, 4),
           savedIcon: false,
         })
-        const today = new Date()
-        const eventDay = new Date(
-          `${event.eventDate.slice(0, 4)}-${event.eventDate.slice(
-            5,
-            7
-          )}-${event.eventDate.slice(8, 10)}`
-        )
-        this.events[idx].daysLeft = Math.ceil(
-          (eventDay - today) / (1000 * 3600 * 24)
-        )
       })
-      this.events.sort(function (a, b) {
-        return a.daysLeft - b.daysLeft
-      })
-
-      this.events = this.events.slice(0, 8)
     },
     async eventLoadId(id) {
       this.userId = id
 
-      const dbEvent = await this.$axios.$get(`/events/`)
+      const dbEvent = await this.$axios.$get(`/events/category/${this.data}`)
 
       dbEvent.forEach((event, idx) => {
         this.events.push({
@@ -210,13 +200,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-// .v-card > .v-card__progress + :not(.v-btn):not(.v-chip),
-// .v-card > :first-child:not(.v-btn):not(.v-chip) {
-//   max-height: 180px;
-// }
-.v-image.v-responsive.theme--light > div.v-image__image.v-image__image--cover {
-  background-size: cover !important;
-}
-</style>

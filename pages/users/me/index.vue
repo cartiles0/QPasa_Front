@@ -182,9 +182,7 @@
             See All
           </v-btn>
         </v-list-item-title>
-        <v-card class="rounded-xl">
-          <eventCarousel :userevent="user.myEvents" />
-        </v-card>
+        <eventCardsPhone :userevent="user.myEvents" />
         <v-list-item-title class="py-2 pl-4 mt-6">
           Attending Events -
           <v-btn
@@ -196,9 +194,7 @@
             See All
           </v-btn>
         </v-list-item-title>
-        <v-card class="rounded-xl">
-          <eventCarousel :userevent="user.attendingEvents" />
-        </v-card>
+        <eventCardsPhone :userevent="user.attendingEvents" />
         <v-list-item-title class="py-2 pl-4 mt-6">
           Saved Events -
           <v-btn
@@ -210,9 +206,7 @@
             See All
           </v-btn>
         </v-list-item-title>
-        <v-card class="rounded-xl">
-          <eventCarousel :userevent="user.savedEvents" />
-        </v-card>
+        <eventCardsPhone :userevent="user.savedEvents" />
       </div>
 
       <div class="hidden-xs-only">
@@ -253,13 +247,15 @@
 </template>
 
 <script>
-import eventCarousel from '@/components/userProfileCarousel'
+// import eventCarousel from '@/components/userProfileCarousel'
 import eventCards from '@/components/userProfileCards'
+import eventCardsPhone from '@/components/userProfileCardsPhone'
 
 export default {
   components: {
-    eventCarousel,
+    // eventCarousel,
     eventCards,
+    eventCardsPhone,
   },
   async asyncData({ $axios, params }) {
     const headers = { headers: { token: localStorage.getItem('token') } }

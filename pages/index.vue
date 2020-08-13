@@ -24,9 +24,7 @@
             <v-icon left small class="mr-0">mdi-pound</v-icon>
             {{ category.type }}
           </v-chip>
-          <v-card class="rounded-xl">
-            <eventCarousel :data="category.type" />
-          </v-card>
+          <eventCardsPhone :data="category.type" />
           <br />
         </div>
       </div>
@@ -57,8 +55,9 @@ import tagChips from '../components/tagChips'
 import upcomingEventsCardPhone from '../components/upcomingEventsCardPhone'
 import upcomingEventsCard from '../components/upcomingEventsCard'
 // import nearYou from '../components/nearYou'
-import eventCarousel from '../components/eventCarousel'
+// import eventCarousel from '../components/eventCarousel'
 import eventCards from '../components/eventCards'
+import eventCardsPhone from '../components/eventCardsPhone'
 
 export default {
   components: {
@@ -66,8 +65,9 @@ export default {
     upcomingEventsCardPhone,
     upcomingEventsCard,
     // nearYou,
-    eventCarousel,
+    // eventCarousel,
     eventCards,
+    eventCardsPhone,
   },
   data() {
     return {

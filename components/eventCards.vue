@@ -1,19 +1,16 @@
 <template>
-  <v-container fluid>
-    <v-row dense>
-      <v-col
+  <v-sheet class="mx-auto" elevation="0" max-width="2000">
+    <v-slide-group v-model="model" class="pt-2" show-arrows center-active>
+      <v-slide-item
         v-for="(event, idx) in events"
         :key="idx"
-        :cols="12"
-        :sm="6"
-        :md="4"
-        :lg="3"
-        :xl="3"
+        v-slot:default="{ active }"
       >
         <v-card class="mr-5 mb-5 rounded-xl">
           <v-img
             :src="event.photo"
-            height="200px"
+            height="250px"
+            width="300px"
             @click="goToEvent(idx)"
           ></v-img>
 
@@ -45,10 +42,28 @@
             >
             </v-btn>
           </v-card-title>
+          <v-row class="fill-height" align="center" justify="center">
+            <v-scale-transition>
+              <v-icon
+                v-if="active"
+                color="white"
+                size="48"
+                v-text="'mdi-close-circle-outline'"
+              ></v-icon>
+            </v-scale-transition>
+          </v-row>
         </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+      </v-slide-item>
+    </v-slide-group>
+
+    <v-expand-transition>
+      <v-sheet v-if="model != null" color="grey lighten-4" height="200" tile>
+        <v-row class="fill-height" align="center" justify="center">
+          <h3 class="title">Selected {{ model }}</h3>
+        </v-row>
+      </v-sheet>
+    </v-expand-transition>
+  </v-sheet>
 </template>
 
 <script>
@@ -61,6 +76,7 @@ export default {
   },
   data() {
     return {
+      model: null,
       events: [],
       savedIcon: false,
       userId: '',
