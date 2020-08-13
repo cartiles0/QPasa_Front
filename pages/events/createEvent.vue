@@ -90,14 +90,13 @@
                   required
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
+              <v-col cols="12" class="px-2">
                 <v-combobox
                   v-model="tags"
                   chips
                   clearable
-                  label="Your favorite hobbies"
+                  label="Event tags"
                   multiple
-                  solo
                 >
                   <template
                     v-slot:selection="{ attrs, item, select, selected }"
