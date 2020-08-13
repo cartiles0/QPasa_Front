@@ -8,12 +8,7 @@
       </v-container>
     </v-main>
 
-    <v-bottom-navigation
-      :value="activeBtn"
-      class="hidden-sm-and-up"
-      color="indigo"
-      fixed
-    >
+    <v-bottom-navigation class="hidden-sm-and-up" fixed>
       <bottomNav />
     </v-bottom-navigation>
     <v-footer app fixed>

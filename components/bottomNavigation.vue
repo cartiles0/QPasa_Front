@@ -2,35 +2,35 @@
   <div class="pt-2">
     <div v-if="userLogged === false">
       <v-btn @click="goHome">
-        <span>EXPLORE</span>
-        <v-icon>mdi-pound</v-icon>
+        <span class="text--primary">EXPLORE</span>
+        <v-icon color="indigo">mdi-pound</v-icon>
       </v-btn>
 
       <v-btn @click="goLogIn">
-        <span>SAVED</span>
-        <v-icon>mdi-heart</v-icon>
+        <span class="text--primary">SAVED</span>
+        <v-icon color="red">mdi-heart</v-icon>
       </v-btn>
 
       <v-btn @click="goSignUp">
-        <span>SIGN UP</span>
-        <v-icon>mdi-account</v-icon>
+        <span class="text--primary">SIGN UP</span>
+        <v-icon color="primary">mdi-account</v-icon>
       </v-btn>
     </div>
 
     <div v-else>
       <v-btn class="px-1" @click="goHome">
-        <span>EXPLORE</span>
-        <v-icon>mdi-pound</v-icon>
+        <span class="text--primary">EXPLORE</span>
+        <v-icon color="indigo">mdi-pound</v-icon>
       </v-btn>
 
       <v-btn class="px-1" @click="goToSaved">
-        <span>SAVED</span>
-        <v-icon>mdi-heart</v-icon>
+        <span class="text--primary">SAVED</span>
+        <v-icon color="red">mdi-heart</v-icon>
       </v-btn>
 
       <v-btn class="px-1" @click="createEvent">
-        <span>CREATE</span>
-        <v-icon>mdi-calendar-plus</v-icon>
+        <span class="text--primary">CREATE</span>
+        <v-icon color="primary">mdi-calendar-plus</v-icon>
       </v-btn>
 
       <!-- <v-btn class="px-1" @click="goToMyTickets">
@@ -39,7 +39,7 @@
       </v-btn> -->
 
       <v-btn class="px-1" @click="goProfile">
-        <span>PROFILE</span>
+        <span class="text--primary">PROFILE</span>
         <v-avatar height="30px" width="30px">
           <img :src="user.photo" :alt="user.name" />
         </v-avatar>
