@@ -139,31 +139,39 @@ export default {
   },
   methods: {
     async userSave() {
-      const dbSave = await this.$axios.$put(
-        `/events/me/${this.event.id}/save`,
-        {},
-        {
-          headers: { token: localStorage.getItem('token') },
+      if (localStorage.getItem('token')) {
+        const dbSave = await this.$axios.$put(
+          `/events/me/${this.event.id}/save`,
+          {},
+          {
+            headers: { token: localStorage.getItem('token') },
+          }
+        )
+        if (dbSave.saved.includes(this.userId)) {
+          this.savedIcon = true
+        } else {
+          this.savedIcon = false
         }
-      )
-      if (dbSave.saved.includes(this.userId)) {
-        this.savedIcon = true
       } else {
-        this.savedIcon = false
+        this.$router.push(`/auth/login`)
       }
     },
     async userAttend() {
-      const dbAttend = await this.$axios.$put(
-        `/events/me/${this.event.id}/attendance`,
-        {},
-        {
-          headers: { token: localStorage.getItem('token') },
+      if (localStorage.getItem('token')) {
+        const dbAttend = await this.$axios.$put(
+          `/events/me/${this.event.id}/attendance`,
+          {},
+          {
+            headers: { token: localStorage.getItem('token') },
+          }
+        )
+        if (dbAttend.attendance.includes(this.userId)) {
+          this.attendText = true
+        } else {
+          this.attendText = false
         }
-      )
-      if (dbAttend.attendance.includes(this.userId)) {
-        this.attendText = true
       } else {
-        this.attendText = false
+        this.$router.push(`/auth/login`)
       }
     },
     async eventLoad() {
