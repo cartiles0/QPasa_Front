@@ -11,12 +11,6 @@
 
 <script>
 export default {
-  props: {
-    userevent: {
-      type: Array,
-      default: () => [],
-    },
-  },
   data() {
     return {
       events: [],
@@ -37,11 +31,16 @@ export default {
     }
   },
   mounted() {
-    this.loadUserEvents()
+    if (localStorage.getItem('token')) {
+      this.loadUserEvents()
+    }
   },
   methods: {
-    loadUserEvents() {
-      this.userevent.forEach((event, idx) => {
+    async loadUserEvents() {
+      const headers = { headers: { token: localStorage.getItem('token') } }
+      const dbUser = await this.$axios.$get(`/users/me`, headers)
+
+      dbUser.myEvents.forEach((event, idx) => {
         this.events.push({
           title: event.title,
           photo: event.photo,

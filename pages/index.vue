@@ -9,8 +9,8 @@
         <h2>Upcoming Events</h2>
         <upcomingEventsCardPhone />
       </div>
-      <div id="myEvents" class="hidden-sm-and-up pb-9">
-        <v-list-item-title v-if="(userLogged = true)" class="mt-6">
+      <div v-if="(userLogged)" id="myEvents" class="hidden-sm-and-up pb-9">
+        <v-list-item-title class="mt-6">
           <v-row class="px-3 pt-4">
             <h3 class="pl-3">My Events -</h3>
             <v-btn
@@ -23,7 +23,7 @@
             </v-btn>
           </v-row>
         </v-list-item-title>
-        <userProfileCarousel :userevent="user.attendingEvents" />
+        <userProfileCarousel />
       </div>
       <v-container class="py-0">
         <div
@@ -76,8 +76,6 @@
 import tagChips from '../components/tagChips'
 import upcomingEventsCardPhone from '../components/upcomingEventsCardPhone'
 import upcomingEventsCard from '../components/upcomingEventsCard'
-// import nearYou from '../components/nearYou'
-// import eventCarousel from '../components/eventCarousel'
 import userProfileCarousel from '../components/userProfileCarousel'
 import eventCards from '../components/eventCards'
 import eventCardsPhone from '../components/eventCardsPhone'
@@ -88,19 +86,8 @@ export default {
     upcomingEventsCardPhone,
     upcomingEventsCard,
     userProfileCarousel,
-    // nearYou,
-    // eventCarousel,
     eventCards,
     eventCardsPhone,
-  },
-  async asyncData({ $axios, params }) {
-    const headers = { headers: { token: localStorage.getItem('token') } }
-    const dbUser = await $axios.get(`/users/me`, headers)
-    return {
-      user: {
-        attendingEvents: dbUser.data.attendingEvents,
-      },
-    }
   },
   data() {
     return {
