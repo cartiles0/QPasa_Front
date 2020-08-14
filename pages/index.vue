@@ -23,7 +23,7 @@
             </v-btn>
           </v-row>
         </v-list-item-title>
-        <userProfileCarousel />
+        <myEventsCarousel />
       </div>
       <v-container class="py-0">
         <div
@@ -54,6 +54,22 @@
             <h2>Upcoming Events</h2>
             <upcomingEventsCard />
           </div>
+          <div v-if="(userLogged)" class="pb-9">
+            <v-list-item-title class="mt-6">
+              <v-row class="px-3 pt-4">
+                <h3 class="pl-3">My Events -</h3>
+                <v-btn
+                  :to="'/users/me/attendingEvents'"
+                  class="pl-1 pb-1"
+                  text
+                  color="primary"
+                >
+                  See All
+                </v-btn>
+              </v-row>
+            </v-list-item-title>
+            <myEventsCards />
+          </div>
           <div v-for="(category, idx) in categories" :key="idx">
             <v-chip
               class="ma-2"
@@ -76,7 +92,8 @@
 import tagChips from '../components/tagChips'
 import upcomingEventsCardPhone from '../components/upcomingEventsCardPhone'
 import upcomingEventsCard from '../components/upcomingEventsCard'
-import userProfileCarousel from '../components/userProfileCarousel'
+import myEventsCarousel from '../components/myEventsCarousel'
+import myEventsCards from '../components/myEventsCards'
 import eventCards from '../components/eventCards'
 import eventCardsPhone from '../components/eventCardsPhone'
 
@@ -85,7 +102,8 @@ export default {
     tagChips,
     upcomingEventsCardPhone,
     upcomingEventsCard,
-    userProfileCarousel,
+    myEventsCarousel,
+    myEventsCards,
     eventCards,
     eventCardsPhone,
   },
