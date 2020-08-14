@@ -84,6 +84,9 @@ export default {
     }
   },
   methods: {
+    goToEvent(idx) {
+      this.$router.push(`/events/${this.events[idx].id}`)
+    },
     async loadUserEvents() {
       const headers = { headers: { token: localStorage.getItem('token') } }
       const dbUser = await this.$axios.$get(`/users/me`, headers)
