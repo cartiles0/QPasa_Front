@@ -80,6 +80,7 @@
                 <v-text-field
                   v-model.number="capacity"
                   label="Capacity"
+                  type="number"
                   required
                 ></v-text-field>
               </v-col>
@@ -87,6 +88,14 @@
                 <v-text-field
                   v-model="price"
                   label="Price"
+                  type="number"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field
+                  v-model="mapLocation"
+                  label="Map Link"
                   required
                 ></v-text-field>
               </v-col>
@@ -95,7 +104,7 @@
                   v-model="tags"
                   chips
                   clearable
-                  label="Event tags"
+                  label="Event Tags"
                   multiple
                 >
                   <template
@@ -146,6 +155,7 @@ export default {
       capacity: '',
       price: '',
       category: '',
+      mapLocation: '',
       date: new Date().toISOString().substr(0, 10),
       eventDate: '',
       tags: [],

@@ -415,6 +415,7 @@ export default {
         category: dbEvent.category,
         creator: dbEvent.creator.name,
         address: dbEvent.address,
+        mapLocation: dbEvent.mapLocation,
         saved: dbEvent.saved,
         attendance: dbEvent.attendance,
         views: dbEvent.views,
