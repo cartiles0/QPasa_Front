@@ -88,7 +88,9 @@
           </v-card-text>
           <v-col cols="12" lg="8">
             <v-card-actions>
-              <v-btn color="blue darken-1" text to="/">Back</v-btn>
+              <v-btn color="blue darken-1" text @click="previousPage">
+                Back
+              </v-btn>
               <v-spacer></v-spacer>
               <v-btn color="blue darken-1" text @click="signup">Submit</v-btn>
             </v-card-actions>
@@ -119,6 +121,9 @@ export default {
     }
   },
   methods: {
+    previousPage() {
+      history.back()
+    },
     reset() {
       this.$refs.form.reset()
     },

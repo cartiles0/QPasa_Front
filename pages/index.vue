@@ -9,13 +9,9 @@
         <h2>Upcoming Events</h2>
         <upcomingEventsCardPhone />
       </div>
-      <div class="hidden-sm-and-up">
-        <v-list-item-title
-          v-if="(userLogged = true)"
-          id="myEvents"
-          class="mt-6"
-        >
-          <v-row class="px-3">
+      <div id="myEvents" class="hidden-sm-and-up pb-9">
+        <v-list-item-title v-if="(userLogged = true)" class="mt-6">
+          <v-row class="px-3 pt-4">
             <h3 class="pl-3">My Events -</h3>
             <v-btn
               :to="'/users/me/attendingEvents'"
@@ -29,27 +25,29 @@
         </v-list-item-title>
         <userProfileCarousel :userevent="user.attendingEvents" />
       </div>
-      <v-container>
-        <div class="hidden-sm-and-up">
+      <v-container class="py-0">
+        <div
+          v-for="(category, idx) in categories"
+          :key="idx"
+          class="hidden-sm-and-up"
+        >
           <!-- <div v-if="userLogged === true">
           <br />
           <h3>#CERCADETI</h3>
           <nearYou />
         </div> -->
           <br />
-          <div v-for="(category, idx) in categories" :key="idx">
-            <v-chip
-              class="ma-2"
-              :color="category.color"
-              :to="`/events/category/${category.type}`"
-              outlined
-            >
-              <v-icon left small class="mr-0">mdi-pound</v-icon>
-              {{ category.type }}
-            </v-chip>
-            <eventCardsPhone :data="category.type" />
-            <br />
-          </div>
+          <v-chip
+            class="ma-2"
+            :color="category.color"
+            :to="`/events/category/${category.type}`"
+            outlined
+          >
+            <v-icon left small class="mr-0">mdi-pound</v-icon>
+            {{ category.type }}
+          </v-chip>
+          <eventCardsPhone :data="category.type" />
+          <br />
         </div>
         <div class="hidden-xs-only px-3">
           <div>

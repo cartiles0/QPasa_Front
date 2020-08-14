@@ -130,7 +130,7 @@
             <small>Please fill out the the complete form!</small>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="blue darken-1" text to="/">Back</v-btn>
+            <v-btn color="blue darken-1" text @click="previousPage">Back</v-btn>
             <v-spacer></v-spacer>
             <v-btn color="blue darken-1" text @click="reset">Reset</v-btn>
             <v-btn color="blue darken-1" text @click="create">Create</v-btn>
@@ -176,6 +176,9 @@ export default {
     },
   },
   methods: {
+    previousPage() {
+      history.back()
+    },
     remove(item) {
       this.tags.splice(this.tags.indexOf(item), 1)
       this.tags = [...this.tags]

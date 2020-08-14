@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="text-center pt-3">
     <v-chip
       class="ma-1"
       color="success"

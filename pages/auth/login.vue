@@ -34,7 +34,9 @@
           </v-card-text>
           <v-col cols="12">
             <v-card-actions>
-              <v-btn color="blue darken-1" text @click="logInBack">Back</v-btn>
+              <v-btn color="blue darken-1" text @click="previousPage">
+                Back
+              </v-btn>
               <v-spacer></v-spacer>
               <v-btn color="blue darken-1" text @click="login">Log In</v-btn>
             </v-card-actions>
@@ -55,8 +57,8 @@ export default {
     }
   },
   methods: {
-    logInBack() {
-      this.$emit('logInBack')
+    previousPage() {
+      history.back()
     },
     login() {
       const data = {

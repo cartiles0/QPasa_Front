@@ -1,5 +1,8 @@
 <template>
-  <v-card class="mx-auto my-5 justified-center elevation-0" max-width="600px">
+  <v-card class="mx-auto my-3 justified-center elevation-0" max-width="600px">
+    <v-btn icon class="pb-2 pl-12" color="black" @click="previousPage">
+      <v-icon class="pl-1">mdi-chevron-left</v-icon>Back
+    </v-btn>
     <v-img :src="event.photo"></v-img>
 
     <v-card-actions class="pb-0">
@@ -138,6 +141,9 @@ export default {
     this.eventLoad()
   },
   methods: {
+    previousPage() {
+      history.back()
+    },
     async userSave() {
       if (localStorage.getItem('token')) {
         const dbSave = await this.$axios.$put(

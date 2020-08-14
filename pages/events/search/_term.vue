@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <v-btn icon class="pl-4" color="black" @click="previousPage">
+      <v-icon class="pl-1">mdi-chevron-left</v-icon>Back
+    </v-btn>
     <div class="pb-2 title">Search for: "{{ searchItem }}"</div>
     <v-row dense>
       <v-col
@@ -81,6 +84,9 @@ export default {
     this.loadCategory()
   },
   methods: {
+    previousPage() {
+      history.back()
+    },
     async userSave(idx) {
       const dbSave = await this.$axios.$put(
         `/events/me/${this.events[idx].id}/save`,
