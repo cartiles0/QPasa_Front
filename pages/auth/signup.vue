@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" sm="10" md="8" lg="6" xl="4">
+      <v-col cols="12" sm="10" md="8" lg="10" xl="4">
         <v-form ref="form">
           <v-card-title>
             <span class="headline">Create Account</span>

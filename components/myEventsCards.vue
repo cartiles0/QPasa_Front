@@ -88,7 +88,7 @@ export default {
       const headers = { headers: { token: localStorage.getItem('token') } }
       const dbUser = await this.$axios.$get(`/users/me`, headers)
 
-      dbUser.myEvents.forEach((event, idx) => {
+      dbUser.attendingEvents.forEach((event, idx) => {
         this.events.push({
           title: event.title,
           photo: event.photo,
