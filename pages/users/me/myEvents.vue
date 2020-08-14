@@ -1,6 +1,6 @@
 <template>
-  <v-container fluid>
-    <div class="pb-2 title">My Events</div>
+  <v-container>
+    <div class="pb-2 title">Created Events</div>
     <v-row dense>
       <v-col
         v-for="(event, idx) in events"

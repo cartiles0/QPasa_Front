@@ -1,142 +1,144 @@
 <template>
-  <v-row justify="center">
-    <v-col>
-      <v-form ref="form">
-        <v-card-title>
-          <span class="headline">Create Event</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12" sm="5" md="4">
-                <v-card-title class="pl-0 pb-0">
-                  Upload Event Poster
-                </v-card-title>
-                <uploadImage v-model="photo" @imageURL="setImageURL" />
-              </v-col>
-              <v-col cols="12" sm="7" md="8">
-                <v-text-field
-                  v-model="title"
-                  label="Title"
-                  required
-                ></v-text-field>
-                <v-menu
-                  ref="menu1"
-                  v-model="menu1"
-                  :close-on-content-click="false"
-                  transition="scale-transition"
-                  offset-y
-                  max-width="290px"
-                  min-width="290px"
-                >
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-text-field
-                      v-model="eventDate"
-                      label="Event Date"
-                      hint="Format MM/DD/YYYY"
-                      persistent-hint
-                      prepend-icon=""
-                      v-bind="attrs"
-                      @blur="date = parseDate(eventDate)"
-                      v-on="on"
-                    ></v-text-field>
-                  </template>
-                  <v-date-picker
-                    v-model="date"
-                    no-title
-                    @input="menu1 = false"
-                  ></v-date-picker>
-                </v-menu>
-                <v-select
-                  v-model="category"
-                  class="pt-7"
-                  :items="[
-                    'Concerts',
-                    'Conferences-Workshops',
-                    'Expo-Fairs',
-                    'Festivals',
-                    'For Kids',
-                    'Gastronomy',
-                    'Parties',
-                    'Retreats',
-                    'Shows',
-                    'Sports',
-                    'Theater-Film',
-                  ]"
-                  label="Category"
-                  required
-                ></v-select>
-              </v-col>
-              <v-col cols="12">
-                <v-textarea
-                  v-model="description"
-                  label="Event Description"
-                  auto-grow
-                  rows="2"
-                  clearable
-                ></v-textarea>
-              </v-col>
-              <v-col cols="12" sm="6" md="6">
-                <v-text-field
-                  v-model.number="capacity"
-                  label="Capacity"
-                  type="number"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="6">
-                <v-text-field
-                  v-model="price"
-                  label="Price"
-                  type="number"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="6">
-                <v-text-field
-                  v-model="mapLocation"
-                  label="Map Link"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" class="px-2">
-                <v-combobox
-                  v-model="tags"
-                  chips
-                  clearable
-                  label="Event Tags"
-                  multiple
-                >
-                  <template
-                    v-slot:selection="{ attrs, item, select, selected }"
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="12" sm="12" md="10" lg="8" xl="6">
+        <v-form ref="form">
+          <v-card-title>
+            <span class="headline">Create Event</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12" sm="5" md="4">
+                  <v-card-title class="pl-0 pb-0">
+                    Upload Event Poster
+                  </v-card-title>
+                  <uploadImage v-model="photo" @imageURL="setImageURL" />
+                </v-col>
+                <v-col cols="12" sm="7" md="8">
+                  <v-text-field
+                    v-model="title"
+                    label="Title"
+                    required
+                  ></v-text-field>
+                  <v-menu
+                    ref="menu1"
+                    v-model="menu1"
+                    :close-on-content-click="false"
+                    transition="scale-transition"
+                    offset-y
+                    max-width="290px"
+                    min-width="290px"
                   >
-                    <v-chip
-                      v-bind="attrs"
-                      :input-value="selected"
-                      close
-                      @click="select"
-                      @click:close="remove(item)"
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="eventDate"
+                        label="Event Date"
+                        hint="Format MM/DD/YYYY"
+                        persistent-hint
+                        prepend-icon=""
+                        v-bind="attrs"
+                        @blur="date = parseDate(eventDate)"
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      v-model="date"
+                      no-title
+                      @input="menu1 = false"
+                    ></v-date-picker>
+                  </v-menu>
+                  <v-select
+                    v-model="category"
+                    class="pt-7"
+                    :items="[
+                      'Concerts',
+                      'Conferences-Workshops',
+                      'Expo-Fairs',
+                      'Festivals',
+                      'For Kids',
+                      'Gastronomy',
+                      'Parties',
+                      'Retreats',
+                      'Shows',
+                      'Sports',
+                      'Theater-Film',
+                    ]"
+                    label="Category"
+                    required
+                  ></v-select>
+                </v-col>
+                <v-col cols="12">
+                  <v-textarea
+                    v-model="description"
+                    label="Event Description"
+                    auto-grow
+                    rows="2"
+                    clearable
+                  ></v-textarea>
+                </v-col>
+                <v-col cols="12" sm="6" md="6">
+                  <v-text-field
+                    v-model.number="capacity"
+                    label="Capacity"
+                    type="number"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="6">
+                  <v-text-field
+                    v-model="price"
+                    label="Price"
+                    type="number"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="6">
+                  <v-text-field
+                    v-model="mapLocation"
+                    label="Map Link"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" class="px-2">
+                  <v-combobox
+                    v-model="tags"
+                    chips
+                    clearable
+                    label="Event Tags"
+                    multiple
+                  >
+                    <template
+                      v-slot:selection="{ attrs, item, select, selected }"
                     >
-                      &nbsp;
-                      <v-icon left x-small>mdi-pound</v-icon>
-                      <strong>{{ item }}</strong>
-                    </v-chip>
-                  </template>
-                </v-combobox>
-              </v-col>
-            </v-row>
-          </v-container>
-          <small>Please fill out the the complete form!</small>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="blue darken-1" text to="/">Back</v-btn>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="reset">Reset</v-btn>
-          <v-btn color="blue darken-1" text @click="create">Create</v-btn>
-        </v-card-actions>
-      </v-form>
-    </v-col>
-  </v-row>
+                      <v-chip
+                        v-bind="attrs"
+                        :input-value="selected"
+                        close
+                        @click="select"
+                        @click:close="remove(item)"
+                      >
+                        &nbsp;
+                        <v-icon left x-small>mdi-pound</v-icon>
+                        <strong>{{ item }}</strong>
+                      </v-chip>
+                    </template>
+                  </v-combobox>
+                </v-col>
+              </v-row>
+            </v-container>
+            <small>Please fill out the the complete form!</small>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="blue darken-1" text to="/">Back</v-btn>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="reset">Reset</v-btn>
+            <v-btn color="blue darken-1" text @click="create">Create</v-btn>
+          </v-card-actions>
+        </v-form>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

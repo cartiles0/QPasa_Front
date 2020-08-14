@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <div class="pb-2 title">Search for: "{{ searchItem }}"</div>
     <v-row dense>
       <v-col

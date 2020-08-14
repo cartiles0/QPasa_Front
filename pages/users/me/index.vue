@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <v-card class="mx-auto my-5 justify-center elevation-0" max-width="1300px">
       <v-container class="px-12">
         <v-row>
@@ -181,14 +181,14 @@
 
       <div class="hidden-sm-and-up">
         <v-list-item-title class="py-2 pl-4 mt-6">
-          My Events -
+          Created Events -
           <v-btn :to="'/users/me/myEvents'" class="pl-0" text color="primary">
             See All
           </v-btn>
         </v-list-item-title>
         <eventCardsPhone :userevent="user.myEvents" />
         <v-list-item-title class="py-2 pl-4 mt-6">
-          Attending Events -
+          My Events -
           <v-btn
             :to="'/users/me/attendingEvents'"
             class="pl-0"
@@ -215,14 +215,14 @@
 
       <div class="hidden-xs-only">
         <v-list-item-title class="py-2 pl-4 mt-6">
-          My Events -
+          Created Events -
           <v-btn :to="'/users/me/myEvents'" class="pl-0" text color="primary">
             See All
           </v-btn>
         </v-list-item-title>
         <eventCards :userevent="user.myEvents" />
         <v-list-item-title class="py-2 pl-4 mt-6">
-          Attending Events -
+          My Events -
           <v-btn
             :to="'/users/me/attendingEvents'"
             class="pl-0"
@@ -247,7 +247,7 @@
         <eventCards :userevent="user.savedEvents" />
       </div>
     </v-card>
-  </div>
+  </v-container>
 </template>
 
 <script>

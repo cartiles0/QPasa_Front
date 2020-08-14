@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <div class="pb-2 title">My Saved Events</div>
     <v-row dense>
       <v-col

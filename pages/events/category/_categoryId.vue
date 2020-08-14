@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <div class="pb-2 title">Category - {{ searchItem }}</div>
     <v-row dense>
       <v-col
@@ -15,7 +15,7 @@
           <v-img
             :src="event.photo"
             class="white--text align-end"
-            height="auto"
+            height="200px"
             :to="`/events/${event.id}`"
           >
           </v-img>
@@ -135,7 +135,7 @@ export default {
 </script>
 
 <style>
-.v-image__image--cover {
-  background-size: contain !important;
+.v-image.v-responsive.theme--light > div.v-image__image.v-image__image--cover {
+  background-size: cover !important;
 }
 </style>
