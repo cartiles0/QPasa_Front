@@ -110,6 +110,7 @@ export default {
   data() {
     return {
       categories: [
+        { type: 'Festivals', color: 'secondary' },
         { type: 'Concerts', color: 'primary' },
         { type: 'Gastronomy', color: 'success' },
         { type: 'Sports', color: 'deep-purple accent-4' },
