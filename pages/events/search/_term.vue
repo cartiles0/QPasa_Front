@@ -19,7 +19,7 @@
             :src="event.photo"
             height="200px"
             class="white--text align-end"
-            :to="`/events/${event.id}`"
+            @click="goToEvent(idx)"
           >
           </v-img>
 
@@ -84,6 +84,9 @@ export default {
     this.loadCategory()
   },
   methods: {
+    goToEvent(idx) {
+      this.$router.push(`/events/${this.events[idx].id}`)
+    },
     previousPage() {
       history.back()
     },
