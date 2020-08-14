@@ -202,6 +202,7 @@ export default {
         capacity: parseInt(this.capacity),
         price: parseInt(this.price),
         category: this.category,
+        mapLocation: this.mapLocation,
         creator: getCreator.id,
       }
 
