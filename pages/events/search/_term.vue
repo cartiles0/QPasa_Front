@@ -81,17 +81,19 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$route.params.term)
+
     if (localStorage.getItem('token')) {
       this.$axios
         .$get('/auth/me', {
           headers: { token: localStorage.getItem('token') },
         })
         .then((response) => {
-          this.loadCategoryId(response.id)
+          this.loadSearchTermId(response.id)
         })
         .catch((err) => console.error(err))
     } else {
-      this.loadCategoryNoId()
+      this.loadSearchTermNoId()
     }
   },
   methods: {
@@ -119,7 +121,7 @@ export default {
         this.$router.push(`/auth/login`)
       }
     },
-    async loadCategoryId(id) {
+    async loadSearchTermId(id) {
       const dbEvent = await this.$axios.$get(
         `/events/search/${this.$route.params.term}`
       )
@@ -151,7 +153,7 @@ export default {
         }
       })
     },
-    async loadCategoryNoId() {
+    async loadSearchTermNoId() {
       const dbEvent = await this.$axios.$get(
         `/events/search/${this.$route.params.term}`
       )
