@@ -81,7 +81,18 @@ export default {
     }
   },
   mounted() {
-    this.loadCategory()
+    if (localStorage.getItem('token')) {
+      this.$axios
+        .$get('/auth/me', {
+          headers: { token: localStorage.getItem('token') },
+        })
+        .then((response) => {
+          this.loadCategoryId(response.id)
+        })
+        .catch((err) => console.error(err))
+    } else {
+      this.loadCategoryNoId()
+    }
   },
   methods: {
     goToEvent(idx) {
@@ -91,28 +102,29 @@ export default {
       history.back()
     },
     async userSave(idx) {
-      const dbSave = await this.$axios.$put(
-        `/events/me/${this.events[idx].id}/save`,
-        {},
-        {
-          headers: { token: localStorage.getItem('token') },
+      if (localStorage.getItem('token')) {
+        const dbSave = await this.$axios.$put(
+          `/events/me/${this.events[idx].id}/save`,
+          {},
+          {
+            headers: { token: localStorage.getItem('token') },
+          }
+        )
+        if (dbSave.saved.includes(this.userId)) {
+          this.events[idx].savedIcon = true
+        } else {
+          this.events[idx].savedIcon = false
         }
-      )
-      if (dbSave.saved.includes(this.userId)) {
-        this.events[idx].savedIcon = true
       } else {
-        this.events[idx].savedIcon = false
+        this.$router.push(`/auth/login`)
       }
     },
-    async loadCategory() {
+    async loadCategoryId(id) {
       const dbEvent = await this.$axios.$get(
         `/events/category/${this.$route.params.categoryId}`
       )
 
-      const getCreator = await this.$axios.$get('/auth/me', {
-        headers: { token: localStorage.getItem('token') },
-      })
-      this.userId = getCreator.id
+      this.userId = id
 
       dbEvent.forEach((event, idx) => {
         this.events.push({
@@ -132,11 +144,36 @@ export default {
           eventYear: event.eventDate.slice(0, 4),
           savedIcon: false,
         })
-        if (dbEvent[idx].saved.includes(getCreator.id)) {
+        if (dbEvent[idx].saved.includes(id)) {
           this.events[idx].savedIcon = true
         } else {
           this.events[idx].savedIcon = false
         }
+      })
+    },
+    async loadCategoryNoId() {
+      const dbEvent = await this.$axios.$get(
+        `/events/category/${this.$route.params.categoryId}`
+      )
+
+      dbEvent.forEach((event, idx) => {
+        this.events.push({
+          title: event.title,
+          date: event.eventDate,
+          capacity: event.capacity,
+          price: event.price,
+          photo: event.photo,
+          category: event.category,
+          address: event.address,
+          saved: event.saved,
+          attendance: event.attendance,
+          tags: event.tags,
+          id: event._id,
+          eventDay: event.eventDate.slice(8, 10),
+          eventMonth: this.months[event.eventDate.slice(5, 7) - 1],
+          eventYear: event.eventDate.slice(0, 4),
+          savedIcon: false,
+        })
       })
     },
   },
