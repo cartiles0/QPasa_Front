@@ -23,6 +23,7 @@
         rounded
         outlined
         @click:append="search"
+        @keydown.enter="search"
       ></v-text-field>
 
       <v-spacer />
