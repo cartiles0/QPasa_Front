@@ -114,6 +114,7 @@ export default {
         { type: 'Concerts', color: 'primary' },
         { type: 'Gastronomy', color: 'success' },
         { type: 'Sports', color: 'deep-purple accent-4' },
+        { type: 'Expo-Fairs', color: 'teal' },
       ],
       userLogged: false,
     }
